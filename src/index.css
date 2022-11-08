@@ -1,3 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Oswald&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +17,33 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.glass:before {
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+    filter: blur(10px);
+    background: inherit;
+}
+
+.glassy {
+    /* margin: 0 auto; */
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    background: inherit;
+}
+.glass {
+    /* margin: 0 auto; */
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    background: inherit;
+}
+
+.glassless {
+    /* margin: 0 auto; */
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.2);
 }
