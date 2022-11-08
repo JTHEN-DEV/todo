@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://www.codewars.com/kata/585894545a8a07255e0002f1/train/javascript -->
+<html class="dark sl-theme-dark" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.turbolinks-progress-bar {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #0076ff;
+  z-index: 9999;
+  transition: width 300ms ease-out, opacity 150ms 150ms ease-in;
+  transform: translate3d(0, 0, 0);
+}</style><style type="text/css">.swal-icon--error{border-color:#f27474;-webkit-animation:animateErrorIcon .5s;animation:animateErrorIcon .5s}.swal-icon--error__x-mark{position:relative;display:block;-webkit-animation:animateXMark .5s;animation:animateXMark .5s}.swal-icon--error__line{position:absolute;height:5px;width:47px;background-color:#f27474;display:block;top:37px;border-radius:2px}.swal-icon--error__line--left{-webkit-transform:rotate(45deg);transform:rotate(45deg);left:17px}.swal-icon--error__line--right{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);right:16px}@-webkit-keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@-webkit-keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}@keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate}.swal-icon--warning__body{width:5px;height:47px;top:10px;border-radius:2px;margin-left:-2px}.swal-icon--warning__body,.swal-icon--warning__dot{position:absolute;left:50%;background-color:#f8bb86}.swal-icon--warning__dot{width:7px;height:7px;border-radius:50%;margin-left:-4px;bottom:-11px}@-webkit-keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}@keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}.swal-icon--success{border-color:#a5dc86}.swal-icon--success:after,.swal-icon--success:before{content:"";border-radius:50%;position:absolute;width:60px;height:120px;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal-icon--success:before{border-radius:120px 0 0 120px;top:-7px;left:-33px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:60px 60px;transform-origin:60px 60px}.swal-icon--success:after{border-radius:0 120px 120px 0;top:-11px;left:30px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 60px;transform-origin:0 60px;-webkit-animation:rotatePlaceholder 4.25s ease-in;animation:rotatePlaceholder 4.25s ease-in}.swal-icon--success__ring{width:80px;height:80px;border:4px solid hsla(98,55%,69%,.2);border-radius:50%;box-sizing:content-box;position:absolute;left:-4px;top:-4px;z-index:2}.swal-icon--success__hide-corners{width:5px;height:90px;background-color:#fff;padding:1px;position:absolute;left:28px;top:8px;z-index:1;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal-icon--success__line{height:5px;background-color:#a5dc86;display:block;border-radius:2px;position:absolute;z-index:2}.swal-icon--success__line--tip{width:25px;left:14px;top:46px;-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-animation:animateSuccessTip .75s;animation:animateSuccessTip .75s}.swal-icon--success__line--long{width:47px;right:8px;top:38px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-animation:animateSuccessLong .75s;animation:animateSuccessLong .75s}@-webkit-keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@-webkit-keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}@keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}.swal-icon--info{border-color:#c9dae1}.swal-icon--info:before{width:5px;height:29px;bottom:17px;border-radius:2px;margin-left:-2px}.swal-icon--info:after,.swal-icon--info:before{content:"";position:absolute;left:50%;background-color:#c9dae1}.swal-icon--info:after{width:7px;height:7px;border-radius:50%;margin-left:-3px;top:19px}.swal-icon{width:80px;height:80px;border-width:4px;border-style:solid;border-radius:50%;padding:0;position:relative;box-sizing:content-box;margin:20px auto}.swal-icon:first-child{margin-top:32px}.swal-icon--custom{width:auto;height:auto;max-width:100%;border:none;border-radius:0}.swal-icon img{max-width:100%;max-height:100%}.swal-title{color:rgba(0,0,0,.65);font-weight:600;text-transform:none;position:relative;display:block;padding:13px 16px;font-size:27px;line-height:normal;text-align:center;margin-bottom:0}.swal-title:first-child{margin-top:26px}.swal-title:not(:first-child){padding-bottom:0}.swal-title:not(:last-child){margin-bottom:13px}.swal-text{font-size:16px;position:relative;float:none;line-height:normal;vertical-align:top;text-align:left;display:inline-block;margin:0;padding:0 10px;font-weight:400;color:rgba(0,0,0,.64);max-width:calc(100% - 20px);overflow-wrap:break-word;box-sizing:border-box}.swal-text:first-child{margin-top:45px}.swal-text:last-child{margin-bottom:45px}.swal-footer{text-align:right;padding-top:13px;margin-top:13px;padding:13px 16px;border-radius:inherit;border-top-left-radius:0;border-top-right-radius:0}.swal-button-container{margin:5px;display:inline-block;position:relative}.swal-button{background-color:#7cd1f9;color:#fff;border:none;box-shadow:none;border-radius:5px;font-weight:600;font-size:14px;padding:10px 24px;margin:0;cursor:pointer}.swal-button:not([disabled]):hover{background-color:#78cbf2}.swal-button:active{background-color:#70bce0}.swal-button:focus{outline:none;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(43,114,165,.29)}.swal-button[disabled]{opacity:.5;cursor:default}.swal-button::-moz-focus-inner{border:0}.swal-button--cancel{color:#555;background-color:#efefef}.swal-button--cancel:not([disabled]):hover{background-color:#e8e8e8}.swal-button--cancel:active{background-color:#d7d7d7}.swal-button--cancel:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--danger{background-color:#e64942}.swal-button--danger:not([disabled]):hover{background-color:#df4740}.swal-button--danger:active{background-color:#cf423b}.swal-button--danger:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(165,43,43,.29)}.swal-content{padding:0 20px;margin-top:20px;font-size:medium}.swal-content:last-child{margin-bottom:20px}.swal-content__input,.swal-content__textarea{-webkit-appearance:none;background-color:#fff;border:none;font-size:14px;display:block;box-sizing:border-box;width:100%;border:1px solid rgba(0,0,0,.14);padding:10px 13px;border-radius:2px;transition:border-color .2s}.swal-content__input:focus,.swal-content__textarea:focus{outline:none;border-color:#6db8ff}.swal-content__textarea{resize:vertical}.swal-button--loading{color:transparent}.swal-button--loading~.swal-button__loader{opacity:1}.swal-button__loader{position:absolute;height:auto;width:43px;z-index:2;left:50%;top:50%;-webkit-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);text-align:center;pointer-events:none;opacity:0}.swal-button__loader div{display:inline-block;float:none;vertical-align:baseline;width:9px;height:9px;padding:0;border:none;margin:2px;opacity:.4;border-radius:7px;background-color:hsla(0,0%,100%,.9);transition:background .2s;-webkit-animation:swal-loading-anim 1s infinite;animation:swal-loading-anim 1s infinite}.swal-button__loader div:nth-child(3n+2){-webkit-animation-delay:.15s;animation-delay:.15s}.swal-button__loader div:nth-child(3n+3){-webkit-animation-delay:.3s;animation-delay:.3s}@-webkit-keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}.swal-overlay{position:fixed;top:0;bottom:0;left:0;right:0;text-align:center;font-size:0;overflow-y:auto;background-color:rgba(0,0,0,.4);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s}.swal-overlay:before{content:" ";display:inline-block;vertical-align:middle;height:100%}.swal-overlay--show-modal{opacity:1;pointer-events:auto}.swal-overlay--show-modal .swal-modal{opacity:1;pointer-events:auto;box-sizing:border-box;-webkit-animation:showSweetAlert .3s;animation:showSweetAlert .3s;will-change:transform}.swal-modal{width:478px;opacity:0;pointer-events:none;background-color:#fff;text-align:center;border-radius:5px;position:static;margin:20px auto;display:inline-block;vertical-align:middle;-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;z-index:10001;transition:opacity .2s,-webkit-transform .3s;transition:transform .3s,opacity .2s;transition:transform .3s,opacity .2s,-webkit-transform .3s}@media (max-width:500px){.swal-modal{width:calc(100% - 20px)}}@-webkit-keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}</style>
+<script type="text/javascript" src="./Training on Screen Locking Patterns _ Codewars_files/364dba19a3"></script><script src="./Training on Screen Locking Patterns _ Codewars_files/nr-1216.min.js.download"></script><script type="text/javascript" async="" src="./Training on Screen Locking Patterns _ Codewars_files/analytics.js.download"></script><script type="text/javascript" async="" src="./Training on Screen Locking Patterns _ Codewars_files/js"></script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":858,"agent":""}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).init={ajax:{deny_list:["bam.nr-data.net"]}};(window.NREUM||(NREUM={})).loader_config={licenseKey:"364dba19a3",applicationID:"15446117"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(){}function i(t,e,n,r){return function(){return s.recordSupportability("API/"+e+"/called"),o(t+e,[u.now()].concat(c(arguments)),n?null:this,r),n?void 0:this}}var o=t("handle"),a=t(9),c=t(10),f=t("ee").get("tracer"),u=t("loader"),s=t(4),d=NREUM;"undefined"==typeof window.newrelic&&(newrelic=d);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",v=l+"ixn-";a(p,function(t,e){d[e]=i(l,e,!0,"api")}),d.addPageAction=i(l,"addPageAction",!0),d.setCurrentRouteName=i(l,"routeName",!0),e.exports=newrelic,d.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(v+"tracer",[u.now(),t,n],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw f.emit("fn-err",[arguments,this,t],n),t}finally{f.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=i(v,e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),s.recordSupportability("API/noticeError/called"),o("err",[t,u.now(),!1,e])}},{}],2:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],3:[function(t,e,n){var r=!1;try{var i=Object.defineProperty({},"passive",{get:function(){r=!0}});window.addEventListener("testPassive",null,i),window.removeEventListener("testPassive",null,i)}catch(o){}e.exports=function(t){return r?{passive:!0,capture:!!t}:!!t}},{}],4:[function(t,e,n){function r(t,e){var n=[a,t,{name:t},e];return o("storeMetric",n,null,"api"),n}function i(t,e){var n=[c,t,{name:t},e];return o("storeEventMetrics",n,null,"api"),n}var o=t("handle"),a="sm",c="cm";e.exports={constants:{SUPPORTABILITY_METRIC:a,CUSTOM_METRIC:c},recordSupportability:r,recordCustom:i}},{}],5:[function(t,e,n){function r(){return c.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,c=t(11);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],6:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?l("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&l("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();if(n.length>0){var r=n[n.length-1];if(u&&u<r.startTime)return;var i=[r],o=a({});o&&i.push(o),l("lcp",i)}}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||l("cls",[t])})}function a(t){var e=navigator.connection||navigator.mozConnection||navigator.webkitConnection;if(e)return e.type&&(t["net-type"]=e.type),e.effectiveType&&(t["net-etype"]=e.effectiveType),e.rtt&&(t["net-rtt"]=e.rtt),e.downlink&&(t["net-dlink"]=e.downlink),t}function c(t){if(t instanceof y&&!w){var e=Math.round(t.timeStamp),n={type:t.type};a(n),e<=v.now()?n.fid=v.now()-e:e>v.offset&&e<=Date.now()?(e-=v.offset,n.fid=v.now()-e):e=v.now(),w=!0,l("timing",["fi",e,n])}}function f(t){"hidden"===t&&(u=v.now(),l("pageHide",[u]))}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var u,s,d,p,l=t("handle"),v=t("loader"),m=t(8),g=t(3),y=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){s=new PerformanceObserver(r);try{s.observe({entryTypes:["paint"]})}catch(h){}d=new PerformanceObserver(i);try{d.observe({entryTypes:["largest-contentful-paint"]})}catch(h){}p=new PerformanceObserver(o);try{p.observe({type:"layout-shift",buffered:!0})}catch(h){}}if("addEventListener"in document){var w=!1,b=["click","keydown","mousedown","pointerdown","touchstart"];b.forEach(function(t){document.addEventListener(t,c,g(!1))})}m(f)}},{}],7:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}e.exports={agent:i,version:o,match:r}},{}],8:[function(t,e,n){function r(t){function e(){t(c&&document[c]?document[c]:document[o]?"hidden":"visible")}"addEventListener"in document&&a&&document.addEventListener(a,e,i(!1))}var i=t(3);e.exports=r;var o,a,c;"undefined"!=typeof document.hidden?(o="hidden",a="visibilitychange",c="visibilityState"):"undefined"!=typeof document.msHidden?(o="msHidden",a="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(o="webkitHidden",a="webkitvisibilitychange",c="webkitVisibilityState")},{}],9:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],10:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],11:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?u(t,f,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!l.aborted||o){t&&a&&t(n,r,i);for(var c=e(i),f=m(n),u=f.length,s=0;s<u;s++)f[s].apply(c,r);var p=d[w[n]];return p&&p.push([b,n,r,c]),c}}function o(t,e){h[t]=m(t).concat(e)}function v(t,e){var n=h[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return h[t]||[]}function g(t){return p[t]=p[t]||i(n)}function y(t,e){l.aborted||s(t,function(t,n){e=e||"feature",w[n]=e,e in d||(d[e]=[])})}var h={},w={},b={on:o,addEventListener:o,removeEventListener:v,emit:n,get:g,listeners:m,context:e,buffer:y,abort:c,aborted:!1};return b}function o(t){return u(t,f,a)}function a(){return new r}function c(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var f="nr@context",u=t("gos"),s=t(9),d={},p={},l=e.exports=i();e.exports.getOrSetContext=o,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!M++){var t=T.info=NREUM.info,e=m.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return u.abort();f(x,function(e,n){t[e]||(t[e]=n)});var n=a();c("mark",["onload",n+T.offset],null,"api"),c("timing",["load",n]);var r=m.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=l+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===m.readyState&&o()}function o(){c("mark",["domContent",a()+T.offset],null,"api")}var a=t(5),c=t("handle"),f=t(9),u=t("ee"),s=t(7),d=t(2),p=t(3),l=d.getConfiguration("ssl")===!1?"http":"https",v=window,m=v.document,g="addEventListener",y="attachEvent",h=v.XMLHttpRequest,w=h&&h.prototype,b=!1;NREUM.o={ST:setTimeout,SI:v.setImmediate,CT:clearTimeout,XHR:h,REQ:v.Request,EV:v.Event,PR:v.Promise,MO:v.MutationObserver};var E=""+location,x={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1216.min.js"},O=h&&w&&w[g]&&!/CriOS/.test(navigator.userAgent),T=e.exports={offset:a.getLastTimestamp(),now:a,origin:E,features:{},xhrWrappable:O,userAgent:s,disabled:b};if(!b){t(1),t(6),m[g]?(m[g]("DOMContentLoaded",o,p(!1)),v[g]("load",r,p(!1))):(m[y]("onreadystatechange",i),v[y]("onload",r)),c("mark",["firstbyte",a.getLastTimestamp()],null,"api");var M=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,f,u){function nrWrapper(){var o,a,s,p;try{a=this,o=d(arguments),s="function"==typeof r?r(o,a):r||{}}catch(l){i([l,"",[o,a,f],s],t)}c(n+"start",[o,a,f],s,u);try{return p=e.apply(a,o)}catch(v){throw c(n+"err",[o,a,v],s,u),v}finally{c(n+"end",[o,a,p],s,u)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var c,f,u,s="-"===r.charAt(0);for(u=0;u<e.length;u++)f=e[u],c=t[f],a(c)||(t[f]=n(c,s?f+r:r,i,f,o))}function c(n,r,o,a){if(!v||e){var c=v;v=!0;try{t.emit(n,r,o,e,a)}catch(f){i([f,n,r,o],t)}v=c}}return t||(t=s),n.inPlace=r,n.flag=p,n}function i(t,e){e||(e=s);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function c(t,e){var n=e(t);return n[p]=t,o(t,n,s),n}function f(t,e,n){var r=t[e];t[e]=c(r,n)}function u(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var s=t("ee"),d=t(10),p="nr@original",l=Object.prototype.hasOwnProperty,v=!1;e.exports=r,e.exports.wrapFunction=c,e.exports.wrapInPlace=f,e.exports.argsToArray=u},{}]},{},["loader"]);</script>
+<link href="./Training on Screen Locking Patterns _ Codewars_files/css" media="screen" rel="stylesheet"><script async="" src="./Training on Screen Locking Patterns _ Codewars_files/ethicalads.min.js.download"></script><link rel="stylesheet" media="screen" href="./Training on Screen Locking Patterns _ Codewars_files/components.c62f39ab.css" data-turbolinks-track="reload"><script src="./Training on Screen Locking Patterns _ Codewars_files/components.3bc5130e.js.download" crossorigin="anonymous" type="module" defer="defer" data-turbolinks-track="reload"></script><link rel="stylesheet" media="screen" href="./Training on Screen Locking Patterns _ Codewars_files/application.bb9f08dd.css" data-turbolinks-track="reload"><script src="./Training on Screen Locking Patterns _ Codewars_files/application.79dd3a99.js.download" crossorigin="anonymous" type="module" defer="defer" data-turbolinks-track="reload"></script><link rel="stylesheet" media="screen" href="./Training on Screen Locking Patterns _ Codewars_files/application.adda2f81.css" defer="defer" data-turbolinks-track="reload"><script async="" src="./Training on Screen Locking Patterns _ Codewars_files/js(1)"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('js', new Date());</script><style>[data-ea-publisher].loaded,[data-ea-type].loaded{font-size:14px;font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;font-weight:normal;font-style:normal;leter-spacing:0px;vertical-align:baseline;line-height:1.3em}[data-ea-publisher].loaded a,[data-ea-type].loaded a{text-decoration:none}[data-ea-publisher].loaded .ea-pixel,[data-ea-type].loaded .ea-pixel{display:none}[data-ea-publisher].loaded .ea-content,[data-ea-type].loaded .ea-content{margin:1em 1em 0.5em 1em;padding:1em;background:rgba(0,0,0,0.03);color:#505050}[data-ea-publisher].loaded .ea-content a:link,[data-ea-type].loaded .ea-content a:link{color:#505050}[data-ea-publisher].loaded .ea-content a:visited,[data-ea-type].loaded .ea-content a:visited{color:#505050}[data-ea-publisher].loaded .ea-content a:hover,[data-ea-type].loaded .ea-content a:hover{color:#373737}[data-ea-publisher].loaded .ea-content a:active,[data-ea-type].loaded .ea-content a:active{color:#373737}[data-ea-publisher].loaded .ea-content a strong,[data-ea-publisher].loaded .ea-content a b,[data-ea-type].loaded .ea-content a strong,[data-ea-type].loaded .ea-content a b{color:#088cdb}[data-ea-publisher].loaded .ea-callout a:link,[data-ea-type].loaded .ea-callout a:link{color:#6a6a6a}[data-ea-publisher].loaded .ea-callout a:visited,[data-ea-type].loaded .ea-callout a:visited{color:#6a6a6a}[data-ea-publisher].loaded .ea-callout a:hover,[data-ea-type].loaded .ea-callout a:hover{color:#505050}[data-ea-publisher].loaded .ea-callout a:active,[data-ea-type].loaded .ea-callout a:active{color:#505050}[data-ea-publisher].loaded .ea-callout a strong,[data-ea-publisher].loaded .ea-callout a b,[data-ea-type].loaded .ea-callout a strong,[data-ea-type].loaded .ea-callout a b{color:#088cdb}[data-ea-publisher].loaded .ea-callout a,[data-ea-type].loaded .ea-callout a{font-size:0.8em}[data-ea-publisher].loaded.dark .ea-content,[data-ea-type].loaded.dark .ea-content{background:rgba(255,255,255,0.05);color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:link,[data-ea-type].loaded.dark .ea-content a:link{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:visited,[data-ea-type].loaded.dark .ea-content a:visited{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:hover,[data-ea-type].loaded.dark .ea-content a:hover{color:#f6f6f6}[data-ea-publisher].loaded.dark .ea-content a:active,[data-ea-type].loaded.dark .ea-content a:active{color:#f6f6f6}[data-ea-publisher].loaded.dark .ea-content a strong,[data-ea-publisher].loaded.dark .ea-content a b,[data-ea-type].loaded.dark .ea-content a strong,[data-ea-type].loaded.dark .ea-content a b{color:#50baf9}[data-ea-publisher].loaded.dark .ea-callout a:link,[data-ea-type].loaded.dark .ea-callout a:link{color:#c3c3c3}[data-ea-publisher].loaded.dark .ea-callout a:visited,[data-ea-type].loaded.dark .ea-callout a:visited{color:#c3c3c3}[data-ea-publisher].loaded.dark .ea-callout a:hover,[data-ea-type].loaded.dark .ea-callout a:hover{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-callout a:active,[data-ea-type].loaded.dark .ea-callout a:active{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-callout a strong,[data-ea-publisher].loaded.dark .ea-callout a b,[data-ea-type].loaded.dark .ea-callout a strong,[data-ea-type].loaded.dark .ea-callout a b{color:#50baf9}@media (prefers-color-scheme: dark){[data-ea-publisher].loaded.adaptive .ea-content,[data-ea-type].loaded.adaptive .ea-content{background:rgba(255,255,255,0.05);color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:link,[data-ea-type].loaded.adaptive .ea-content a:link{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:visited,[data-ea-type].loaded.adaptive .ea-content a:visited{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:hover,[data-ea-type].loaded.adaptive .ea-content a:hover{color:#f6f6f6}[data-ea-publisher].loaded.adaptive .ea-content a:active,[data-ea-type].loaded.adaptive .ea-content a:active{color:#f6f6f6}[data-ea-publisher].loaded.adaptive .ea-content a strong,[data-ea-publisher].loaded.adaptive .ea-content a b,[data-ea-type].loaded.adaptive .ea-content a strong,[data-ea-type].loaded.adaptive .ea-content a b{color:#50baf9}[data-ea-publisher].loaded.adaptive .ea-callout a:link,[data-ea-type].loaded.adaptive .ea-callout a:link{color:#c3c3c3}[data-ea-publisher].loaded.adaptive .ea-callout a:visited,[data-ea-type].loaded.adaptive .ea-callout a:visited{color:#c3c3c3}[data-ea-publisher].loaded.adaptive .ea-callout a:hover,[data-ea-type].loaded.adaptive .ea-callout a:hover{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-callout a:active,[data-ea-type].loaded.adaptive .ea-callout a:active{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-callout a strong,[data-ea-publisher].loaded.adaptive .ea-callout a b,[data-ea-type].loaded.adaptive .ea-callout a strong,[data-ea-type].loaded.adaptive .ea-callout a b{color:#50baf9}}[data-ea-publisher].loaded .ea-content,[data-ea-type].loaded .ea-content{border:0px;border-radius:3px;box-shadow:0px 2px 3px rgba(0,0,0,0.15)}[data-ea-publisher].loaded.raised .ea-content,[data-ea-type].loaded.raised .ea-content{border:0px;border-radius:3px;box-shadow:0px 2px 3px rgba(0,0,0,0.15)}[data-ea-publisher].loaded.bordered .ea-content,[data-ea-type].loaded.bordered .ea-content{border:1px solid rgba(0,0,0,0.04);border-radius:3px;box-shadow:none}[data-ea-publisher].loaded.bordered.dark .ea-content,[data-ea-type].loaded.bordered.dark .ea-content{border:1px solid rgba(255,255,255,0.07)}@media (prefers-color-scheme: dark){[data-ea-publisher].loaded.bordered.adaptive .ea-content,[data-ea-type].loaded.bordered.adaptive .ea-content{border:1px solid rgba(255,255,255,0.07)}}[data-ea-publisher].loaded.flat .ea-content,[data-ea-type].loaded.flat .ea-content{border:0px;border-radius:3px;box-shadow:none}[data-ea-type="image"].loaded,[data-ea-publisher]:not([data-ea-type]).loaded,.ea-type-image{display:inline-block}[data-ea-type="image"].loaded .ea-content,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content,.ea-type-image .ea-content{max-width:180px;overflow:auto;text-align:center}[data-ea-type="image"].loaded .ea-content>a>img,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content>a>img,.ea-type-image .ea-content>a>img{width:120px;height:90px;display:inline-block}[data-ea-type="image"].loaded .ea-content>.ea-text,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content>.ea-text,.ea-type-image .ea-content>.ea-text{margin-top:1em;font-size:1em;text-align:center}[data-ea-type="image"].loaded .ea-callout,[data-ea-publisher]:not([data-ea-type]).loaded .ea-callout,.ea-type-image .ea-callout{max-width:180px;margin:0em 1em 1em 1em;padding-left:1em;padding-right:1em;font-style:italic;text-align:right}[data-ea-type="image"].loaded.horizontal .ea-content,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content,.ea-type-image.horizontal .ea-content{max-width:320px}[data-ea-type="image"].loaded.horizontal .ea-content>a>img,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content>a>img,.ea-type-image.horizontal .ea-content>a>img{float:left;margin-right:1em}[data-ea-type="image"].loaded.horizontal .ea-content .ea-text,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content .ea-text,.ea-type-image.horizontal .ea-content .ea-text{margin-top:0em;text-align:left;overflow:auto}[data-ea-type="image"].loaded.horizontal .ea-callout,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-callout,.ea-type-image.horizontal .ea-callout{max-width:320px;text-align:right}[data-ea-type="text"].loaded,.ea-type-text{font-size:14px}[data-ea-type="text"].loaded .ea-content,.ea-type-text .ea-content{text-align:left}[data-ea-type="text"].loaded .ea-callout,.ea-type-text .ea-callout{margin:0.5em 1em 1em 1em;padding-left:1em;padding-right:1em;text-align:right;font-style:italic}[data-ea-style="stickybox"].loaded{position:fixed;bottom:20px;right:20px;z-index:10}[data-ea-style="stickybox"].loaded .ea-type-image .ea-stickybox-hide{cursor:pointer;position:absolute;top:0.75em;right:0.75em;background-color:#fefefe;border:1px solid #088cdb;border-radius:50%;color:#088cdb;font-size:1em;text-align:center;height:1.5em;width:1.5em;line-height:1.5em}@media (max-width: 1300px){[data-ea-style="stickybox"].loaded{position:static;bottom:0;right:0;margin:auto;text-align:center}[data-ea-style="stickybox"].loaded .ea-stickybox-hide{display:none}}@media (min-width: 1301px){[data-ea-style="stickybox"].loaded .ea-type-image .ea-content{background:#dcdcdc}[data-ea-style="stickybox"].loaded.dark .ea-type-image .ea-content{background:#505050}}@media (min-width: 1301px) and (prefers-color-scheme: dark){[data-ea-style="stickybox"].loaded.adaptive .ea-type-image .ea-content{background:#505050}}[data-ea-style="fixedfooter"].loaded{position:fixed;bottom:0;left:0;z-index:10;width:100%;max-width:100%}[data-ea-style="fixedfooter"].loaded .ea-type-text{width:100%;max-width:100%;display:flex;z-index:10;background:#dcdcdc}[data-ea-style="fixedfooter"].loaded .ea-type-text .ea-content{border:0px;border-radius:3px;box-shadow:none}[data-ea-style="fixedfooter"].loaded .ea-type-text .ea-content{background-color:inherit;max-width:100%;margin:0;padding:1em;flex:auto}[data-ea-style="fixedfooter"].loaded .ea-type-text .ea-callout{max-width:100%;margin:0;padding:1em;flex:initial}@media (max-width: 576px){[data-ea-style="fixedfooter"].loaded .ea-type-text .ea-callout{display:none}}[data-ea-style="fixedfooter"].loaded .ea-type-text .ea-fixedfooter-hide{cursor:pointer;color:#505050;padding:1em;flex:initial;margin:auto 0}[data-ea-style="fixedfooter"].loaded .ea-type-text .ea-fixedfooter-hide span{padding:0.25em;font-size:0.8em;font-weight:bold;border:0.15em solid #505050;border-radius:0.5em;white-space:nowrap}[data-ea-style="fixedfooter"].loaded.dark .ea-type-text{background:#505050}[data-ea-style="fixedfooter"].loaded.dark .ea-type-text .ea-fixedfooter-hide span{color:#dcdcdc;border-color:#dcdcdc}@media (prefers-color-scheme: dark){[data-ea-style="fixedfooter"].loaded.adaptive .ea-type-text{background:#505050}[data-ea-style="fixedfooter"].loaded.adaptive .ea-type-text .ea-fixedfooter-hide span{color:#dcdcdc;border-color:#dcdcdc}}
+</style><style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmSU5fCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmSU5fABc4EsA.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmSU5fCBc4EsA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmSU5fBxc4EsA.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmSU5fCxc4EsA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmSU5fChc4EsA.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmSU5fBBc4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu72xKOzY.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu5mxKOzY.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7mxKOzY.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4WxKOzY.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7WxKOzY.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7GxKOzY.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fABc4EsA.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fCBc4EsA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fBxc4EsA.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fCxc4EsA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fChc4EsA.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmEU9fBBc4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfABc4EsA.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfCBc4EsA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfBxc4EsA.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfCxc4EsA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfChc4EsA.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style><style>.ucbzx-button-wrapper {
+    position: absolute !important;
+    z-index: 1000 !important;
+    top: 0 !important;
+    right: 0 !important;
+}
+
+.ucbzx-button {
+    display: block;
+    border: none !important;
+    /* outline: none !important; */
+    background: #3c3c54 !important;
+    padding: 0 !important;
+    border-radius: 5px;
+    width: 36px !important;
+    height: 36px !important;
+}
+
+.ucbzx-button:active {
+    border: none !important;
+}
+
+.ucbzx-button:disabled {
+    cursor: default !important;
+}
+
+.ucbzx-download-img {
+    display: block !important;
+    width: 36px !important;
+    height: 36px !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+}
+
+.ucbzx-hide {
+    display: none !important;
+}
+
+.ucbzx-loader {
+    display: block;
+    box-sizing: content-box !important;
+    width: 30px !important;
+    height: 30px !important;
+    padding: 3px !important;
+    animation: rotate 1s linear infinite;
+    margin: 0 !important;
+}
+
+/*
+    RESOLUTIONS CHOICE
+*/
+
+.ucbzx-resolutions-list {
+    position: absolute !important;
+    top: 36px !important;
+    right: 0 !important;
+    background: #3c3c54 !important;
+    color: #dbdbdb !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 14px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.ucbzx-resolutions-list li {
+    margin: 4px !important;
+    padding: 0 !important;
+    font-weight: bold !important;
+    white-space: nowrap !important;
+    width: 130px !important;
+    height: 30px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.ucbzx-list-item-tickbox {
+    width: 20px !important;
+    height: 20px !important;
+    background: rgba(255, 255, 255, 0.219) !important;
+    /* border-radius: 5px !important; */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    /* font-size: 17px !important; */
+    /* border: 1px solid rgba(255, 255, 255, 0.835) !important; */
+    cursor: pointer !important;
+    margin-left: 4px !important;
+}
+
+.ucbzx-resolutions-list > li::before {
+    display: none;
+}
+
+.ucbzx-list-item-tickbox:not(.ucbzx-list-item-tickbox-checked):hover {
+    background: rgba(255, 255, 255, 0.37) !important;
+}
+
+.ucbzx-list-item-tickbox.ucbzx-list-item-tickbox-checked {
+    cursor: default !important;
+}
+
+.ucbzx-list-item-tickbox-checked::after {
+    content: "\2713" !important;
+    color: white !important;
+}
+
+.ucbzx-list-item-text {
+    /* border-radius: 5px !important; */
+    flex-grow: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    height: 100% !important;
+    margin-left: 10px !important;
+}
+
+.ucbzx-list-item-text:hover {
+    background: rgba(255, 255, 255, 0.37) !important;
+    color: white !important;
+}
+
+/* account for the fact that we got rid of the tickbox there */
+.ucbzx-resolutions-list li[data-type="captions"] .ucbzx-list-item-text {
+    margin-left: 34px !important;
+    font-style: italic;
+}
+
+/*
+    MISC
+*/
+
+.ucbzx-arrow-container {
+    background: none !important;
+    position: absolute !important;
+    top: 36px !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    border-left: 18px solid transparent !important;
+    border-right: 18px solid transparent !important;
+    border-top: 18px solid #3c3c54 !important;
+    /* border-bottom: none !important; */
+    cursor: pointer !important;
+}
+
+.ucbzx-arrow-container::after {
+    position: absolute !important;
+    top: -18px !important;
+    left: -4px !important;
+    content: "" !important;
+    border: 1px solid #dbdbdb !important;
+    border-width: 0 3px 3px 0 !important;
+    display: inline-block !important;
+    padding: 3px !important;
+    transform: rotate(45deg);
+}
+
+.ucbzx-button:focus,
+.ucbzx-arrow-container:focus,
+.ucbzx-resolutions-list:focus,
+.ucbzx-list-item-tickbox:focus,
+.ucbzx-list-item-text:focus {
+    outline: 1px solid white !important;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+    RESET STYLES
+*/
+.ucbzx-button-wrapper button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    outline: none;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+}
+
+.ucbzx-button-wrapper li,
+.ucbzx-button-wrapper li * {
+    margin: 0;
+    font: inherit;
+    font-style: inherit;
+    font-size: inherit;
+}</style><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":1134,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":756,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":632,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":938,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":1029,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":2703,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKEl9bQg==","queueTime":0,"applicationTime":729,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKEVtVTA==","queueTime":0,"applicationTime":532,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":901,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKDV5HQQ==","queueTime":0,"applicationTime":929,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKEl9bQg==","queueTime":0,"applicationTime":273,"agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"364dba19a3","applicationID":"15446117","transactionName":"Jg5ZQEdYXQ1XRRZWXQEEaFddVl0NV1leUEFKEVtVTA==","queueTime":0,"applicationTime":286,"agent":""}</script><title>Training on Screen Locking Patterns | Codewars</title><meta name="csrf-param" content="authenticity_token"><meta name="csrf-token" content="ZgdCPzOXo6VbOwMof0+KiqgaabN81AWX64v0MRuW8cVwJGYu7T6wf2IKN173Pq5ssw873FqSp59S6cc0WfiD9w=="><meta content="no-cache" name="turbolinks-cache-control"><meta content="noindex" name="robots"><meta content="width=320px, initial-scale=1.0, minimum-scale=0.86, maximum-scale=5.0" name="viewport"><meta content="summary_large_image" property="twitter:card"><meta content="Training on Screen Locking Patterns" property="og:title"><meta content="website" property="og:type"><meta content="Codewars" property="og:site_name"><meta content="https://www.codewars.com" property="og:url"><meta content="https://www.codewars.com/packs/assets/og-image.7f5134fb.png" property="og:image"><meta content="https://www.codewars.com/packs/assets/og-image.7f5134fb.png" property="og:image:secure_url"><meta content="Codewars is where developers achieve code mastery through challenge. Train on kata in the dojo and reach your highest potential." property="og:description"><meta content="652826666" property="fb:admins"><meta content="110951985735625" property="fb:app_id"><meta content="@codewars" name="twitter:site"><meta content="Codewars is where developers achieve code mastery through challenge. Train on kata in the dojo and reach your highest potential." name="description"><meta content="codewars, code kata, kata, code gym, coding, code practice, ruby, javascript, coffeescript, web development, software development, dojo" name="keywords"><meta content="EMv3k6eCCUuSkbwJpGlLbtsBd_lCvmvDp1Ucsv0rIvM" name="google-site-verification"><meta name="action-cable-url" content="wss://www.codewars.com/cable"><script src="./Training on Screen Locking Patterns _ Codewars_files/saved_resource" type="text/javascript" async=""></script></head><body class="play_view  full-viewport  logged-in no-footer" id="code_challenges"><div id="app"><h1 class="page-title">Kata Training</h1><div class="w-full" id="shell"><div class="sidenav-nubbin block md:hidden"><i class="icon-moon-list "></i></div><nav id="sidenav"><ul class="top md:mb-10"><li class="sidenav-item"><a class="inline-flex pb-2" href="https://www.codewars.com/dashboard"><div class="logo mt-3 shrink-0"><img class="w-full h-full" src="./Training on Screen Locking Patterns _ Codewars_files/logo.61192cf7.svg"></div><div class="sidenav-link__content mt-2"><div class="sidenav-link__label">Home</div><div class="sidenav-link__desc">Report home for your next assignment</div></div></a></li><li class="sidenav-section"><span>Training</span></li><li class="sidenav-item mt-1"><a href="https://www.codewars.com/kata/latest/my-languages?beta=false"><div class="sidenav-link__icon"><svg class="ml-1.5 w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24"><path d="M23.477 7.694c-.395-.559-1.312-.795-1.869-.318L20.342 8.46c-3.71-1.833-7.42-3.663-11.129-5.497-1.651-.817-2.512 1.944-.884 2.748l4.011 1.98-2.83 5.437c-.019.039-.032.08-.05.12L2.053 9.843c-1.66-.762-2.537 1.931-.899 2.685l8.863 4.074.5 2.442a272 272 0 0 1-3.176-1.45c-1.643-.767-3.08 1.672-1.428 2.443 2.031.948 4.082 1.852 6.123 2.776 1.268.572 2.405-.733 2.115-1.708v-.02c-.353-1.726-.708-3.452-1.06-5.179.076-.093.152-.19.21-.3l3.08-5.918 3.405 1.68c.384.191.723.183 1.001.055.172-.036.337-.11.478-.23.631-.54 1.26-1.081 1.893-1.62.555-.477.767-1.242.32-1.879z"></path><path d="M16.482 5.579a2.303 2.303 0 1 0 1.145-4.462l-.016-.003a2.303 2.303 0 0 0-1.145 4.461l.016.004z"></path></svg></div><div class="sidenav-link__content"><div class="sidenav-link__label">Practice</div><div class="sidenav-link__desc">Complete challenging <strong>Kata</strong> to earn honor and ranks. Re-train to hone technique</div></div></a></li><li class="sidenav-item"><a href="https://www.codewars.com/kumite"><div class="sidenav-link__icon"><svg class="ml-1.5 w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24"><path d="m9.441 10.67-2.908 1.233-1.06-2.317 1.848-.05c.543 0 .986-.418 1.06-.96l.296-2.416C8.751 5.568 8.332 5 7.74 4.927a1.106 1.106 0 0 0-1.232.961l-.197 1.48-1.627.049a.786.786 0 0 0-.345.074l-2.268.813a.997.997 0 0 0-.64.616 1.02 1.02 0 0 0 .048.888l2.317 4.659-1.109 6.779c-.123.69.37 1.356 1.06 1.479.074 0 .148.025.222.025a1.27 1.27 0 0 0 1.257-1.085l1.134-6.902 6.113-2.589-2.193-.936a2.199 2.199 0 0 1-.838-.567zM4.574 4.136a2.243 2.243 0 1 1-4.07 1.887 2.243 2.243 0 0 1 4.07-1.887Z"></path><path d="m21.94 6.727-2.268-.814a.87.87 0 0 0-.345-.074l-1.652-.05-.197-1.478c-.074-.592-.641-1.011-1.233-.962a1.11 1.11 0 0 0-.961 1.233l.296 2.415c.073.543.517.937 1.06.962l1.848.05-1.06 2.317-5.768-2.441c-.666-.271-1.405.025-1.676.69-.271.666.024 1.405.69 1.676l6.952 2.959 1.134 6.902a1.27 1.27 0 0 0 1.257 1.085c.074 0 .148 0 .222-.025.69-.123 1.183-.789 1.06-1.48l-1.11-6.778 2.317-4.66c.148-.27.148-.616.05-.887a.946.946 0 0 0-.617-.64zm.465-5.268a2.243 2.243 0 1 1-1.888 4.07 2.243 2.243 0 0 1 1.888-4.07z"></path></svg></div><div class="sidenav-link__content"><div class="sidenav-link__label">Freestyle Sparring</div><div class="sidenav-link__desc">Take turns remixing and refactoring others code through <strong>Kumite</strong></div></div></a></li><li class="sidenav-section"><span>Career</span></li><li class="sidenav-item mt-1"><a href="https://jobs.qualified.io/" rel="noopener" target="_blank" title="Qualified Jobs"><div class="sidenav-link__icon"><svg class="ml-1.5 w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div class="sidenav-link__content"><div class="sidenav-link__label">Opportunities</div><div class="sidenav-link__desc">Find your next career challenge – powered by <strong>Qualified Jobs</strong></div></div></a></li><li class="sidenav-section"><span>Community</span></li><li class="sidenav-item mt-1"><a href="https://www.codewars.com/users/leaderboard" title="Leaders"><div class="sidenav-link__icon"><svg class="ml-1.5 w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg></div><div class="sidenav-link__content"><div class="sidenav-link__label">Leaderboards</div><div class="sidenav-link__desc">Achieve honor and move up the global leaderboards</div></div></a></li><li class="sidenav-item"><a href="https://discord.gg/mSwJWRvkHA" rel="noopener" target="_blank" title="Discord"><div class="sidenav-link__icon sidenav__discord-icon"><svg class="ml-1.5 w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24"><path d="M9.8147 10.0948c-.6792 0-1.2191.5921-1.2191 1.315 0 .7227.5486 1.3236 1.2191 1.3236.6793 0 1.2192-.6008 1.2192-1.3237.0174-.7228-.54-1.315-1.2192-1.315zm4.3715 0c-.6792 0-1.2191.5921-1.2191 1.315 0 .7227.5486 1.3236 1.2191 1.3236.6793 0 1.2192-.6008 1.2192-1.3237 0-.7228-.54-1.315-1.2192-1.315z"></path><path d="M20.0034.0539H3.9889C2.64.0637 1.5506 1.1594 1.5506 2.5096v.0092-.0004 16.1629c0 1.3533 1.0945 2.4508 2.4465 2.4558H17.539l-.627-2.212 1.524 1.4195 1.4455 1.3411 2.569 2.2642V2.5096c0-1.3532-1.0945-2.4508-2.4466-2.4557ZM15.388 15.6595l-.7838-.9667c.889-.2145 1.636-.7207 2.1527-1.4097l.007-.0097c-.4877.3222-.958.5486-1.376.6966-.9578.4145-2.0733.6556-3.2451.6556a8.4005 8.4005 0 0 1-1.6323-.1593l.0531.0088c-.9878-.2002-1.8648-.5165-2.6764-.9407l.0552.0263-.1132-.061-.0435-.0348c-.2177-.122-.3396-.209-.3396-.209s.5747.958 2.09 1.4108c-.3484.4528-.7925.9928-.7925.9928-2.6386-.0871-3.6488-1.8201-3.6488-1.8201 0-3.8404 1.7242-6.9668 1.7242-6.9668 1.7156-1.2801 3.3527-1.2453 3.3527-1.2453l.122.148c-2.151.6183-3.135 1.5676-3.135 1.5676s.2612-.148.6966-.3484c.7886-.3714 1.7038-.6386 2.6657-.7534l.0426-.0042.209-.0174c.3922-.056.8452-.088 1.3056-.088 1.7258 0 3.3467.449 4.7522 1.2367l-.0491-.0253s-.9493-.9057-2.9783-1.5414l.1742-.1916s1.6285-.0348 3.3527 1.2628c0 0 1.7155 3.1176 1.7155 6.9667 0 0-1.0101 1.7243-3.6574 1.8114z"></path></svg></div><div class="sidenav-link__content"><div class="sidenav-link__label">Chat</div><div class="sidenav-link__desc">Join our <strong>Discord</strong> server and chat with your fellow code warriors</div></div></a></li><li class="sidenav-item"><a href="https://github.com/codewars/codewars.com/discussions" rel="noopener" target="_blank" title="GitHub Discussions"><div class="sidenav-link__icon"><svg class="ml-1.5 w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg></div><div class="sidenav-link__content"><div class="sidenav-link__label">Discussions</div><div class="sidenav-link__desc">View our <strong>Github Discussions</strong> board to discuss general Codewars topics</div></div></a></li><li class="sidenav-section"><span>About</span></li><li class="sidenav-item mt-1"><a href="https://docs.codewars.com/" rel="noopener" target="_blank" title="The Codewars Docs"><div class="sidenav-link__icon"><svg class="ml-1.5 w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg></div><div class="sidenav-link__content"><div class="sidenav-link__label">Docs</div><div class="sidenav-link__desc">Learn about all of the different aspects of Codewars</div></div></a></li></ul></nav><header class="main is-visible" id="main_header"><ul class="items"><li class="item-list"><a class="js-toggle-dark-mode w-6"><svg class="block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg><svg class="hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></a></li><li class="item-list stars-item has-menu static"><a><i class="icon-moon-bookmark text-2xl"></i></a><div class="menu has-auto-scrolling right-0 shadow-lg"><div class="menu-body" style="max-height: 962px;"><ul class="space-y"><li><a><div>You have not starred any kata</div><div>To add some, just click the<span class="is-link ml-5px"><i class="icon-moon-star-empty is-small"></i></span>next to any kata title.</div></a></li></ul></div></div></li><li class="notifications-item has-menu static" id="notifications_drawer"><a><i class="icon-moon-bell text-2xl"></i></a><div class="menu right-0 shadow-lg"><div class="menu-body" style="max-height: 962px;"><div class="notifications-body"><ul class="divide-y"><li class="notification"><figure><img title="An0n1m1ty" data-tippy-content="An0n1m1ty" data-tippy-placement="bottom" alt="An0n1m1ty Avatar" src="./Training on Screen Locking Patterns _ Codewars_files/profile-pic.f3a90aca.png"></figure><figcaption><a data-notification-ids="635b2f6c0ea5a00001ed326d" data-turbolinks="false" href="https://www.codewars.com/users/5e8ac8a15f1a01001f3a26bd">500+ Honor: You now have the ability to moderate comments marked as having spoilers.</a><div class="ml-15px"></div><time-ago datetime="2022-10-28T01:25:00.966+0000" lang="en" title="28 Oct 2022, 09:25 GMT+8">yesterday</time-ago></figcaption><div class="clearfix"></div></li><li class="notification"><figure><div class="square">2</div></figure><figcaption><a data-notification-ids="635b2f6c00fba205511900e5 635a101600fba2ac99188a66" data-turbolinks="false" href="https://www.codewars.com/users/5e8ac8a15f1a01001f3a26bd">You have ranked up in JavaScript!</a><div class="ml-15px"></div><time-ago datetime="2022-10-28T01:25:00.899+0000" lang="en" title="28 Oct 2022, 09:25 GMT+8">yesterday</time-ago></figcaption><div class="clearfix"></div></li><li class="notification"><figure><div rank="-4" class="small-hex is-extra-wide is-blue-rank"><div class="inner-small-hex is-extra-wide "><span>4 kyu</span></div></div></figure><figcaption><a data-notification-ids="635b2f6c00fba205511900e4" data-turbolinks="false" href="https://www.codewars.com/users/5e8ac8a15f1a01001f3a26bd">Congratulations! Your new overall rank is 4 kyu.</a><div class="ml-15px"></div><time-ago datetime="2022-10-28T01:25:00.879+0000" lang="en" title="28 Oct 2022, 09:25 GMT+8">yesterday</time-ago></figcaption><div class="clearfix"></div></li></ul></div></div></div></li><li class="profile-item min-w-60px sm:min-w-130px has-menu mr-0 text-sm"><a href="https://www.codewars.com/users/An0n1m1ty" id="header_profile_link"><div class="profile-pic mr-0"><img title="" alt="An0n1m1ty Avatar" src="./Training on Screen Locking Patterns _ Codewars_files/profile-pic.f3a90aca.png"></div><div class="profile-points hidden sm:block ml-4"><div class="small-hex is-extra-wide is-invertable is-blue-rank"><div class="inner-small-hex is-extra-wide "><span>4 kyu</span></div></div><div class="ml-10px is-inline" data-rt="5e8ac8a15f1a01001f3a26bd:honor">516</div></div></a><div class="menu shadow-lg"><div class="menu-body" style="max-height: 962px;"><ul><li><a href="https://www.codewars.com/users/An0n1m1ty"><i class="icon-moon-user "></i>View Profile</a></li><li class="border-t"><a href="https://www.codewars.com/users/edit"><i class="icon-moon-settings "></i>Account Settings</a></li><li><a href="https://www.codewars.com/trainer/setup"><i class="icon-moon-settings "></i>Training Setup</a></li><li class="border-t"><a data-turbolinks="false" href="https://www.codewars.com/subscription"><i class="icon-moon-red-badge is-red-text"></i>Upgrade to Red</a></li><li class="border-t"><a data-turbolinks="false" href="https://www.codewars.com/kata/new"><i class="icon-moon-begin "></i>New Kata</a></li><li><a href="https://www.codewars.com/kumite/new"><i class="icon-moon-begin "></i>New Kumite</a></li><li class="border-t"><a class="js-sign-out"><i class="icon-moon-power "></i>Sign out</a></li></ul></div></div></li></ul></header><main id="shell_content" role="main"><div class="is-hidden" id="global_alerts"><div class="alert-box"></div></div><div id="flash"></div>
+<div id="cc_play_view">
+<!--v-if-->
+<div class="w-full game-title">
+<div class="panel p-0 mb-0">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-5/12">
+<div class="flex items-center">
+<div class="small-hex is-extra-wide is-blue-rank"><div class="inner-small-hex is-extra-wide "><span>3 kyu</span></div></div>
+<h4 class="ml-2 mb-3">Screen Locking Patterns</h4>
+<!--v-if-->
+</div>
+<div class="mt-1 mb-3 space-x-4" data-id="585894545a8a07255e0002f1"><span><a class="mr-0 js-remove-code-challenge-star is-hidden" data-tippy-content="Total times this kata has been bookmarked. Click to remove your bookmark" data-tippy-placement="bottom"><i class="icon-moon-star text-sm opacity-75" rt="585894545a8a07255e0002f1:total_stars"></i><span data-rt="585894545a8a07255e0002f1:total_stars">940</span></a><a class="mr-0 js-add-code-challenge-star" data-tippy-content="Total times this kata has been bookmarked. Click to bookmark" data-tippy-placement="bottom"><i class="icon-moon-star-empty text-sm opacity-75" rt="585894545a8a07255e0002f1:total_stars"></i><span data-rt="585894545a8a07255e0002f1:total_stars">940</span></a></span><a class="mr-0 js-add-to-collection ml-2" data-challenge="{&quot;id&quot;:&quot;585894545a8a07255e0002f1&quot;,&quot;name&quot;:&quot;Screen Locking Patterns&quot;}" data-tippy-content="Total collections this kata is a part of. Click to view and add collections." data-tippy-placement="bottom"><i class="icon-moon-collection text-sm opacity-75" rt="585894545a8a07255e0002f1:total_collections"></i><span data-rt="585894545a8a07255e0002f1:total_collections">191</span></a><span class="mr-0 text-ui-text-lc" data-tippy-content="Satisfaction Rating: 95% of users gave a positive rating out of 578 votes. Ranked kata must be completed before they can be voted on." data-tippy-placement="bottom"><i class="icon-moon-guage text-xs opacity-75 top-0"></i><span class="mr-0">95% <span class="opacity-75">of</span> 578</span></span><span class="mr-0 text-ui-text-lc" data-tippy-content="Total times JavaScript has been completed out of all kata completions" data-tippy-placement="bottom"><i class="icon-moon-bullseye text-sm opacity-75"></i><span>692 <span class="opacity-75">of</span> 3,254</span></span><a class="mr-0" data-tippy-content="This kata&#39;s Sensei" data-tippy-placement="bottom" href="https://www.codewars.com/users/rsalgado"><i class="icon-moon-user text-sm opacity-75"></i>rsalgado</a><span class="mr-0 text-ui-text-lc hidden sm:inline-block"><a class="mr-0" href="https://www.codewars.com/kata/585894545a8a07255e0002f1/discuss#label-issue"><i class="icon-moon-warning text-sm opacity-75"></i>1 Issue Reported</a></span></div>
+</div>
+<div class="w-full md:w-7/12 pt-4 md:pl-4">
+<ul class="is-inline float-left">
+<li>
+<div class="language-selector">
+<div class="dropdown has-border is-scrolled is-big shadow-sm" id="language_dd">
+<i class="icon-moon-chevron-sign-down"></i>
+<span class="mr-4">
+<i class="icon-moon-javascript"></i>
+<span>JavaScript</span>
+<div class="placeholder">Language</div>
+</span>
+<dl>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/cobol" data-value="cobol">
+<i class="icon-moon-cobol "></i>
+COBOL (Beta)
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/commonlisp" data-value="commonlisp">
+<i class="icon-moon-commonlisp "></i>
+CommonLisp (Beta)
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/cpp" data-value="cpp">
+<i class="icon-moon-cplusplus "></i>
+ C++
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/crystal" data-value="crystal">
+<i class="icon-moon-crystal "></i>
+Crystal
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/csharp" data-value="csharp">
+<i class="icon-moon-csharp "></i>
+C#
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/d" data-value="d">
+<i class="icon-moon-d "></i>
+D (Beta)
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/dart" data-value="dart">
+<i class="icon-moon-dart "></i>
+Dart
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/elixir" data-value="elixir">
+<i class="icon-moon-elixir "></i>
+Elixir
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/groovy" data-value="groovy">
+<i class="icon-moon-groovy "></i>
+Groovy
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/haskell" data-value="haskell">
+<i class="icon-moon-haskell "></i>
+Haskell
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/java" data-value="java">
+<i class="icon-moon-java "></i>
+Java
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/javascript" data-value="javascript">
+<i class="icon-moon-javascript "></i>
+JavaScript
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/julia" data-value="julia">
+<i class="icon-moon-julia "></i>
+Julia (Beta)
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/kotlin" data-value="kotlin">
+<i class="icon-moon-kotlin "></i>
+Kotlin
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/php" data-value="php">
+<i class="icon-moon-php "></i>
+PHP
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/python" data-value="python">
+<i class="icon-moon-python "></i>
+Python
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/r" data-value="r">
+<i class="icon-moon-r "></i>
+R (Beta)
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/ruby" data-value="ruby">
+<i class="icon-moon-ruby "></i>
+Ruby
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/rust" data-value="rust">
+<i class="icon-moon-rust "></i>
+Rust
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/scala" data-value="scala">
+<i class="icon-moon-scala "></i>
+Scala
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/swift" data-value="swift">
+<i class="icon-moon-swift "></i>
+Swift
+</dd>
+<dd data-href="/kata/585894545a8a07255e0002f1/train/typescript" data-value="typescript">
+<i class="icon-moon-typescript "></i>
+TypeScript
+</dd>
+</dl>
+</div>
+</div>
+</li>
+<li class="mr-0">
+<div class="dropdown has-border is-big shadow-sm" data-tippy-content="Select the language version you wish to use." data-tippy-placement="top" id="language_version">
+<i class="icon-moon-chevron-sign-down"></i>
+<span>Node v8.1.3</span>
+<div class="placeholder">Language Version</div>
+<dl>
+<dd data-tippy-placement="right" class="is-active" data-version="8.x">
+<span>Node v8.1.3</span>
+</dd><dd data-tippy-placement="right" class="" data-version="8.x/babel">
+<span>Node v8.1.3/Babel</span>
+</dd><dd data-tippy-placement="right" class="is-disabled" data-version="10.x" data-tippy-content="Not available for this kata">
+<span>Node v10.x</span>
+</dd><dd data-tippy-placement="right" class="is-disabled" data-version="12.x" data-tippy-content="Not available for this kata">
+<span>Node v12.x</span>
+</dd><dd data-tippy-placement="right" class="is-disabled" data-version="14.x" data-tippy-content="Not available for this kata">
+<span>Node v14.x</span>
+</dd>
+</dl>
+</div>
+</li>
+</ul>
+<ul class="is-inline float-right ide-options">
+<li class="mr-0 mode-options">
+<ul class="icon-list is-text">
+<li class="mr-0" id="vim_mode">
+<a><div class="icon-container">VIM</div></a>
+</li>
+<li class="mr-0" id="emacs_mode">
+<a><div class="icon-container">EMACS</div></a>
+</li>
+</ul>
+</li>
+<li class="mr-0 hidden md:block">
+<ul class="icon-list">
+<li class="mr-0" id="maximize_layout">
+<a title="Maximize editor space">
+<div class="icon-container"><i class="icon-moon-expand "></i></div>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="md:flex md:flex-row min-h-[250px] h-auto md:h-[calc(100vh-155px)]" id="play">
+<div class="w-full md:w-5/12 max-h-[75vh] md:max-h-screen h-auto md:h-full pr-0 overflow-auto md:overflow-visible" id="description_area">
+<div class="h-full">
+<div class="mb-2 border-0 overflow-hidden flex items-center justify-start">
+<div>
+<a data-tippy-content="Tip: You can press Cmd + I to toggle between Instructions and Output tabs." data-tippy-placement="bottom" class="inline-block px-4 py-2 rounded-lg">
+Instructions
+</a>
+</div>
+<div>
+<a class="inline-block px-4 py-2 rounded-lg bg-ui-active-tab-bg text-ui-active-tab-text">
+Output
+</a>
+</div>
+<!--v-if-->
+<div class="float-right pr-2.5 pt-1.5">
+<a class="is-hidden" id="minimize_layout">
+<i class="icon-moon-collapse text-2xl"></i>
+<span>Restore</span>
+</a>
+</div>
+</div>
+<div class="p-0 mb-0 min-h-[200px] h-auto md:h-[calc(100vh-195px)] overflow-auto bg-ui-section rounded-lg">
+<div class="md:h-full" style="display: none;">
+<div class="description h-full">
+<div class="description-content p-4">
+<div class="markdown prose max-w-none mb-8" id="description"><h2 id="screen-locking-patterns">Screen Locking Patterns</h2>
+<p>You might already be familiar with many smartphones that allow you to use a geometric pattern as a security measure. To unlock the device, you need to connect a sequence of dots/points in a grid by swiping your finger <strong>without lifting it</strong> as you trace the pattern through the screen.</p>
+<p>The image below has an example pattern of 7 dots/points: (A -&gt; B -&gt; I -&gt; E -&gt; D -&gt; G -&gt; C).</p>
+<p><img alt="lock_example.png" src="./Training on Screen Locking Patterns _ Codewars_files/zmPNYdv.png"></p>
+<p>For this kata, your job is to implement a function that returns <strong>the number of possible patterns starting from a given first point, that have a given length</strong>. </p>
+<p>More specifically, for a function <code>countPatternsFrom(firstPoint, length)</code>, the parameter <code>firstPoint</code> is a single-character string corresponding to the point in the grid (e.g.: <code>'A'</code>) where your patterns start, and the parameter <code>length</code> is an integer indicating the number of points (length) every pattern must have.</p>
+<p>For example, <code>countPatternsFrom("C", 2)</code>, should return the number of patterns starting from <code>'C'</code> that have <code>2</code> two points. The return value in this case would be <code>5</code>, because there are 5 possible patterns:</p>
+<p>(C -&gt; B), (C -&gt; D), (C -&gt; E), (C -&gt; F) and (C -&gt; H).</p>
+<p>Bear in mind that this kata requires returning the <strong>number</strong> of patterns, <strong>not the patterns themselves</strong>, so you only need to count them. Also, <strong>the name of the function might be different depending on the programming language used</strong>, but the idea remains the same.</p>
+<h2 id="rules">Rules</h2>
+<ol>
+<li>In a pattern, the dots/points <strong>cannot be repeated</strong>: they can only be used once, at most.</li>
+<li>In a pattern, any two subsequent dots/points can only be connected with <strong>direct straight lines</strong> in either of these ways:</li>
+<li><strong>Horizontally:</strong> like (A -&gt; B) in the example pattern image.</li>
+<li><strong>Vertically:</strong> like (D -&gt; G) in the example pattern image.</li>
+<li><strong>Diagonally:</strong> like (I -&gt; E), <em>as well as</em> (B -&gt; I), in the example pattern image.</li>
+<li><strong>Passing over a point between them that has already been 'used':</strong> like (G -&gt; C) passing over E, in the example pattern image. This is the trickiest rule. Normally, you wouldn't be able to connect G to C, because E is between them, <strong>however</strong> when E has already been used as part the pattern you are tracing, you <strong>can</strong> connect G to C <strong>passing over E</strong>, because E is <strong>ignored</strong>, as it was already used once.</li>
+</ol>
+<p><br>The sample tests have some examples of the number of combinations for some cases to help you check your code.</p>
+<p><strong>Haskell Note:</strong> A data type <code>Vertex</code> is provided in place of the single-character strings. See the solution setup code for more details.</p>
+<p><strong>Fun fact:</strong></p>
+<p>In case you're wondering out of curiosity, for the Android lock screen, the valid patterns must have between 4 and 9 dots/points. There are 389112 possible valid patterns in total; that is, patterns with a length between 4 and 9 dots/points.</p>
+</div>
+<hr>
+<div class="mt-4"><span><i class="icon-moon-tag "></i></span><div class="keyword-tag">Mathematics</div><div class="keyword-tag">Combinatorics</div><div class="keyword-tag">Geometry</div><div class="keyword-tag">Algorithms</div><div class="keyword-tag">Graph Theory</div></div>
+</div>
+<div class="description-footer flex flex-row">
+<div class="grow bg-contrast-n-100 dark:bg-contrast-100">
+<div id="partner-display"><!--v-if--><!--v-if--><div class="cw-ad cw-ad--image"><a rel="nofollow noopener external" target="_blank" href="https://www.codewars.com/ads/carbon_srv?path=/ads/click/x/GTND42JNCAYD4237CE74YKQNCYSDL27ECYYICZ3JCYSDK2QJCVYIT27KFTAICKQMCASDT53JF67ICKQMCEADPKQKC6SDK27ECKYDVK3EHJNCLSIZ&amp;ad=470645&amp;placement=train_ad"><img alt="Ad" class="cw-ad__img" src="./Training on Screen Locking Patterns _ Codewars_files/1664318833-AD-1812_ClickUp_AdTests_BuySell_260x200_V1_1x.jpg"><div class="cw-ad__text"><!--v-if--><div class="cw-ad__copy"><span>Team feeling unorganized? Bring all your work together into one app and maximize productivity.</span><!--v-if--></div></div></a><a class="cw-ad__callout" target="carbon" href="http://ads.new/checkout/new/?utm_source=codewars-com-carbon&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon">Ads via Carbon</a></div></div>
+</div>
+<div class="max-w-[130px] text-center hidden lg:flex flow-row justify-center bg-contrast-n-200 dark:bg-contrast-200">
+<a class="hover:text-current p-2 pb-4" data-tippy-content="The code engine that powers Codewars is the same used by Qualified.io, a platform built for educators and technical recruiters looking to train and hire the best software engineers." data-tippy-placement="top" href="https://www.qualified.io/?utm_source=codewars&amp;utm_medium=web" target="_blank" rel="noopener">
+<span class="pl-1 text-xs inline-block">powered by</span>
+<img class="h-4 inline-block dark:hidden pl-1" src="./Training on Screen Locking Patterns _ Codewars_files/qualified-black.b052752a.svg">
+<img class="h-4 hidden dark:inline-block pl-1" src="./Training on Screen Locking Patterns _ Codewars_files/qualified-white.7cba1bde.svg">
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="md:h-full overflow-hidden" style="">
+<div class="console-output h-full p-0">
+<div class="h-full" id="code_results">
+<div class="alert-box no-border is-square mb-0 h-full alert">
+<div class="message">Incorrect!</div>
+<iframe id="runner_frame" data-src="https://cr.codewars.com?api=v2&amp;utm_campaign=kata_trainer&amp;utm_medium=web&amp;utm_source=codewars#congrats=true&amp;pro=false&amp;theme=dark" sandbox="allow-scripts allow-same-origin allow-pointer-lock" class="rounded-lg" src="./Training on Screen Locking Patterns _ Codewars_files/saved_resource.html"></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="md:h-full overflow-auto" style="display: none;">
+<div class="h-full mb-4 p-4">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-7/12 pt-4 md:pt-0 md:pl-4 min-h-[500px] h-[75vh] md:h-full" id="editors_area">
+<div class="ide-editors" id="editors">
+<div class="pb-5" id="code_container">
+<div class="bg-ui-section p-2 rounded-t-lg p-2">
+<div class="text-sm font-bold">Solution</div>
+</div>
+<div class="code-editor-wrapper h-full pb-5">
+<div id="code" class="text-editor-container">
+<div class="text-editor js-editor has-shadow" style="height: 445.391px;"><div class="CodeMirror cm-s-codewars CodeMirror-focused" translate="no"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 423.5px; left: 467.641px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; min-height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true" style="bottom: 10px; display: block;"><div style="min-width: 1px; height: 603px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true" style="display: block; right: 10px; left: 40px;"><div style="height: 100%; min-height: 1px; width: 1039px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true" style="display: block; height: 10px; width: 10px;"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="false"><div class="CodeMirror-sizer" style="margin-left: 40px; margin-bottom: -10px; border-right-width: 40px; min-height: 603px; min-width: 1039.06px; padding-right: 10px; padding-bottom: 10px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors" style="visibility: hidden;"><div class="CodeMirror-cursor" style="left: 427.641px; top: 542.5px; height: 17.5px; width: 7.71875px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">// Feel free to write and use any additional functions, variables, objects, etc. as you wish</span></span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">const</span> <span class="cm-def">arr</span> <span class="cm-operator">=</span> [[<span class="cm-string">'A'</span>, <span class="cm-string">'B'</span>, <span class="cm-string">'C'</span>], [<span class="cm-string">'D'</span>, <span class="cm-string">'E'</span>, <span class="cm-string">'F'</span>], [<span class="cm-string">'G'</span>, <span class="cm-string">'H'</span>, <span class="cm-string">'I'</span>]];</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">function</span> <span class="cm-def">getIndexOfK</span>(<span class="cm-def">arr</span>, <span class="cm-def">k</span>) {</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">6</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-keyword">for</span> (<span class="cm-keyword">var</span> <span class="cm-def">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span class="cm-variable-2">i</span> <span class="cm-operator">&lt;</span> <span class="cm-variable-2">arr</span>.<span class="cm-property">length</span>; <span class="cm-variable-2">i</span><span class="cm-operator">++</span>) {</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-keyword">var</span> <span class="cm-def">index</span> <span class="cm-operator">=</span> <span class="cm-variable-2">arr</span>[<span class="cm-variable-2">i</span>].<span class="cm-property">indexOf</span>(<span class="cm-variable-2">k</span>);</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">8</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-keyword">if</span> (<span class="cm-variable-2">index</span> <span class="cm-operator">&gt;</span> <span class="cm-operator">-</span><span class="cm-number">1</span>) {</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">      <span class="cm-keyword">return</span> [<span class="cm-variable-2">i</span>, <span class="cm-variable-2">index</span>];</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    }</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  }</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">13</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">14</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">function</span> <span class="cm-def">rec</span>(<span class="cm-def">curList</span>, <span class="cm-def">depth</span>, <span class="cm-def">curX</span>, <span class="cm-def">curY</span>){</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">15</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-keyword">if</span> (<span class="cm-variable-2">depth</span> <span class="cm-operator">===</span> <span class="cm-number">0</span>){</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">16</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-keyword">return</span> <span class="cm-number">1</span>;</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">17</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  }</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">18</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-keyword">let</span> <span class="cm-def">curTotal</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>;</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">19</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-keyword">i</span><span class="cm-keyword">f</span> (<span class="cm-variable-2">curX</span> <span class="cm-operator">-</span> <span class="cm-number">1</span> <span class="cm-operator">&gt;=</span> <span class="cm-number">0</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curY</span> <span class="cm-operator">-</span> <span class="cm-number">1</span> <span class="cm-operator">&gt;=</span> <span class="cm-number">0</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curList</span>.<span class="cm-property">includes</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">-</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">-</span><span class="cm-number">1</span>])){</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">20</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-variable-2">curTotal</span> <span class="cm-operator">+=</span> <span class="cm-variable">rec</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">splice</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">indexOf</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">-</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">-</span><span class="cm-number">1</span>]), <span class="cm-number">1</span>), <span class="cm-variable-2">depth</span><span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-variable-2">curY</span><span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-variable-2">curX</span><span class="cm-operator">-</span><span class="cm-number">1</span>) </span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">21</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  } <span class="cm-keyword">else</span> <span class="cm-keyword">if</span> (<span class="cm-variable-2">curX</span> <span class="cm-operator">-</span> <span class="cm-number">1</span> <span class="cm-operator">&gt;=</span> <span class="cm-number">0</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curY</span> <span class="cm-operator">+</span> <span class="cm-number">1</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">2</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curList</span>.<span class="cm-property">includes</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">+</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">-</span><span class="cm-number">1</span>])){</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">22</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-variable-2">curTotal</span> <span class="cm-operator">+=</span> <span class="cm-variable">rec</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">splice</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">indexOf</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">+</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">-</span><span class="cm-number">1</span>]), <span class="cm-number">1</span>), <span class="cm-variable-2">depth</span><span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-variable-2">curY</span><span class="cm-operator">+</span><span class="cm-number">1</span>, <span class="cm-variable-2">curX</span><span class="cm-operator">-</span><span class="cm-number">1</span>) </span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">23</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  } <span class="cm-keyword">else</span> <span class="cm-keyword">if</span> (<span class="cm-variable-2">curX</span> <span class="cm-operator">+</span> <span class="cm-number">1</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">2</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curY</span> <span class="cm-operator">+</span> <span class="cm-number">1</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">2</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curList</span>.<span class="cm-property">includes</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">+</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">+</span><span class="cm-number">1</span>])){</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">24</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-variable-2">curTotal</span> <span class="cm-operator">+=</span> <span class="cm-variable">rec</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">splice</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">indexOf</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">+</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">+</span><span class="cm-number">1</span>]), <span class="cm-number">1</span>), <span class="cm-variable-2">depth</span><span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-variable-2">curY</span><span class="cm-operator">+</span><span class="cm-number">1</span>, <span class="cm-variable-2">curX</span><span class="cm-operator">+</span><span class="cm-number">1</span>) </span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">25</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  } <span class="cm-keyword">else</span> <span class="cm-keyword">if</span> (<span class="cm-variable-2">curX</span> <span class="cm-operator">+</span> <span class="cm-number">1</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">2</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curY</span> <span class="cm-operator">-</span> <span class="cm-number">1</span> <span class="cm-operator">&gt;=</span> <span class="cm-number">0</span> <span class="cm-operator">&amp;&amp;</span> <span class="cm-variable-2">curList</span>.<span class="cm-property">includes</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">-</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">+</span><span class="cm-number">1</span>])){</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">26</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-variable-2">curTotal</span> <span class="cm-operator">+=</span> <span class="cm-variable">rec</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">splice</span>(<span class="cm-variable-2">curList</span>.<span class="cm-property">indexOf</span>(<span class="cm-variable">arr</span>[<span class="cm-variable-2">curY</span><span class="cm-operator">-</span><span class="cm-number">1</span>][<span class="cm-variable-2">curX</span><span class="cm-operator">+</span><span class="cm-number">1</span>]), <span class="cm-number">1</span>), <span class="cm-variable-2">depth</span><span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-variable-2">curY</span><span class="cm-operator">-</span><span class="cm-number">1</span>, <span class="cm-variable-2">curX</span><span class="cm-operator">+</span><span class="cm-number">1</span>) </span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">27</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  }</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">28</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> <span class="cm-variable-2">curTotal</span>;</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">29</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div><div class="" style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">30</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">31</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">function</span> <span class="cm-def">countPatternsFrom</span>(<span class="cm-def">firstPoint</span>, <span class="cm-def">length</span>) {</span></pre></div><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -40px; width: 40px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">32</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> <span class="cm-variable">rec</span>([<span class="cm-string">'A'</span>, <span class="cm-string">'B'</span>, <span class="cm-string">'C'</span>, <span class="cm-string">'D'</span>, <span class="cm-string">'E'</span>, <span class="cm-string">'F'</span>, <span class="cm-string">'G'</span>, <span class="cm-string">'H'</span>, <span class="cm-string">'I'</span>], <span class="cm-variable-2">length</span>, <span class="cm-variable">getIndexOfK</span>(<span class="cm-variable">arr</span>, <span class="cm-variable-2">firstPoint</span>)[<span class="cm-number">0</span>], <span class="cm-variable">getIndexOfK</span>(<span class="cm-variable">arr</span>, <span class="cm-variable-2">firstPoint</span>)[<span class="cm-number">1</span>]);</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">33</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">34</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 40px; width: 1px; border-bottom: 10px solid transparent; top: 603px;"></div><div class="CodeMirror-gutters" style="height: 653px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div></div></div></div><div class="editor-msg-container is-hidden" style="opacity: 0; display: none; visibility: hidden;"><div class="alert-box"></div></div></div><div class="commands-container"><ul class="is-unstyled"><li class="expand" title="Maximize Editor (esc key)"><a><i class="icon-moon-expand "></i></a></li><li class="shrink is-hidden" title="Shrink Editor (esc key)"><a><i class="icon-moon-collapse "></i></a></li></ul></div>
+</div>
+</div>
+</div>
+<div class="pb-5 mt-4" id="fixture_container">
+<div class="bg-ui-section p-2 rounded-t-lg p-2">
+<div class="text-sm font-bold">Sample Tests</div>
+</div>
+<div class="code-editor-wrapper h-full pb-5">
+<div id="fixture" class="text-editor-container">
+<div class="text-editor js-editor has-shadow" style="height: 283.594px;"><div class="CodeMirror cm-fat-cursor cm-s-codewars has-red-border" translate="no"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 46px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; min-height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 40px; margin-bottom: -10px; border-right-width: 40px; min-height: 236px; min-width: 407.469px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>13</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 17.5px; width: 7.70312px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -40px; width: 40px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">describe</span>(<span class="cm-string">"Tests"</span>, () <span class="cm-operator">=&gt;</span> {</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div><div class="CodeMirror-gutter-elt" style="left: 29px; width: 10px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">it</span>(<span class="cm-string">"test"</span>, () <span class="cm-operator">=&gt;</span> {</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Test</span>.<span class="cm-property">assertEquals</span>(<span class="cm-variable">countPatternsFrom</span>(<span class="cm-string">'A'</span>, <span class="cm-number">0</span>), <span class="cm-number">0</span>);</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Test</span>.<span class="cm-property">assertEquals</span>(<span class="cm-variable">countPatternsFrom</span>(<span class="cm-string">'A'</span>, <span class="cm-number">10</span>), <span class="cm-number">0</span>);</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Test</span>.<span class="cm-property">assertEquals</span>(<span class="cm-variable">countPatternsFrom</span>(<span class="cm-string">'B'</span>, <span class="cm-number">1</span>), <span class="cm-number">1</span>);</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Test</span>.<span class="cm-property">assertEquals</span>(<span class="cm-variable">countPatternsFrom</span>(<span class="cm-string">'C'</span>, <span class="cm-number">2</span>), <span class="cm-number">5</span>);</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Test</span>.<span class="cm-property">assertEquals</span>(<span class="cm-variable">countPatternsFrom</span>(<span class="cm-string">'D'</span>, <span class="cm-number">3</span>), <span class="cm-number">37</span>);</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Test</span>.<span class="cm-property">assertEquals</span>(<span class="cm-variable">countPatternsFrom</span>(<span class="cm-string">'E'</span>, <span class="cm-number">4</span>), <span class="cm-number">256</span>);</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">Test</span>.<span class="cm-property">assertEquals</span>(<span class="cm-variable">countPatternsFrom</span>(<span class="cm-string">'E'</span>, <span class="cm-number">8</span>), <span class="cm-number">23280</span>);</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  });</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">});</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" aria-hidden="true" style="left: -40px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">13</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 40px; width: 1px; border-bottom: 0px solid transparent; top: 236px;"></div><div class="CodeMirror-gutters" style="height: 276px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div></div></div></div><div class="editor-msg-container is-hidden" style="opacity: 0; display: none; visibility: hidden;"><div class="alert-box"></div></div></div><div class="commands-container"><ul class="is-unstyled"><li><a id="fixture_help"><i class="icon-moon-help is-normal"></i></a></li><li class="expand" title="Maximize Editor (esc key)"><a><i class="icon-moon-expand "></i></a></li><li class="shrink is-hidden" title="Shrink Editor (esc key)"><a><i class="icon-moon-collapse "></i></a></li></ul></div>
+</div>
+</div>
+</div>
+<div class="w-full mt-4 flex flex-row flex-nowrap items-center justify-between">
+<div class="flex flex-row flex-nowrap">
+<a class="btn is-dark no-border whitespace-nowrap" data-tippy-content="Skip this kata" data-tippy-placement="top" id="skip_btn">
+<i class="icon-moon-next m-0"></i>
+<span class="ml-2 hidden lg:inline">Skip</span>
+</a>
+<a id="surrender_btn" class="btn is-dark no-border ml-1 text-center whitespace-nowrap" data-tippy-content="Forfeit and unlock solutions" data-tippy-placement="top">
+<i class="icon-moon-unlock m-0"></i>
+<span class="ml-2 hidden lg:inline">Unlock Solutions</span>
+</a>
+<a class="btn is-dark no-border ml-1 text-center whitespace-nowrap" data-tippy-content="View comments, suggestions and issues" data-tippy-placement="top" href="https://www.codewars.com/kata/585894545a8a07255e0002f1/discuss">
+<i class="icon-moon-comments m-0"></i>
+<span class="ml-2 hidden lg:inline">
+Discuss (78)
+</span>
+</a>
+<a id="reset_btn" class="btn is-dark no-border whitespace-nowrap ml-1" data-tippy-content="Reset to the initial state" data-tippy-placement="top">
+Reset
+</a>
+</div>
+<div class="flex flex-row flex-nowrap justify-end">
+<a id="validate_btn" class="btn js-run is-dark whitespace-nowrap lg:w-20" data-tippy-content="Test against the sample tests (Cmd/Ctrl + &#39;)" data-tippy-placement="top-start">
+Test
+</a>
+<a id="attempt_btn" class="btn js-run ml-1 whitespace-nowrap lg:w-20" data-tippy-content="Attempt to pass the full test suite (Cmd/Ctrl + Enter)" data-tippy-placement="top-start">
+Attempt
+</a>
+<a id="submit_btn" class="btn is-hidden is-green ml-1 whitespace-nowrap lg:w-20" data-tippy-content="Submit your solution and view solutions (Cmd/Ctrl + Enter)" data-tippy-placement="top-start">
+Submit
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main><div class="clearfix"></div></div><div class="clearfix"></div><div class="modal" id="confirm_modal" style="display: none"><div class="modal-header"><div class="close" data-dismiss="modal"><i class="icon-moon-x"></i></div><h4>Confirm</h4><div class="clearfix"></div></div><div class="clearfix"></div><div class="modal-body view"></div><div class="modal-footer"><ul class="form-actions"><li class="cancel" data-dismiss="modal"><a class="btn">Cancel</a></li><li class="alt-confirm is-hidden"><a class="btn"></a></li><li class="confirm"><a class="btn is-green"><i class="icon-general-checkmark"></i>Confirm</a></li></ul></div></div></div><div class="is-hidden" data-turbolinks-permanent="" id="template_helpers"><script id="hidden_field" type="template"><input data-bind-id="@id" data-bind-name="@name" data-bind-value="@value" type="hidden" /></script><script id="input_field" type="template"><div data-bind-class="field_class"><label data-bind-class="%required &amp;&amp; &#39;required&#39;" data-bind-for="@id" data-bind-if="%label"><abbr data-bind-if="%required" title="required">* </abbr><span data-bind-html="%label"></span></label><div data-bind-class="field_value_class"><input data-bind-id="@id" data-bind-name="@name" data-bind-type="%type || &#39;text&#39;" data-bind-value="@value | unescape_html || %defaultValue" /></div><include data-bind-each="@errors"><small data-bind-html="@"></small></include></div></script><script id="checkbox_field" type="template"><div class="boolean" data-bind-class="field_class"><div class="field_value"><div><input data-bind-name="@name" type="hidden" value="false" /><label class="checkbox"><input class="form-checkbox rounded bg-gray-400 dark:bg-gray-600 border-transparent focus:border-transparent focus:bg-gray-400 text-gray-700 focus:ring-1 focus:ring-offset-2 dark:ring-offset-1 focus:ring-gray-500 dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800 boolean" data-bind-checked="@value" data-bind-id="@id" data-bind-name="@name" type="checkbox" value="true" /><span data-bind-html="%label || @label"></span></label></div></div></div></script><script id="markdown_field" type="template"><div class="is-full-height" data-bind-class="field_class" data-bind-if="%style | eq::&#39;full&#39;"><div class="markdown-editor is-full-height mb-0"><div class="tabs is-full-height"><dl class="tabs"><dd class="is-active" data-tippy-content="Edit your message using markdown" data-tippy-placement="top"><a data-bind-html="{{%label}}" data-bind-if="%label" data-tab="markdown"></a><a data-bind-unless="%label" data-tab="markdown"><i class="icon-moon-edit "></i></a></dd><dd data-tippy-content="Preview your comment" data-tippy-placement="right"><a data-tab="preview"><i class="icon-moon-preview "></i></a></dd><dd data-tippy-content="Edit in full-screen mode" data-tippy-placement="left"><a class="js-expand"><i class="icon-moon-expand "></i></a></dd></dl><div class="clearfix"></div><ul class="tabs-content is-full-height"><li class="is-full-height is-active" data-tab="markdown"><div class="text-editor-container is-full-height"><textarea class="is-hidden" data-bind-id="@id" data-bind-name="@name" data-bind-value="@value"></textarea><div class="text-editor js-editor has-shadow"></div><div class="editor-msg-container is-hidden"><div class="alert-box"></div></div></div></li><li class="is-full-height" data-tab="preview"><div class="panel bg-ui-section is-overflow-auto"><div class="markdown prose max-w-none"><p>Your rendered <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="noopener">github-flavored</a> markdown will appear here.</p></div></div></li></ul></div></div></div><div data-bind-class="field_class" data-bind-if="%style | ne::&#39;full&#39;"><label data-bind-class="%required &amp;&amp; &#39;required&#39;" data-bind-for="@id" data-bind-if="%label"><abbr data-bind-if="%required" title="required">* </abbr><span data-bind-html="%label"></span></label><div class="markdown-editor is-tall" data-bind-class="%markdownEditorClass"><div class="tabs"><dl class="tabs"><dd class="is-active" data-tippy-content="Edit your message using markdown" data-tippy-placement="top"><a data-tab="markdown"><i class="icon-moon-edit "></i></a></dd><dd data-tippy-content="Preview your comment" data-tippy-placement="right"><a data-tab="preview"><i class="icon-moon-preview "></i></a></dd><dd data-tippy-content="Edit in full-screen mode" data-tippy-placement="right"><a class="js-expand"><i class="icon-moon-expand "></i></a></dd></dl><ul class="tabs-content"><li class="is-full-height is-active" data-tab="markdown"><div class="text-editor-container is-full-height"><textarea class="is-hidden" data-bind-id="@id" data-bind-name="@name" data-bind-value="@value"></textarea><div class="text-editor js-editor has-shadow"></div><div class="editor-msg-container is-hidden"><div class="alert-box"></div></div></div></li><li class="is-full-height" data-tab="preview"><div class="panel bg-ui-section is-overflow-auto"><div class="markdown prose max-w-none"><p>Your rendered <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="noopener">github-flavored</a> markdown will appear here.</p></div></div></li></ul></div></div></div></script><script id="code_editor_field" type="template"><div class="text-editor-container" data-bind-class="field_class" data-bind-id="{{@id}}_field"><label data-bind-class="%required &amp;&amp; &#39;required&#39;" data-bind-for="@id" data-bind-if="%label"><abbr data-bind-if="%required" title="required">* </abbr><span data-bind-html="%label"></span></label><textarea class="is-hidden" data-bind-id="@id" data-bind-name="@name" data-bind-value="@value"></textarea><div class="text-editor js-editor has-shadow"></div><div class="commands-container"><ul class="is-unstyled"><li class="expand" title="Maximize Editor (esc key)"><a><i class="icon-moon-expand "></i></a></li><li class="shrink is-hidden" title="Shrink Editor (esc key)"><a><i class="icon-moon-collapse "></i></a></li></ul></div><div class="editor-msg-container is-hidden"><div class="alert-box"></div></div></div></script></div><div id="collection_modal" class="p-4 is-hidden" data-turbolinks-permanent="true" style="display: none;">
+<div id="collection-modal-view">
+<h3 class="mx-2 mt-2 mb-5 text-base font-bold">
+Collect: <span>undefined</span>
+</h3>
+<div class="pl-2">
+<p>Loading collection data...</p>
+</div>
+
+</div>
+</div>
+<script>document.addEventListener("turbolinks:load", (event) => {
+  const currentUser = JSON.parse("{\"username\":\"An0n1m1ty\",\"email\":\"joel.yh.then@gmail.com\",\"role\":\"standard\",\"guest\":false,\"honor\":516,\"rank\":-4,\"bootcamp_interest\":null,\"career_paths\":null,\"phone\":null,\"current_language\":\"javascript\",\"country_name\":\"Australia\",\"blocked_user_ids\":[],\"blocked_by_user_ids\":[],\"jwt\":\"eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjVlOGFjOGExNWYxYTAxMDAxZjNhMjZiZCIsImV4cCI6MTY2Nzg5NjE4NX0.OjPlIdm6SX9GEbRUgrpYNLYqAoE3R0OT6XEsZPwpNXM\",\"experience\":\"junior\",\"subscriber\":false,\"hideAds\":false,\"id\":\"5e8ac8a15f1a01001f3a26bd\",\"starred_code_challenge_ids\":[],\"can_resolve_comments\":false,\"can_report_comments\":true,\"avatar_tag\":\"\\u003cimg title=\\\"An0n1m1ty\\\" data-tippy-content=\\\"An0n1m1ty\\\" data-tippy-placement=\\\"bottom\\\" alt=\\\"An0n1m1ty Avatar\\\" src=\\\"https://www.codewars.com/packs/assets/profile-pic.f3a90aca.png\\\" /\\u003e\"}");
+  if (typeof gtag === "function" && event.data.url) {
+    const url = new URL(event.data.url);
+    // Clear query params for these paths
+    if (["/users/password/edit", "/users/confirmation"].includes(url.pathname)) url.search = "";
+    const config = {
+      page_location: url.toString(),
+      page_title: event.target.title,
+    };
+    if (!currentUser.guest && currentUser.id) config.user_id = currentUser.id;
+    gtag("config", "G-M3JYSQLS8M", config);
+    if (!currentUser.guest && currentUser.experience) {
+      gtag("set", "user_properties", {
+        career_level: currentUser.experience,
+        rank: currentUser.rank,
+        bootcamp_interest: currentUser.bootcamp_interest || "unknown",
+      });
+    }
+  }
+  App.setup({
+    env: "production",
+    currentUser,
+    data: JSON.parse("{\"routes\":{},\"controllerName\":\"code_challenges\",\"id\":\"585894545a8a07255e0002f1\",\"challengeName\":\"Screen Locking Patterns\",\"authorUsername\":\"rsalgado\",\"now\":\"2022-10-29T08:29:45.157Z\",\"activeLanguage\":\"javascript\",\"description\":\"## Screen Locking Patterns\\n\\nYou might already be familiar with many smartphones that allow you to use a geometric pattern as a security measure. To unlock the device, you need to connect a sequence of dots/points in a grid by swiping your finger **without lifting it** as you trace the pattern through the screen.\\n\\nThe image below has an example pattern of 7 dots/points: (A -\\u003e B -\\u003e I -\\u003e E -\\u003e D -\\u003e G -\\u003e C).\\n\\n![lock_example.png](https://i.imgur.com/zmPNYdv.png)\\n\\nFor this kata, your job is to implement a function that returns **the number of possible patterns starting from a given first point, that have a given length**. \\n\\n```if-not:commonlisp\\nMore specifically, for a function `countPatternsFrom(firstPoint, length)`, the parameter `firstPoint` is a single-character string corresponding to the point in the grid (e.g.: `'A'`) where your patterns start, and the parameter `length` is an integer indicating the number of points (length) every pattern must have.\\n\\nFor example, `countPatternsFrom(\\\"C\\\", 2)`, should return the number of patterns starting from `'C'` that have `2` two points. The return value in this case would be `5`, because there are 5 possible patterns:\\n```\\n\\n```if:commonlisp\\nMore specifically, for a function `(count-patterns-from first-dot length)`, the parameter `first-dot` is a single-character string corresponding to the point in the grid (e.g.: `\\\"A\\\"`) where your patterns start, and the parameter `length` is an integer indicating the number of points (length) every pattern must have.\\n\\nFor example, `(count-patterns-from \\\"C\\\" 2)`, should return the number of patterns starting from `\\\"C\\\"` that have `2` two points. The return value in this case would be `5`, because there are 5 possible patterns:\\n```\\n\\n(C -\\u003e B), (C -\\u003e D), (C -\\u003e E), (C -\\u003e F) and (C -\\u003e H).\\n\\nBear in mind that this kata requires returning the **number** of patterns, **not the patterns themselves**, so you only need to count them. Also, **the name of the function might be different depending on the programming language used**, but the idea remains the same.\\n\\n## Rules\\n1. In a pattern, the dots/points **cannot be repeated**: they can only be used once, at most.\\n2. In a pattern, any two subsequent dots/points can only be connected with **direct straight lines** in either of these ways:\\n  1. **Horizontally:** like (A -\\u003e B) in the example pattern image.\\n  2. **Vertically:** like (D -\\u003e G) in the example pattern image.\\n  3. **Diagonally:** like (I -\\u003e E), *as well as* (B -\\u003e I), in the example pattern image.\\n  4. **Passing over a point between them that has already been 'used':** like (G -\\u003e C) passing over E, in the example pattern image. This is the trickiest rule. Normally, you wouldn't be able to connect G to C, because E is between them, **however** when E has already been used as part the pattern you are tracing, you **can** connect G to C **passing over E**, because E is **ignored**, as it was already used once.\\n\\n\\n\\n\\u003cbr/\\u003eThe sample tests have some examples of the number of combinations for some cases to help you check your code.\\n\\n**Haskell Note:** A data type `Vertex` is provided in place of the single-character strings. See the solution setup code for more details.\\n\\n**Fun fact:**\\n\\nIn case you're wondering out of curiosity, for the Android lock screen, the valid patterns must have between 4 and 9 dots/points. There are 389112 possible valid patterns in total; that is, patterns with a length between 4 and 9 dots/points.\\n\",\"category\":\"algorithms\",\"published\":true,\"retired\":false,\"previousSolutions\":null,\"completedKata\":false,\"progress\":{\"any\":null}}"),
+    routes: {"user_profile":"/users/An0n1m1ty","user_stars":"/user/stars","star_code_challenge":"/users/stars/%7Bid%7D","mark_notifications_read":"/users/notifications/mark_read","unread_popup_notifications":"/users/notifications/unread_popups","collections":"/api/v1/collections","collection_code_challenge":"/api/v1/collections/%7BcollectionId%7D/code_challenges/%7Bid%7D","session":"/kata/projects/635ce4798f20016ececf1d7b/%7Blanguage%7D/session","notify":"/api/v1/code-challenges/projects/635ce4798f20016ececf1d7b/solutions/%7BsolutionId%7D/notify","finalize":"/api/v1/code-challenges/projects/635ce4798f20016ececf1d7b/solutions/%7BsolutionId%7D/finalize","skip":"/kata/projects/635ce4798f20016ececf1d7b/skip","report":"/kata/585894545a8a07255e0002f1","comments":"/kata/585894545a8a07255e0002f1/discuss/javascript","solutions":"/kata/585894545a8a07255e0002f1/solutions/%7Blanguage%7D","editor":"/kata/585894545a8a07255e0002f1/edit/%7Blanguage%7D","forfeit":"/kata/585894545a8a07255e0002f1/solutions?show-solutions=1"},
+    pageControllerName: 'CodeChallenges.PlayController',
+  });
+}, { once: true });</script><script>document.addEventListener("turbolinks:load", (event) => {
+  if (typeof Intercom === "function" && Intercom.booted) Intercom("shutdown");
+}, { once: true });</script></body></html>
