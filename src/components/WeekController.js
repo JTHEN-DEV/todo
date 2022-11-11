@@ -11,7 +11,7 @@ export const WeekController = (props) => {
     }
 
     return (
-        <div className="bg-gray-200 rounded-3xl flex justify-between w-full p-4 items-center glassless">
+        <div className="bg-gray-200 rounded-xl flex justify-between w-full p-4 items-center glassless">
             <FaChevronLeft style={{fontSize: "2rem", fontWeight: "bold"}} className="cursor-pointer" onClick={decreaseDay} />
             <div>
                 <div className="font-bold text-3xl"><span>{props.day.format("YYYY")}</span> Week 42/43</div>
