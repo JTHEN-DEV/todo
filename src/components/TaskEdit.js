@@ -1,4 +1,4 @@
-import {IoMdAdd} from'react-icons/io';
+import {IoMdAdd, IoMdCheckmark} from'react-icons/io';
 import { IoMdSync } from "react-icons/io";
 import { useState } from 'react';
 import { SubTask } from './SubTask';
@@ -9,7 +9,9 @@ export const TaskEdit = (props) => {
     // etc.
     const [newSubTaskName, setNewSubTaskName] = useState('')
 
-    const [notes, setNotes] = useState(props.task.notes)
+    const [showRepeat, setShowRepeat] = useState(false)
+
+    const [editedRepeat, setEditedRepeat] = useState(props.task.repeat)
 
     const onSave = () => {
         console.log(props.task)
@@ -20,12 +22,12 @@ export const TaskEdit = (props) => {
     }
 
     const onAddSubtask = () => {
-        props.incrementSubTaskCurrId(props.task.id)
         console.log(props.task.subTaskCurrId)
         props.editSubTasks(props.task.id, props.task.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false}))
         console.log(props.task.subTasks)
         setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
         setNewSubTaskName('')
+        props.incrementSubTaskCurrId(props.task.id)
     }
 
     const editSubtasks = (id, checkbox, name) => {
@@ -40,17 +42,26 @@ export const TaskEdit = (props) => {
 
     return (
         <div className="rounded-xl glassless w-[35%] px-3 pb-3.5 pt-0.5 backdrop-blur-md">
-            <div className="flex justify-between text-xl font-semibold">
+            <div className="flex justify-between">
                 <div className="flex items-center">
                     <form>
                         <input type="checkbox" className="h-[23px] w-[23px] mr-2 my-4 glassless bg-amber-400" value={props.task.completed} checked={props.task.completed} onClick = {() => props.setCompleted(props.task.id, !props.task.completed)}/>
                     </form>
                     <form>
-                        <input className="rounded-lg glassless my-4 px-2 outline-0" type = 'text' placeholder = 'Task Name...' value={editedTask.name} onChange={(e) => setEditedTask({...editedTask, name: e.target.value})}/>
+                        <input className="rounded-lg glassless my-4 px-2 outline-0 text-xl font-semibold" type = 'text' placeholder = 'Task Name...' value={editedTask.name} onChange={(e) => setEditedTask({...editedTask, name: e.target.value})}/>
                     </form>
                 </div>
-                <div className="flex items-center">
-                    <IoMdSync className="text-xl font-black text-gray-500 hover:text-gray-800 cursor-pointer"/>
+                <div className="flex items-center rounded-lg glassless my-3.5 px-1">
+                    <div>{showRepeat && <div>
+                        <select className="rounded-lg glassless outline-0 bg-transparent text-sm mr-1 p-0.5" value={editedRepeat.type} onChange={(e) => setEditedRepeat({...editedTask.repeat, type: e.target.value})}>
+                            <option className="rounded-lg glassless outline-0 bg-transparent" value="daily">Daily</option>
+                            <option className="rounded-lg glassless outline-0 bg-transparent" value="weekly">Weekly</option>
+                            <option className="rounded-lg glassless outline-0 bg-transparent" value="yearly">Yearly</option>
+                        </select>  
+                    </div>}</div>
+                    <div className="text-xl font-black text-gray-500 hover:text-gray-800 cursor-pointer" onClick = {() => {setShowRepeat(!showRepeat)}}>
+                        {showRepeat ? <IoMdCheckmark onClick={() => {setEditedTask({...editedTask, repeat: editedRepeat})}}/> : <IoMdSync/>}
+                    </div>
                 </div>
             </div>
             <div className="text-left mb-1" style={{fontWeight:"bold"}}>Subtasks</div>

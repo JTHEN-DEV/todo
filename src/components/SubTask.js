@@ -3,10 +3,6 @@ import { IoMdClose } from "react-icons/io";
 
 export const SubTask = (props) => {
 
-    const editSubtask = (id, checkbox, name) => {
-        //handles renaming and checkbox functions
-        props.editSubTasks(props.task.id, props.task.subTasks[id])
-    }
     
     const onNameChange = (newName) => {
         props.editSubTasks(props.task.id, props.task.subTasks.map((task) => {
