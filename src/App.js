@@ -15,9 +15,21 @@ function App() {
         {
             id: 0,
             dayIdx: 0,
+            subTaskCurrId: 1, // currently set to 1 because the current id of the last "test subtask" is 1
             name: "Finish coding project",
             completed: false,
-            subTasks: ['test1', 'test2'],
+            subTasks: [
+                {
+                    id: 0,
+                    name: "test 1",
+                    completed: false
+                },
+                {
+                    id: 1,
+                    name: "test 2",
+                    completed: false
+                }
+            ],
             startDate: "6/11/2022",
             rolledOver: false,
             notes: ''
@@ -26,8 +38,20 @@ function App() {
             id: 1,
             dayIdx: 1,
             name: "Import boilerplate",
+            subTaskCurrId: 1, // currently set to 1 because the current id of the last "test subtask" is 1
             completed: true,
-            subTasks: ['test'],
+            subTasks: [
+                {
+                    id: 0,
+                    name: "test a1",
+                    completed: false
+                },
+                {
+                    id: 1,
+                    name: "test a2",
+                    completed: false
+                }
+            ],
             startDate: "10/11/2022",
             repeat: {
                 type: "yearly",
@@ -37,6 +61,18 @@ function App() {
             notes: 'testing :)'
         }
     ]);
+
+    const incrementSubTaskCurrId = (taskId) => {
+        setTasks(tasks => {
+            return tasks.map((task) => {
+                if ((task.id) === taskId){
+                    return {...task, subTaskCurrId: task.subTaskCurrId+1};
+                } else {
+                    return task;
+                }
+            })
+        })
+    }
 
     const setCompleted = (taskId, isCompleted) => {
         setTasks(tasks => {
@@ -72,6 +108,7 @@ function App() {
                 }
             })
         })
+        console.log(tasks)
         // 'done' is printed but subtask list isn't updating?!?
     }
 
@@ -125,6 +162,7 @@ function App() {
                 </div>
                 <div className="absolute w-full flex justify-center top-[50vh] -translate-y-[50%]">
                     {showEdit && <TaskEdit 
+                        incrementSubTaskCurrId={incrementSubTaskCurrId}
                         toggleEdit = {toggleEdit} 
                         task = {tasks[currentEditID]}
                         editTask = {editTask}
