@@ -69,7 +69,7 @@ function App() {
     const addTask = (date) => {
         setTasks(
             tasks.concat({
-                id: currid,
+                id: currTaskId,
                 dayIdx: 0,
                 subTaskCurrId: 0,
                 name: "",
@@ -84,7 +84,7 @@ function App() {
                 notes: "",
             })
         );
-        setcurrid(currid + 1);
+        setCurrTaskId(currTaskId + 1);
     };
 
     const incrementSubTaskCurrId = (taskId) => {
