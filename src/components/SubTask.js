@@ -50,7 +50,7 @@ export const SubTask = (props) => {
 
     return (
         <div>
-            <div key={props.subTask.id} className="flex items-center glasslest hover:bg-white/40 rounded-md px-1 mx-0.5 my-1.5">
+            <div key={props.subTask.id} className="flex items-center glasslest hover:bg-white/50 rounded-md px-1 mx-0.5 my-1.5">
                 <form>
                     <input type="checkbox" className="h-[10px] w-[10px]" value={props.subTask.completed} checked={props.subTask.completed} onClick = {onToggle}/>
                 </form>

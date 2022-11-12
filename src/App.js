@@ -66,6 +66,25 @@ function App() {
         }
     ]);
 
+    const addTask = (date) => {
+        setTasks(tasks.concat({
+            id: currid,
+            dayIdx: 0,
+            subTaskCurrId: 0,
+            name: "",
+            completed: false,
+            subTasks: [],
+            repeat: {
+                type: "",
+                frequency: 1
+            },
+            startDate: date,
+            rolledOver: false,
+            notes: ''
+        }))
+        setcurrid(currid+1)
+    }
+
     const incrementSubTaskCurrId = (taskId) => {
         setTasks(tasks => {
             return tasks.map((task) => {
@@ -162,13 +181,13 @@ function App() {
             <div className="max-w-[1500px] w-full relative">
                 <WeekController day={day} changeDay={changeDay}/>
                 <div className="flex justify-between pt-5">
-                    {[...Array(5)].map((e, i) => { return ( <Day setCompleted={setCompleted} toggleEdit={toggleEdit} name={day.clone().add(-2+i, 'days').format("dddd")} tasks={tasks.filter((task) => dayMatch(day.clone().add(-2+i, 'days'), task))} date={day.clone().add(-2+i, 'days').format("DD.MM")}/> ) })}
+                    {[...Array(5)].map((e, i) => { return ( <Day setCompleted={setCompleted} addTask={addTask} toggleEdit={toggleEdit} name={day.clone().add(-2+i, 'days').format("dddd")} tasks={tasks.filter((task) => dayMatch(day.clone().add(-2+i, 'days'), task))} date={day.clone().add(-2+i, 'days').format("DD.MM")}/> ) })}
                 </div>
                 <div className="absolute w-full flex justify-center top-[50vh] -translate-y-[50%]">
                     {showEdit && <TaskEdit 
                         incrementSubTaskCurrId={incrementSubTaskCurrId}
                         toggleEdit = {toggleEdit} 
-                        task = {tasks[currentEditID]}
+                        task = {tasks.filter((task) => task.id === currentEditID)[0]}
                         editTask = {editTask}
                         editSubTasks = {editSubTasks}
                         setCompleted={setCompleted}
