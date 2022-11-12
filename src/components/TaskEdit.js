@@ -14,7 +14,7 @@ export const TaskEdit = (props) => {
     const onSave = () => {
         console.log(props.task)
         console.log(editedTask)
-        props.editTask(props.task.id, editedTask)
+        props.editTask(props.task.id, editedTask, props.selectedDate)
         props.toggleEdit(0, false) //closes the edit box :)
         // NOTE: adding subtasks is independent of the save process
     }
@@ -22,17 +22,12 @@ export const TaskEdit = (props) => {
     const onAddSubtask = () => {
         props.incrementSubTaskCurrId(props.task.id)
         console.log(props.task.subTaskCurrId)
-        props.editSubTasks(props.task.id, props.task.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false}))
+        props.editSubTasks(props.task.id, props.task.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false}), props.selectedDate);
         console.log(props.task.subTasks)
         setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
         setNewSubTaskName('')
     }
 
-    const editSubtasks = (id, checkbox, name) => {
-        //handles renaming and checkbox functions
-        props.editSubTasks(props.task.id, props.task.subTasks[id])
-    }
-    
     const deleteSubtask = () => {
         //delets a particular subtask
         

@@ -14,7 +14,7 @@ export const Day = (props) => {
     }
 
     const setCompleted = (taskId, isCompleted) => {
-        props.setCompleted(taskId, isCompleted)
+        props.setCompleted(taskId, isCompleted, props.date);
     }
     return (
         <div className="rounded-xl glassless w-[19.5%] p-3">
@@ -23,11 +23,11 @@ export const Day = (props) => {
                     {props.name}
                 </div>
                 <div className="text-gray-400">
-                    {props.date}
+                    {props.dateName}
                 </div>
             </div>
             <div className="min-h-[30vh] flex flex-col" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-                {props.tasks.map((task) => {return <Task setCompleted={setCompleted} toggleEdit={props.toggleEdit} {...task}/>})}
+                {props.tasks.map((task) => {return <Task date={props.date} setCompleted={setCompleted} toggleEdit={props.toggleEdit} {...task}/>})}
                 <div className={`flex px-2 py-1 transition-opacity ease-in-out duration-300 ${hover ? "opacity-100" : "opacity-0"}`}>
                     <div className="cursor-pointer">New Task</div>
                 </div>
