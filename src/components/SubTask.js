@@ -3,10 +3,6 @@ import { IoMdClose } from "react-icons/io";
 
 export const SubTask = (props) => {
 
-    const editSubtask = (id, checkbox, name) => {
-        //handles renaming and checkbox functions
-        props.editSubTasks(props.task.id, props.task.subTasks[id])
-    }
     
     const onNameChange = (newName) => {
         props.editSubTasks(props.task.id, props.task.subTasks.map((task) => {
@@ -54,7 +50,7 @@ export const SubTask = (props) => {
 
     return (
         <div>
-            <div key={props.subTask.id} className="flex items-center glasslest hover:bg-white/40 rounded-md px-1 mx-0.5 my-1.5">
+            <div key={props.subTask.id} className="flex items-center glasslest hover:bg-white/50 rounded-md px-1 mx-0.5 my-1.5">
                 <form>
                     <input type="checkbox" className="h-[10px] w-[10px]" value={props.subTask.completed} checked={props.subTask.completed} onClick = {onToggle}/>
                 </form>
