@@ -15,7 +15,7 @@ function App() {
         {
             id: 0,
             dayIdx: 0,
-            subTaskCurrId: 1, // currently set to 1 because the current id of the last "test subtask" is 1
+            subTaskCurrId: 2, // currently set to 2 because a new task needs an id of 2
             name: "Finish coding project",
             completed: false,
             subTasks: [
@@ -30,6 +30,10 @@ function App() {
                     completed: false
                 }
             ],
+            repeat: {
+                type: "weekly",
+                frequency: 1
+            },
             startDate: "6/11/2022",
             rolledOver: false,
             notes: ''
@@ -38,7 +42,7 @@ function App() {
             id: 1,
             dayIdx: 1,
             name: "Import boilerplate",
-            subTaskCurrId: 1, // currently set to 1 because the current id of the last "test subtask" is 1
+            subTaskCurrId: 2, // currently set to 2 because a new task needs an id of 2
             completed: true,
             subTasks: [
                 {

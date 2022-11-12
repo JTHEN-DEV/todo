@@ -21,6 +21,7 @@ export const TaskEdit = (props) => {
 
     const onAddSubtask = () => {
         props.incrementSubTaskCurrId(props.task.id)
+        console.log(props.task.subTaskCurrId)
         props.editSubTasks(props.task.id, props.task.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false}))
         console.log(props.task.subTasks)
         setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
