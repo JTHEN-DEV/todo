@@ -6,6 +6,9 @@ import {
 } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { SubTask } from "./SubTask";
+import { DatePicker } from "./DatePicker";
+import moment from "moment/moment";
+
 
 export const TaskEdit = (props) => {
     const [editedTask, setEditedTask] = useState(props.task);
@@ -15,6 +18,8 @@ export const TaskEdit = (props) => {
     const [showRepeat, setShowRepeat] = useState(false);
 
     const [editedRepeat, setEditedRepeat] = useState(props.task.repeat);
+    
+    const [showDatePicker, setShowDatePicker] = useState(false)
 
     const onSave = () => {
         console.log(props.task);
@@ -208,6 +213,14 @@ export const TaskEdit = (props) => {
                     </div>
                 </div>
             </div>
+            <div className="flex justify-between left-0 pl-8">
+                        {!showRepeat && !showDatePicker && <div className="glassless rounded-lg text-gray-600 text-sm font-semibold cursor-pointer px-1 p-1" onClick={() => setShowDatePicker(!showDatePicker)}>{editedTask.startDate}</div>}
+                        {!showRepeat && showDatePicker && <DatePicker setEditedTask={setEditedTask} editedTask={editedTask} setShowDatePicker={setShowDatePicker} month={moment(editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(editedTask.startDate, "DD/MM/YYYY").year()}/>}
+                    </div>
+            <div className="text-left mb-1" style={{ fontWeight: "bold" }}>
+                Subtasks
+            </div>
+
             <div className="text-left mb-1" style={{ fontWeight: "bold" }}>
                 Subtasks
             </div>
