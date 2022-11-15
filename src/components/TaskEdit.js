@@ -192,10 +192,12 @@ export const TaskEdit = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-between left-0 pl-8">
-                        {!showRepeat && !showDatePicker && <div className="glassless rounded-lg text-gray-600 text-sm font-semibold cursor-pointer px-1 p-1" onClick={() => setShowDatePicker(!showDatePicker)}>{editedTask.startDate}</div>}
-                        {!showRepeat && showDatePicker && <DatePicker setEditedTask={setEditedTask} editedTask={editedTask} setShowDatePicker={setShowDatePicker} month={moment(editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(editedTask.startDate, "DD/MM/YYYY").year()}/>}
-                    </div>
+            <div className="flex left-0 pl-8 relative">
+                        {!showRepeat && <div>
+                        <div className="glassless rounded-lg text-gray-600 text-sm font-semibold cursor-pointer px-1 p-1" onClick={() => setShowDatePicker(!showDatePicker)}>{editedTask.startDate}</div>
+                        {showDatePicker && <DatePicker setEditedTask={setEditedTask} editedTask={editedTask} setShowDatePicker={setShowDatePicker} month={moment(editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(editedTask.startDate, "DD/MM/YYYY").year()}/>}
+                        </div>}
+            </div>
 
             <div className="text-left mb-1" style={{ fontWeight: "bold" }}>
                 Subtasks

@@ -48,6 +48,13 @@ code {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.frosty {
+  /* margin: 0 auto; */
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.15);
+  background: rgba(242, 242, 242, 0.7);
+  backdrop-filter: blur(10px);
+}
+
 .glasslest {
   /* margin: 0 auto; */
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.05);

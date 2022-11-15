@@ -70,7 +70,7 @@ export const DatePicker = (props) => {
     }
 
     return (
-        <div className="scale-75 glassless text-sm text-center rounded-2xl mb-5 p-2 px-3">
+        <div className="absolute z-50 scale-75 frosty text-sm text-center rounded-2xl ml-2 mb-5 p-2 px-3 left-0 top-2">
             <h1 className="text-lg flex justify-between">
                 <FaChevronLeft className="mt-1 ml-1 cursor-pointer text-gray-500 hover:text-gray-800" onClick={()=>incMonth(-1)}/>
                 <div className="font-bold">{`${
