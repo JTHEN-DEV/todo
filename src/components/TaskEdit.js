@@ -22,43 +22,22 @@ export const TaskEdit = (props) => {
     const [showDatePicker, setShowDatePicker] = useState(false)
 
     const onSave = () => {
-        console.log(props.task);
-        console.log(editedTask);
-        props.editTask(props.task.id, editedTask, props.selectedDate);
-        props.toggleEdit(0, false); //closes the edit box :)
+        console.log(props.task)
+        console.log(editedTask)
+        props.editTask(props.task.id, editedTask)
+        props.toggleEdit(0, false) //closes the edit box :)
         // NOTE: adding subtasks is independent of the save process
-    };
-
+    }
     const onAddSubtask = () => {
-        console.log(props.task.subTaskCurrId);
-        props.editSubTasks(
-            props.task.id,
-            props.task.subTasks.concat({
-                id: props.task.subTaskCurrId,
-                name: newSubTaskName,
-                completed: false,
-            }),
-            props.selectedDate
-        );
-        console.log(props.task.subTasks);
-        setEditedTask({
-            ...editedTask,
-            subTasks: editedTask.subTasks.concat({
-                id: props.task.subTaskCurrId,
-                name: newSubTaskName,
-                completed: false,
-            }),
-        });
-        setNewSubTaskName("");
-        props.incrementSubTaskCurrId(props.task.id);
-    };
+        console.log(props.task.subTaskCurrId)
+        props.editSubTasks(props.task.id, props.task.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false}))
+        console.log(props.task.subTasks)
+        setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
+        setNewSubTaskName('')
+        props.incrementSubTaskCurrId(props.task.id)
+    }
 
     const [showRepeatType, setShowRepeatType] = useState(false);
-
-    const editSubtasks = (id, checkbox, name) => {
-        //handles renaming and checkbox functions
-        props.editSubTasks(props.task.id, props.task.subTasks[id]);
-    };
 
     const setsEditedRepeat = (value) => {
         setEditedRepeat(value);

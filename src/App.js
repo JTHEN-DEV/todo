@@ -88,120 +88,51 @@ function App() {
     };
 
     const incrementSubTaskCurrId = (taskId) => {
-        setTasks((tasks) => {
+        setTasks(tasks => {
             return tasks.map((task) => {
-                if (task.id === taskId) {
-                    return { ...task, subTaskCurrId: task.subTaskCurrId + 1 };
+                if ((task.id) === taskId){
+                    return {...task, subTaskCurrId: task.subTaskCurrId+1};
                 } else {
                     return task;
                 }
-            });
-        });
-    };
-
-    const setCompleted = (taskId, isCompleted, date) => {
-        editTask(
-            taskId,
-            {
-                ...tasks.filter((task) => task.id === taskId)[0],
-                completed: isCompleted,
-            },
-            date
-        );
-    };
-
-    const editTask = (taskId, newTask, date) => {
-        console.log("Test");
-        let flag = false;
-        const newTaskList = tasks.map((task) => {
-            if (task.id === taskId) {
-                if (task.repeat) {
-                    console.log("WHATTTT");
-                    newEditedTask(taskId, newTask, date);
-                    flag = true;
-                    return task;
+            })
+        })
+    }
+    const setCompleted = (taskId, isCompleted) => {
+        setTasks(tasks => {
+            return tasks.map((task) => {
+                if ((task.id) === taskId){
+                    return {...task, completed: isCompleted};
                 } else {
+                    return task;
+                }
+            })
+        })
+    }
+    const editTask = (taskId, newTask) => {
+        setTasks(tasks => {
+            return tasks.map((task) => {
+                if ((task.id) === taskId){
                     return newTask;
-                }
-            } else {
-                return task;
-            }
-        });
-
-        if (!flag) {
-            setTasks(newTaskList);
-        }
-    };
-
-    const editSubTasks = (taskId, updatedSubTasks, date) => {
-        let flag = false;
-        const newTaskList = tasks.map((task) => {
-            if (task.id === taskId) {
-                if (task.repeat) {
-                    newEditedTask(
-                        taskId,
-                        { ...task, subTasks: updatedSubTasks },
-                        date
-                    );
-                    flag = true;
+                } else {
                     return task;
-                } else {
-                    return { ...task, subTasks: updatedSubTasks };
                 }
-            } else {
-                return task;
-            }
-        });
-
-        if (!flag) {
-            setTasks(newTaskList);
-        }
-        console.log(tasks);
+            })
+        })
+    }
+    const editSubTasks = (taskId, updatedSubTasks) => {
+        setTasks(tasks => {
+            return tasks.map((task) => {
+                if ((task.id) === taskId){
+                    return {...task, subTasks: updatedSubTasks};
+                } else {
+                    return task;
+                }
+            })
+        })
+        console.log(tasks)
         // 'done' is printed but subtask list isn't updating?!?
-    };
-
-    const newEditedTask = (taskId, task, date) => {
-        console.log(date);
-        console.log("newEditedTask");
-        setTasks((tasksOld) => {
-            let tasks = tasksOld;
-            tasks = tasks.map((t) => {
-                if (t.id === taskId) {
-                    if (t.exceptions) {
-                        return { ...t, exceptions: [...t.exceptions, date] };
-                    } else {
-                        return { ...t, exceptions: [date] };
-                    }
-                } else {
-                    return t;
-                }
-            });
-            console.log([
-                ...tasks,
-                {
-                    ...task,
-                    isModified: true,
-                    id: currTaskId,
-                    repeat: null,
-                    parentId: taskId,
-                },
-            ]);
-            return [
-                ...tasks,
-                {
-                    ...task,
-                    isModified: true,
-                    id: currTaskId,
-                    repeat: null,
-                    parentId: taskId,
-                },
-            ];
-        });
-
-        setCurrTaskId((taskId) => taskId + 1);
-    };
-
-    //add more of these edit methods - to edit each component of a task using the edit menu
+    }
 
     const rollAllTasks = () => {
         setTasks(
@@ -311,7 +242,6 @@ function App() {
                             editTask={editTask}
                             editSubTasks={editSubTasks}
                             setCompleted={setCompleted}
-                            date={selectedDate}
                         />
                     )}
                 </div>
