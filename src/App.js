@@ -15,17 +15,17 @@ function App() {
         {
             id: 0,
             dayIdx: 0,
-            subTaskCurrId: 2, // currently set to 2 because a new task needs an id of 2
+            subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
             name: "Finish coding project",
             completed: false,
             subTasks: [
                 {
-                    id: 0,
+                    id: 1, // id of first element must be 1 for drag and drop to work
                     name: "test 1",
                     completed: false,
                 },
                 {
-                    id: 1,
+                    id: 2,
                     name: "test 2",
                     completed: false,
                 },
@@ -42,16 +42,16 @@ function App() {
             id: 1,
             dayIdx: 1,
             name: "Import boilerplate",
-            subTaskCurrId: 2, // currently set to 2 because a new task needs an id of 2
+            subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
             completed: false,
             subTasks: [
                 {
-                    id: 0,
+                    id: 1,
                     name: "test a1",
                     completed: false,
                 },
                 {
-                    id: 1,
+                    id: 2,
                     name: "test a2",
                     completed: false,
                 },

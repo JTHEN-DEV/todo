@@ -3,12 +3,14 @@ import {
     IoMdCheckmark,
     IoIosArrowDown,
     IoMdSync,
+    IoMdCheckbox
 } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { SubTask } from "./SubTask";
 import { DatePicker } from "./DatePicker";
 import moment from "moment/moment";
-
+import {DndContext, closestCenter} from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 export const TaskEdit = (props) => {
     const [editedTask, setEditedTask] = useState(props.task);
@@ -20,6 +22,16 @@ export const TaskEdit = (props) => {
     const [editedRepeat, setEditedRepeat] = useState(props.task.repeat);
     
     const [showDatePicker, setShowDatePicker] = useState(false)
+
+    const handleDragEnd = (event) => {
+        const{active, over} = event;
+        const activeIndex = (props.task.subTasks.findIndex(item => item.id === active.id))
+        const overIndex = (props.task.subTasks.findIndex(item => item.id === over.id))
+        if(active.id !== over.id) {
+            props.editSubTasks(props.task.id, arrayMove(props.task.subTasks, activeIndex, overIndex));
+        }
+    }
+
 
     const onSave = () => {
         console.log(props.task)
@@ -54,18 +66,12 @@ export const TaskEdit = (props) => {
             <div className="flex justify-between">
                 <div className="flex items-center">
                     <form>
-                        <input
-                            type="checkbox"
-                            className="h-[23px] w-[23px] mr-2 my-4 glassless bg-amber-400"
-                            value={props.task.completed}
-                            checked={props.task.completed}
-                            onClick={() =>
-                                props.setCompleted(
-                                    props.task.id,
-                                    !props.task.completed
-                                )
-                            }
-                        />
+
+                        {!props.task.completed ? 
+                        <div type="checkbox" className={`cursor-pointer glassless mr-2 my-4 h-[23px] w-[23px] rounded`} value={props.task.completed} checked={props.task.completed} onClick = {() => props.setCompleted(props.task.id, !props.task.completed)}/>
+                        :
+                        <IoMdCheckbox type="checkbox" className="cursor-pointer mr-2 my-4 scale-125 opacity-70 h-[23px] w-[23px]" value={props.task.completed} checked={props.task.completed} onClick = {() => props.setCompleted(props.task.id, !props.task.completed)}/>
+                    }
                     </form>
                     <form>
                         <input
@@ -124,7 +130,7 @@ export const TaskEdit = (props) => {
                                         </div>
                                         {
                                             <div
-                                                className={`py-0.5 absolute z-30 top-[30px] text-sm rounded-lg glassless cursor-pointer w-[72px] backdrop-blur-3xl transition-transform ease-in-out duration-150 origin-top ${
+                                                className={`py-0.5 absolute z-50 top-[30px] text-sm rounded-lg glassless cursor-pointer w-[72px] backdrop-blur-3xl transition-transform ease-in-out duration-150 origin-top ${
                                                     showRepeatType
                                                         ? "scale-y-100"
                                                         : "scale-y-0"
@@ -192,9 +198,9 @@ export const TaskEdit = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="flex left-0 pl-8 relative">
-                        {!showRepeat && <div>
-                        <div className="glassless rounded-lg text-gray-600 text-sm font-semibold cursor-pointer px-1 p-1" onClick={() => setShowDatePicker(!showDatePicker)}>{editedTask.startDate}</div>
+            <div className="left-0 pl-8 relative w-[22%] mb-3">
+                        {<div>
+                        <div className="glassless rounded-lg text-gray-600 text-[12px] font-semibold cursor-pointer -mt-3 p-0.5" onClick={() => setShowDatePicker(!showDatePicker)}>{editedTask.startDate}</div>
                         {showDatePicker && <DatePicker setEditedTask={setEditedTask} editedTask={editedTask} setShowDatePicker={setShowDatePicker} month={moment(editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(editedTask.startDate, "DD/MM/YYYY").year()}/>}
                         </div>}
             </div>
@@ -205,17 +211,22 @@ export const TaskEdit = (props) => {
 
             
             <div className="rounded-lg glassless mb-4 pt-0.5 px-1 text-left">
-                            {props.task.subTasks.map((subTask, i) => (
-                            <SubTask
-                                index={i}
-                                editedTask={editedTask}
-                                setEditedTask={setEditedTask}
-                                editSubTasks={props.editSubTasks}
-                                task={props.task}
-                                key={subTask.id}
-                                subTask={subTask}
-                            />
-                            ))}
+                <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <SortableContext items={props.task.subTasks} strategy={verticalListSortingStrategy}>
+                        {props.task.subTasks.map((subTask, i) => (
+                        <SubTask
+                            index={i}
+                            editedTask={editedTask}
+                            setEditedTask={setEditedTask}
+                            editSubTasks={props.editSubTasks}
+                            task={props.task}
+                            key={subTask.id}
+                            subTask={subTask}
+                            id={subTask.id}
+                        />
+                        ))}
+                    </SortableContext>
+                </DndContext>
                 <form className="form-control">
                     <div className="flex items-center">
                         <IoMdAdd
@@ -254,13 +265,13 @@ export const TaskEdit = (props) => {
             </div>
             <div className="flex w-full justify-between">
                 <button
-                    className="glassless rounded-xl w-[48%]"
+                    className="glassless rounded-lg w-[48%]"
                     onClick={onSave}
                 >
                     Save
                 </button>
                 <button
-                    className="glassless rounded-xl w-[48%]"
+                    className="glassless rounded-lg w-[48%]"
                     onClick={() => props.toggleEdit(0, false)}
                 >
                     Cancel
