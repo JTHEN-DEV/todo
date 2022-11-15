@@ -217,25 +217,24 @@ export const TaskEdit = (props) => {
                         {!showRepeat && !showDatePicker && <div className="glassless rounded-lg text-gray-600 text-sm font-semibold cursor-pointer px-1 p-1" onClick={() => setShowDatePicker(!showDatePicker)}>{editedTask.startDate}</div>}
                         {!showRepeat && showDatePicker && <DatePicker setEditedTask={setEditedTask} editedTask={editedTask} setShowDatePicker={setShowDatePicker} month={moment(editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(editedTask.startDate, "DD/MM/YYYY").year()}/>}
                     </div>
-            <div className="text-left mb-1" style={{ fontWeight: "bold" }}>
-                Subtasks
-            </div>
 
             <div className="text-left mb-1" style={{ fontWeight: "bold" }}>
                 Subtasks
             </div>
 
+            
             <div className="rounded-lg glassless mb-4 pt-0.5 px-1 text-left">
-                {props.task.subTasks.map((subTask) => (
-                    <SubTask
-                        editedTask={editedTask}
-                        setEditedTask={setEditedTask}
-                        editSubTasks={props.editSubTasks}
-                        task={props.task}
-                        key={subTask.id}
-                        subTask={subTask}
-                    />
-                ))}
+                            {props.task.subTasks.map((subTask, i) => (
+                            <SubTask
+                                index={i}
+                                editedTask={editedTask}
+                                setEditedTask={setEditedTask}
+                                editSubTasks={props.editSubTasks}
+                                task={props.task}
+                                key={subTask.id}
+                                subTask={subTask}
+                            />
+                            ))}
                 <form className="form-control">
                     <div className="flex items-center">
                         <IoMdAdd

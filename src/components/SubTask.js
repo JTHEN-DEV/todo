@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { IoMdClose } from "react-icons/io";
+import { Draggable } from "react-beautiful-dnd";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { CssSyntaxError } from "postcss";
 
 export const SubTask = (props) => {
 
@@ -49,7 +53,7 @@ export const SubTask = (props) => {
     }
 
     return (
-        <div>
+        <div key={props.subTask.id} index={props.index}>
             <div key={props.subTask.id} className="flex items-center glasslest hover:bg-white/50 rounded-md px-1 mx-0.5 my-1.5">
                 <form>
                     <input type="checkbox" className="h-[10px] w-[10px]" value={props.subTask.completed} checked={props.subTask.completed} onClick = {onToggle}/>
