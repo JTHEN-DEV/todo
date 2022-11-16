@@ -169,6 +169,17 @@ export const TaskEdit = (props) => {
                                                 >
                                                     Yearly
                                                 </div>
+                                                <div
+                                                    className="px-1.5 text-left bg-white/0 hover:bg-white/60 rounded-lg"
+                                                    onClick={() => {
+                                                        setsEditedRepeat({
+                                                            ...editedRepeat,
+                                                            type: "none",
+                                                        });
+                                                    }}
+                                                >
+                                                    None
+                                                </div>
                                             </div>
                                         }
                                     </div>
