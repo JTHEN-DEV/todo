@@ -298,6 +298,8 @@ function App() {
                                     (task) => task.id === currentEditID
                                 )[0]
                             }
+                            tasks={tasks}
+                            setTasks={setTasks}
                             editTask={editTask}
                             editSubTasks={editSubTasks}
                             setCompleted={setCompleted}

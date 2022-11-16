@@ -3,18 +3,24 @@ import {
     IoMdCheckmark,
     IoIosArrowDown,
     IoMdSync,
-    IoMdCheckbox
+    IoMdCheckbox,
+    IoMdTrash,
+    IoMdClose
 } from "react-icons/io";
+import TextareaAutosize from 'react-textarea-autosize';
 import { useEffect, useState } from "react";
 import { SubTask } from "./SubTask";
 import { DatePicker } from "./DatePicker";
 import moment from "moment/moment";
 import {DndContext, closestCenter} from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { FaTasks } from "react-icons/fa";
 
 export const TaskEdit = (props) => {
     const [editedTask, setEditedTask] = useState(props.task);
     // etc.
+    const [deleteConfirm, setDeleteConfirm] = useState(false);
+
     const [newSubTaskName, setNewSubTaskName] = useState("");
 
     const [showRepeat, setShowRepeat] = useState(false);
@@ -56,6 +62,14 @@ export const TaskEdit = (props) => {
         setShowRepeatType(false);
     };
 
+    const onDeleteTask = () => {
+        const tasks = props.tasks
+        const index = tasks.map(task => task.id).indexOf(props.task.id);
+        tasks.splice(index, 1)
+        props.setTasks(tasks)
+        props.toggleEdit(0, false, false)
+    }
+
     useEffect(() => {
         setEditedTask(props.task);
         setEditedRepeat(props.task.repeat);
@@ -75,7 +89,7 @@ export const TaskEdit = (props) => {
                     </form>
                     <form>
                         <input
-                            className="rounded-lg glassless my-4 px-2 w-[250px] outline-0 text-xl font-semibold"
+                            className="rounded-lg glassless my-4 px-2 w-[250px] outline-0 text-xl font-semibold text-ellipsis"
                             type="text"
                             placeholder="Task Name..."
                             value={editedTask.name}
@@ -88,6 +102,7 @@ export const TaskEdit = (props) => {
                         />
                     </form>
                 </div>
+
                 <div className="flex items-center">
                     <div>
                         {
@@ -259,10 +274,11 @@ export const TaskEdit = (props) => {
                 Notes
             </div>
             <div className="rounded-lg glassless mb-4">
-                <form className="form-control">
-                    <input
+                <form>
+                    <TextareaAutosize
+                        style={{resize: "none"}}
                         type="text"
-                        className="my-1 bg-transparent outline-0 w-[95%] text-sm "
+                        className="my-1 bg-transparent outline-0 w-[95%] text-sm whitespace-normal"
                         placeholder="Add Notes..."
                         value={editedTask.notes}
                         onChange={(e) =>
@@ -274,19 +290,39 @@ export const TaskEdit = (props) => {
                     />
                 </form>
             </div>
-            <div className="flex w-full justify-between">
-                <button
-                    className="glassless rounded-lg w-[48%]"
-                    onClick={onSave}
-                >
-                    Save
-                </button>
-                <button
-                    className="glassless rounded-lg w-[48%]"
-                    onClick={() => props.toggleEdit(0, false, false)}
-                >
-                    Cancel
-                </button>
+            <div>
+                {!deleteConfirm ?
+                <div className="flex w-full justify-between">
+                    <div className="text-red-600 glassless cursor-pointer rounded-lg w-[5%] px-1 py-1" onClick={() => setDeleteConfirm(true)}>
+                        <IoMdTrash/>
+                    </div>
+                    <button
+                        className="glassless font-semibold text-gray-700 hover:text-black rounded-lg w-[45%]"
+                        onClick={() => props.toggleEdit(0, false, false)}
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        className="glassless font-semibold rounded-lg text-gray-700 hover:text-black w-[45%]"
+                        onClick={onSave}
+                    >
+                        Save
+                    </button>
+                </div>
+                :
+                <div className="glassless rounded-lg flex w-[100%] justify-between">
+                    <div className="font-semibold text-gray-700 ml-1 mt-2">Are you sure you want to delete?</div>
+                    <div className="flex justify-between mr-1 my-1">
+                        <div
+                            className="m-1 rounded-lg glassless font-semibold px-3 text-gray-700 cursor-pointer w-[100%]"
+                            onClick={() => setDeleteConfirm(false)}
+                        >Cancel</div>
+                        <div className="m-1 rounded-lg glassless font-semibold px-3 text-red-600 cursor-pointer w-[100%]"
+                            onClick={onDeleteTask}>
+                            Delete
+                        </div>
+                    </div>
+                </div>}
             </div>
         </div>
     );

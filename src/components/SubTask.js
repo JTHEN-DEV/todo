@@ -66,7 +66,7 @@ export const SubTask = (props) => {
                         <IoMdCheckbox type="checkbox" className="cursor-pointer scale-125 opacity-70 h-[12px] w-[12px]" value={props.subTask.completed} checked={props.subTask.completed} onClick = {onToggle}/>
                     }
                 </form>
-                <input className="ml-2 text-sm bg-transparent outline-0 w-[93%]" type='text' value={props.subTask.name} placeholder = 'Subtask Name...'onChange={(e) => onNameChange(e.target.value)}/>
+                <input className="ml-2 text-sm bg-transparent outline-0 w-[93%] text-ellipsis" type='text' value={props.subTask.name} placeholder = 'Subtask Name...'onChange={(e) => onNameChange(e.target.value)}/>
                 <IoIosReorder {...attributes} {...listeners} className="text-gray-500 hover:text-gray-800 cursor-pointer outline-0 mr-1 mb-0.5"/>
                 <IoMdClose className="text-right flex items-right text-gray-500 hover:text-gray-800 cursor-pointer mb-0.5" onClick={onDelete}/>
             </div>
