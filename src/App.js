@@ -4,6 +4,7 @@ import "./App.css";
 import { Day } from "./components/Day";
 import { TaskEdit } from "./components/TaskEdit";
 import { WeekController } from "./components/WeekController";
+import {RepeatEditWarning} from "./components/RepeatEditWarning"
 
 function App() {
     const [currTaskId, setCurrTaskId] = useState(3); // currently set to 3 because the next task will have an id of 3
@@ -11,6 +12,11 @@ function App() {
     const [currentEditID, setCurrentEditID] = useState(0);
     const [dayOffset, setDayOffset] = useState(0);
     const day = moment().add(dayOffset, "days");
+    const [repeatWarning, setRepeatWarning] = useState({
+        show: false,
+        id: 0,
+        date: ""
+    })
     const [tasks, setTasks] = useState([
         {
             id: 0,
@@ -38,6 +44,7 @@ function App() {
             rolledOver: false,
             notes: "",
             exceptions: [],
+            completions: ["16/11/2022"], // Gives the date of repeating tasks that have been completed
         },
         {
             id: 1,
@@ -216,14 +223,15 @@ function App() {
         setDayOffset((currentDayOffset) => currentDayOffset + amount);
     };
 
-    const toggleEdit = (id, date) => {
+    const toggleEdit = (id, date, thisTask) => {
         // Open -> true if the edit window is meant to open
         //         false is the edit window is meant to close
         // this function will handle the edit of repeating tasks
         // NOTE: need to create a function to handle "asynchronous edits" e.g. ticking the completed box without opening taskedit
         if (date) { // Makes sure that this function isn't run when the toggleEdit function is used to close the taskEdit window
             const task = tasks[tasks.findIndex(item => item.id === id)] // this refers to the parent task (if there is one!)
-            if (task.repeat.type !== 'none') {
+            console.log("Editing this task? " + thisTask)
+            if (thisTask && task.repeat.type !== 'none') {
                 // Creates new "non-repeating" version (with no exceptions and new date) of instance of repeating task
                 setTasks(tasks.concat({...task, id: currTaskId, repeat: {type: "none", frequency: 1}, startDate: date, exceptions: []}))
                 setCurrentEditID(currTaskId);
@@ -253,8 +261,11 @@ function App() {
                         return (
                             <Day
                                 setCompleted={setCompleted}
+                                setRepeatWarning={setRepeatWarning}
                                 addTask={addTask}
                                 toggleEdit={toggleEdit}
+                                editTask={editTask}
+                                tasklist={tasks} // sending full task list
                                 name={day
                                     .clone()
                                     .add(-2 + i, "days")
@@ -293,6 +304,9 @@ function App() {
                             selectedDate={selectedDate}
                         />
                     )}
+                    <div className="absolute w-full flex justify-center mb-100 -top-20">
+                        {repeatWarning.show && <RepeatEditWarning setRepeatWarning={setRepeatWarning} toggleEdit={toggleEdit} repeatWarning={repeatWarning} />}
+                    </div>
                 </div>
             </div>
         </div>

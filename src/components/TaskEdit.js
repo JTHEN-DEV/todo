@@ -37,7 +37,7 @@ export const TaskEdit = (props) => {
         console.log(props.task)
         console.log(editedTask)
         props.editTask(props.task.id, editedTask)
-        props.toggleEdit(0, false) //closes the edit box :)
+        props.toggleEdit(0, false, false) //closes the edit box :)
         // NOTE: adding subtasks is independent of the save process
     }
     const onAddSubtask = () => {
@@ -283,7 +283,7 @@ export const TaskEdit = (props) => {
                 </button>
                 <button
                     className="glassless rounded-lg w-[48%]"
-                    onClick={() => props.toggleEdit(0, false)}
+                    onClick={() => props.toggleEdit(0, false, false)}
                 >
                     Cancel
                 </button>

@@ -27,7 +27,7 @@ export const Day = (props) => {
                 </div>
             </div>
             <div className="min-h-[30vh] flex flex-col" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-                {props.tasks.map((task) => {return <Task date={props.date} setCompleted={setCompleted} toggleEdit={props.toggleEdit} {...task}/>})}
+                {props.tasks.map((task) => {return <Task date={props.date} setCompleted={setCompleted} setRepeatWarning={props.setRepeatWarning} toggleEdit={props.toggleEdit} editTask={props.editTask} tasks={props.tasklist} {...task}/>})}
                 <div className={`flex px-2 py-1 transition-opacity ease-in-out duration-300 ${hover ? "opacity-100" : "opacity-0"}`}>
                     <div className="cursor-pointer">New Task</div>
                 </div>
