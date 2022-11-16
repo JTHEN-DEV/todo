@@ -12,6 +12,7 @@ function App() {
     const [currentEditID, setCurrentEditID] = useState(0);
     const [dayOffset, setDayOffset] = useState(0);
     const day = moment().add(dayOffset, "days");
+    const [isNew, setIsNew] = useState(false); // tells taskedit if current task is a new task (on cancel will delete new task)
     const [repeatWarning, setRepeatWarning] = useState({
         show: false,
         id: 0,
@@ -38,7 +39,7 @@ function App() {
             ],
             repeat: {
                 type: "daily",
-                frequency: 2,
+                frequency: 4,
             },
             startDate: "6/11/2022",
             rolledOver: false,
@@ -118,8 +119,11 @@ function App() {
                 startDate: date,
                 rolledOver: false,
                 notes: "",
+                exceptions: [],
+                completions: [],
             })
         );
+        toggleEdit(currTaskId, date, false, true)
         setCurrTaskId(currTaskId + 1);
     };
 
@@ -211,7 +215,7 @@ function App() {
         setDayOffset((currentDayOffset) => currentDayOffset + amount);
     };
 
-    const toggleEdit = (id, date, thisTask) => {
+    const toggleEdit = (id, date, thisTask, isNew) => {
         // Open -> true if the edit window is meant to open
         //         false is the edit window is meant to close
         // this function will handle the edit of repeating tasks
@@ -230,6 +234,8 @@ function App() {
             } else {
                 setCurrentEditID(id);
             }
+            isNew ? setIsNew(true) : setIsNew(false)
+            editTask(id, {...tasks.filter((task) => task.id === id)[0], startDate: date})
             console.log(date)
             console.log(id)
             console.log(currTaskId)
@@ -291,6 +297,7 @@ function App() {
                             editTask={editTask}
                             setCompleted={setCompleted}
                             selectedDate={selectedDate}
+                            isNew={isNew}
                         />
                     )}
                     <div className="absolute w-full flex justify-center mb-100 -top-20">

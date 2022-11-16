@@ -17,7 +17,8 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import { FaTasks } from "react-icons/fa";
 
 export const TaskEdit = (props) => {
-    const [editedTask, setEditedTask] = useState(props.task);
+    console.log(props.selectedDate)
+    const [editedTask, setEditedTask] = useState({...props.task, startDate: props.selectedDate});
     // etc.
 
     const [currSubTaskId, setCurrSubTaskId] = useState(editedTask.subTaskCurrId)
@@ -80,6 +81,13 @@ export const TaskEdit = (props) => {
         setEditedTask(props.task);
         setEditedRepeat(props.task.repeat);
     }, [props.task]);
+    
+    const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault()
+        onAddSubtask();
+    }
+  };
 
     return (
         <div className="rounded-xl glassless w-[35%] px-3 pb-3.5 pt-0.5 backdrop-blur-md">
@@ -219,6 +227,7 @@ export const TaskEdit = (props) => {
                                 onClick={() => {
                                     setEditedTask({
                                         ...editedTask,
+                                        startDate: props.selectedDate,
                                         repeat: editedRepeat,
                                     });
                                     setShowRepeatType(false);
@@ -271,6 +280,7 @@ export const TaskEdit = (props) => {
                             placeholder="Add Subtask..."
                             value={newSubTaskName}
                             onChange={(e) => setNewSubTaskName(e.target.value)}
+                            onKeyDown={handleKeyDown}
                         />
                     </div>
                 </form>
@@ -304,7 +314,7 @@ export const TaskEdit = (props) => {
                     </div>
                     <button
                         className="glassless font-semibold text-gray-700 hover:text-black rounded-lg w-[45%]"
-                        onClick={() => props.toggleEdit(0, false, false)}
+                        onClick={() => {if(props.isNew){onDeleteTask()}; props.toggleEdit(0, false, false)}}
                     >
                         Cancel
                     </button>
