@@ -157,19 +157,7 @@ function App() {
             })
         })
     }
-    const editSubTasks = (taskId, updatedSubTasks) => {
-        setTasks(tasks => {
-            return tasks.map((task) => {
-                if ((task.id) === taskId){
-                    return {...task, subTasks: updatedSubTasks};
-                } else {
-                    return task;
-                }
-            })
-        })
-        console.log(tasks)
-        // 'done' is printed but subtask list isn't updating?!?
-    }
+    
 
     const rollAllTasks = () => {
         setTasks(
@@ -301,7 +289,6 @@ function App() {
                             tasks={tasks}
                             setTasks={setTasks}
                             editTask={editTask}
-                            editSubTasks={editSubTasks}
                             setCompleted={setCompleted}
                             selectedDate={selectedDate}
                         />

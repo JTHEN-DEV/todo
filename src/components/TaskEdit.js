@@ -19,6 +19,9 @@ import { FaTasks } from "react-icons/fa";
 export const TaskEdit = (props) => {
     const [editedTask, setEditedTask] = useState(props.task);
     // etc.
+
+    const [currSubTaskId, setCurrSubTaskId] = useState(editedTask.subTaskCurrId)
+
     const [deleteConfirm, setDeleteConfirm] = useState(false);
 
     const [newSubTaskName, setNewSubTaskName] = useState("");
@@ -34,7 +37,7 @@ export const TaskEdit = (props) => {
         const activeIndex = (props.task.subTasks.findIndex(item => item.id === active.id))
         const overIndex = (props.task.subTasks.findIndex(item => item.id === over.id))
         if(active.id !== over.id) {
-            props.editSubTasks(props.task.id, arrayMove(props.task.subTasks, activeIndex, overIndex));
+            editSubTasks(props.task.id, arrayMove(props.task.subTasks, activeIndex, overIndex));
         }
     }
 
@@ -47,12 +50,15 @@ export const TaskEdit = (props) => {
         // NOTE: adding subtasks is independent of the save process
     }
     const onAddSubtask = () => {
-        console.log(props.task.subTaskCurrId)
-        props.editSubTasks(props.task.id, props.task.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false}))
-        console.log(props.task.subTasks)
-        setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
+        editSubTasks(0, editedTask.subTasks.concat({id: currSubTaskId, name: newSubTaskName, completed: false}))
+        // setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
         setNewSubTaskName('')
-        props.incrementSubTaskCurrId(props.task.id)
+        setCurrSubTaskId(currSubTaskId+1)
+    }
+
+    const editSubTasks = (taskId, updatedSubTasks) => {
+        console.log({...editedTask, subTasks: updatedSubTasks})
+        setEditedTask({...editedTask, subTasks: updatedSubTasks})
     }
 
     const [showRepeatType, setShowRepeatType] = useState(false);
@@ -238,14 +244,14 @@ export const TaskEdit = (props) => {
             
             <div className="rounded-lg glassless mb-4 pt-0.5 px-1 text-left">
                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                    <SortableContext items={props.task.subTasks} strategy={verticalListSortingStrategy}>
-                        {props.task.subTasks.map((subTask, i) => (
+                    <SortableContext items={editedTask.subTasks} strategy={verticalListSortingStrategy}>
+                        {editedTask.subTasks.map((subTask, i) => (
                         <SubTask
                             index={i}
                             editedTask={editedTask}
                             setEditedTask={setEditedTask}
-                            editSubTasks={props.editSubTasks}
-                            task={props.task}
+                            editSubTasks={editSubTasks}
+                            task={editedTask}
                             key={subTask.id}
                             subTask={subTask}
                             id={subTask.id}
