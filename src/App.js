@@ -233,9 +233,9 @@ function App() {
                 // THIS FUNCTION IS CONFIRMED TO WORK :)
             } else {
                 setCurrentEditID(id);
+                editTask(id, {...tasks.filter((task) => task.id === id)[0], startDate: date})
             }
             isNew ? setIsNew(true) : setIsNew(false)
-            editTask(id, {...tasks.filter((task) => task.id === id)[0], startDate: date})
             console.log(date)
             console.log(id)
             console.log(currTaskId)
