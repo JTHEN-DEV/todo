@@ -11,8 +11,12 @@ function App() {
     const [selectedDate, setSelectedDate] = useState(false); // logs the date of the task that is being edited by taskedit
     const [currentEditID, setCurrentEditID] = useState(0);
     const [dayOffset, setDayOffset] = useState(0);
+    const [thisTask, setThisTask] = useState(true);
     const day = moment().add(dayOffset, "days");
     const [isNew, setIsNew] = useState(false); // tells taskedit if current task is a new task (on cancel will delete new task)
+    const [editedTask, setEditedTask] = useState({
+        startDate: ""
+    })
     const [repeatWarning, setRepeatWarning] = useState({
         show: false,
         id: 0,
@@ -215,33 +219,51 @@ function App() {
         setDayOffset((currentDayOffset) => currentDayOffset + amount);
     };
 
+    const onSave = () => { // called when the taskedit saves the edited task to the main task list
+        if (thisTask) {
+            //Creates singular version of repeating task
+            setTasks(tasks.concat({...editedTask, id: currTaskId, repeat: {type: "none", frequency: 1}, exceptions: []}))
+            setCurrTaskId(currTaskId+1)
+            //Creates exception
+            const task = tasks.filter((task) => task.id === currentEditID)[0]
+            editTask(currentEditID, {...task, exceptions: [...task.exceptions, selectedDate]})
+        } else {
+            editTask(currentEditID, editedTask)
+        }
+        toggleEdit(0, false, false) //closes the edit box :)
+    }
+
     const toggleEdit = (id, date, thisTask, isNew) => {
         // Open -> true if the edit window is meant to open
         //         false is the edit window is meant to close
         // this function will handle the edit of repeating tasks
         // NOTE: need to create a function to handle "asynchronous edits" e.g. ticking the completed box without opening taskedit
         if (date) { // Makes sure that this function isn't run when the toggleEdit function is used to close the taskEdit window
-            const task = tasks[tasks.findIndex(item => item.id === id)] // this refers to the parent task (if there is one!)
-            console.log("Editing this task? " + thisTask)
-            if (thisTask && task.repeat.type !== 'none') {
+             // this refers to the parent task (if there is one!)
+            const t = {...tasks.filter((task) => task.id === id)[0], startDate: date}
+            console.log(t)
+            setEditedTask({...t})
+            //console.log("Editing this task? " + thisTask)
+            //if (thisTask && task.repeat.type !== 'none') {
                 // Creates new "non-repeating" version (with no exceptions and new date) of instance of repeating task
-                setTasks(tasks.concat({...task, id: currTaskId, repeat: {type: "none", frequency: 1}, startDate: date, exceptions: []}))
-                setCurrentEditID(currTaskId);
-                setCurrTaskId(currTaskId+1)
+                //setTasks(tasks.concat({...task, id: currTaskId, repeat: {type: "none", frequency: 1}, startDate: date, exceptions: []}))
+                //setCurrentEditID(currTaskId);
+                //setCurrTaskId(currTaskId+1)
                 // Sets an exception to the repeating task
-                editTask(id, {...task, exceptions: [...task.exceptions, date]})
+                // editTask(id, {...task, exceptions: [...task.exceptions, date]})
                 // THIS FUNCTION IS CONFIRMED TO WORK :)
-            } else {
+            } //else {
+                //editTask(id, {...tasks.filter((task) => task.id === id)[0], startDate: date})
+            
+                console.log(date)
+                console.log(id)
+                console.log(currTaskId)
+                isNew ? setIsNew(true) : setIsNew(false)
                 setCurrentEditID(id);
-                editTask(id, {...tasks.filter((task) => task.id === id)[0], startDate: date})
+                setSelectedDate(date);
+                setThisTask(thisTask)
             }
-            isNew ? setIsNew(true) : setIsNew(false)
-            console.log(date)
-            console.log(id)
-            console.log(currTaskId)
-        }
-        setSelectedDate(date);
-    };
+    
 
     return (
         <div
@@ -283,7 +305,7 @@ function App() {
                     })}
                 </div>
                 <div className="absolute w-full flex justify-center top-[50vh] -translate-y-[50%]">
-                    {selectedDate && (
+                    {selectedDate && !repeatWarning.show && (
                         <TaskEdit
                             incrementSubTaskCurrId={incrementSubTaskCurrId}
                             toggleEdit={toggleEdit}
@@ -298,10 +320,15 @@ function App() {
                             setCompleted={setCompleted}
                             selectedDate={selectedDate}
                             isNew={isNew}
+                            editedTask={editedTask}
+                            setEditedTask={setEditedTask}
+                            onSave={onSave}
+                            setThisTask={setThisTask}
+                            setRepeatWarning={setRepeatWarning}
                         />
                     )}
                     <div className="absolute w-full flex justify-center mb-100 -top-20">
-                        {repeatWarning.show && <RepeatEditWarning setRepeatWarning={setRepeatWarning} toggleEdit={toggleEdit} repeatWarning={repeatWarning} />}
+                        {repeatWarning.show && <RepeatEditWarning setRepeatWarning={setRepeatWarning} toggleEdit={toggleEdit} repeatWarning={repeatWarning} setThisTask={setThisTask} onSave={onSave} thisTask={thisTask}/>}
                     </div>
                 </div>
             </div>

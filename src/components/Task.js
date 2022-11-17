@@ -21,8 +21,9 @@ export const Task = (props) => {
     const onClick = () => {
         if (props.repeat.type === 'none') {
             props.toggleEdit(props.id, props.date, false)
+            console.log("toggleEdit called by task")
         } else {
-            props.setRepeatWarning({show: true, id: props.id, date: props.date})
+            props.toggleEdit(props.id, props.date, false)
         }
     }
 

@@ -18,10 +18,10 @@ import { FaTasks } from "react-icons/fa";
 
 export const TaskEdit = (props) => {
     console.log(props.selectedDate)
-    const [editedTask, setEditedTask] = useState({...props.task, startDate: props.selectedDate});
+    // const [editedTask, setEditedTask] = useState({...props.task, startDate: props.selectedDate});
     // etc.
 
-    const [currSubTaskId, setCurrSubTaskId] = useState(editedTask.subTaskCurrId)
+    const [currSubTaskId, setCurrSubTaskId] = useState(props.editedTask.subTaskCurrId)
 
     const [deleteConfirm, setDeleteConfirm] = useState(false);
 
@@ -41,25 +41,16 @@ export const TaskEdit = (props) => {
             editSubTasks(props.task.id, arrayMove(props.task.subTasks, activeIndex, overIndex));
         }
     }
-
-
-    const onSave = () => {
-        console.log(props.task)
-        console.log(editedTask)
-        props.editTask(props.task.id, editedTask)
-        props.toggleEdit(0, false, false) //closes the edit box :)
-        // NOTE: adding subtasks is independent of the save process
-    }
     const onAddSubtask = () => {
-        editSubTasks(0, editedTask.subTasks.concat({id: currSubTaskId, name: newSubTaskName, completed: false}))
+        editSubTasks(0, props.editedTask.subTasks.concat({id: currSubTaskId, name: newSubTaskName, completed: false}))
         // setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
         setNewSubTaskName('')
         setCurrSubTaskId(currSubTaskId+1)
     }
 
     const editSubTasks = (taskId, updatedSubTasks) => {
-        console.log({...editedTask, subTasks: updatedSubTasks})
-        setEditedTask({...editedTask, subTasks: updatedSubTasks})
+        console.log({...props.editedTask, subTasks: updatedSubTasks})
+        props.setEditedTask({...props.editedTask, subTasks: updatedSubTasks})
     }
 
     const [showRepeatType, setShowRepeatType] = useState(false);
@@ -77,17 +68,28 @@ export const TaskEdit = (props) => {
         props.toggleEdit(0, false, false)
     }
 
-    useEffect(() => {
-        setEditedTask(props.task);
-        setEditedRepeat(props.task.repeat);
-    }, [props.task]);
+    // useEffect(() => {
+    //     props.setEditedTask(props.task);
+    //     setEditedRepeat(props.task.repeat);
+    // }, [props.task]);
     
+    const onClickSave = () => {
+        if (props.editedTask.repeat.type === 'none') {
+            props.onSave()
+        } else {
+            props.setThisTask(true)
+            props.setRepeatWarning({show: true, id: props.editedTask.id, date: props.editedTask.startDate})
+        }
+    }
+
     const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
         event.preventDefault()
         onAddSubtask();
     }
   };
+
+    console.log(props.editedTask)
 
     return (
         <div className="rounded-xl glassless w-[35%] px-3 pb-3.5 pt-0.5 backdrop-blur-md">
@@ -106,10 +108,10 @@ export const TaskEdit = (props) => {
                             className="rounded-lg glassless my-4 px-2 w-[250px] outline-0 text-xl font-semibold text-ellipsis"
                             type="text"
                             placeholder="Task Name..."
-                            value={editedTask.name}
+                            value={props.editedTask.name}
                             onChange={(e) =>
-                                setEditedTask({
-                                    ...editedTask,
+                                props.setEditedTask({
+                                    ...props.editedTask,
                                     name: e.target.value,
                                 })
                             }
@@ -225,8 +227,8 @@ export const TaskEdit = (props) => {
                         {showRepeat ? (
                             <IoMdCheckmark
                                 onClick={() => {
-                                    setEditedTask({
-                                        ...editedTask,
+                                    props.setEditedTask({
+                                        ...props.editedTask,
                                         startDate: props.selectedDate,
                                         repeat: editedRepeat,
                                     });
@@ -241,8 +243,8 @@ export const TaskEdit = (props) => {
             </div>
             <div className="left-0 pl-8 relative w-[22%] mb-3">
                         {<div>
-                        <div className="glassless rounded-lg text-gray-600 text-[12px] font-semibold cursor-pointer -mt-3 p-0.5" onClick={() => setShowDatePicker(!showDatePicker)}>{editedTask.startDate}</div>
-                        {showDatePicker && <DatePicker setEditedTask={setEditedTask} editedTask={editedTask} setShowDatePicker={setShowDatePicker} month={moment(editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(editedTask.startDate, "DD/MM/YYYY").year()}/>}
+                        <div className="glassless rounded-lg text-gray-600 text-[12px] font-semibold cursor-pointer -mt-3 p-0.5" onClick={() => setShowDatePicker(!showDatePicker)}>{props.editedTask.startDate}</div>
+                        {showDatePicker && <DatePicker setEditedTask={props.setEditedTask} editedTask={props.editedTask} setShowDatePicker={setShowDatePicker} month={moment(props.editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(props.editedTask.startDate, "DD/MM/YYYY").year()}/>}
                         </div>}
             </div>
 
@@ -253,14 +255,14 @@ export const TaskEdit = (props) => {
             
             <div className="rounded-lg glassless mb-4 pt-0.5 px-1 text-left">
                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                    <SortableContext items={editedTask.subTasks} strategy={verticalListSortingStrategy}>
-                        {editedTask.subTasks.map((subTask, i) => (
+                    <SortableContext items={props.editedTask.subTasks} strategy={verticalListSortingStrategy}>
+                        {props.editedTask.subTasks.map((subTask, i) => (
                         <SubTask
                             index={i}
-                            editedTask={editedTask}
-                            setEditedTask={setEditedTask}
+                            editedTask={props.editedTask}
+                            setEditedTask={props.setEditedTask}
                             editSubTasks={editSubTasks}
-                            task={editedTask}
+                            task={props.editedTask}
                             key={subTask.id}
                             subTask={subTask}
                             id={subTask.id}
@@ -296,10 +298,10 @@ export const TaskEdit = (props) => {
                         type="text"
                         className="my-1 bg-transparent outline-0 w-[95%] text-sm whitespace-normal"
                         placeholder="Add Notes..."
-                        value={editedTask.notes}
+                        value={props.editedTask.notes}
                         onChange={(e) =>
-                            setEditedTask({
-                                ...editedTask,
+                            props.setEditedTask({
+                                ...props.editedTask,
                                 notes: e.target.value,
                             })
                         }
@@ -320,7 +322,7 @@ export const TaskEdit = (props) => {
                     </button>
                     <button
                         className="glassless font-semibold rounded-lg text-gray-700 hover:text-black w-[45%]"
-                        onClick={onSave}
+                        onClick={onClickSave}
                     >
                         Save
                     </button>
