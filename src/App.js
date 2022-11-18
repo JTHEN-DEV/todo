@@ -77,6 +77,7 @@ function App() {
             rolledOver: false,
             notes: "testing :)",
             exceptions: [],
+            completions: [],
         },
         {
             id: 2,
@@ -242,7 +243,14 @@ function App() {
              // this refers to the parent task (if there is one!)
             const t = {...tasks.filter((task) => task.id === id)[0], startDate: date}
             console.log(t)
-            setEditedTask({...t})
+
+            if (t.repeat.type !== 'none') {
+                // repeated tasks have their "master complete" set to true to enable proper functionality of checkbox in taskedit
+                editTask(id, {...t, completed: true})
+                setEditedTask({...t, completed: true})
+            } else {
+                setEditedTask({...t})
+            }
             //console.log("Editing this task? " + thisTask)
             //if (thisTask && task.repeat.type !== 'none') {
                 // Creates new "non-repeating" version (with no exceptions and new date) of instance of repeating task
