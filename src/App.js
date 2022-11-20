@@ -43,13 +43,13 @@ function App() {
             ],
             repeat: {
                 type: "daily",
-                frequency: 4,
+                frequency: 2,
             },
-            startDate: "6/11/2022",
+            startDate: "20/11/2022",
             rolledOver: false,
             notes: "",
             exceptions: [],
-            completions: ["16/11/2022"], // Gives the date of repeating tasks that have been completed
+            completions: ["18/11/2022"], // Gives the date of repeating tasks that have been completed
         },
         {
             id: 1,
@@ -229,7 +229,14 @@ function App() {
             const task = tasks.filter((task) => task.id === currentEditID)[0]
             editTask(currentEditID, {...task, exceptions: [...task.exceptions, selectedDate]})
         } else {
-            editTask(currentEditID, editedTask)
+            //Edit completions to shift if startDate changes
+            const task = tasks.filter((task) => task.id === currentEditID)[0]
+            const start = moment(task.startDate, "DD/MM/YYYY")
+            const difference = start.diff(moment(editedTask.startDate, "DD/MM/YYYY"), "days", true)
+            const array = editedTask.completions.map((day) => {
+                return moment(day, "DD/MM/YYYY").add(-difference, 'days').format("DD/MM/YYYY");
+            })
+            editTask(currentEditID, {...editedTask, completions: array})
         }
         toggleEdit(0, false, false) //closes the edit box :)
     }
