@@ -1,5 +1,6 @@
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
 import { useEffect, useState } from "react";
+import moment from "moment/moment";
 export const DatePicker = (props) => {
     const months = [
         "Jan",
@@ -18,6 +19,12 @@ export const DatePicker = (props) => {
     const [selectedYear, setSelectedYear] = useState(props.year)
     const [selectedMonth, setSelectedMonth] = useState(props.month)
     const daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
+    const date = {
+        day:  moment(props.editedTask.startDate, "DD/MM/YYYY").date(), 
+        month:moment(props.editedTask.startDate, "DD/MM/YYYY").month()+1, 
+        year: moment(props.editedTask.startDate, "DD/MM/YYYY").year()}
+    console.log(date)
+    const sel = date.month === selectedMonth && date.year === selectedYear
     const prevYear = selectedMonth === 1 ? selectedYear - 1 : selectedYear;
     const prevMonth = selectedMonth === 1 ? 12 : selectedMonth - 1;
     const daysInPrevMonth = new Date(prevYear, prevMonth, 0).getDate();
@@ -105,25 +112,25 @@ export const DatePicker = (props) => {
             }} */}
             {day.map((days) => (
                 <div className="flex flex-row">
-                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[0][1] === 'grey' ? "text-gray-500 cursor-default" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[0])}>
+                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[0][1] === 'grey' ? "text-gray-500 cursor-default" : sel && days[0][0] == date.day ? "text-black font-bold glassless rounded-lg cursor-pointer hover:bg-white/80" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[0])}>
                         {days[0][0]}
                     </div>
-                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[1][1] === 'grey' ? "text-gray-500 cursor-default" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[1])}>
+                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[1][1] === 'grey' ? "text-gray-500 cursor-default" : sel && days[1][0] == date.day ? "text-black font-bold glassless rounded-lg cursor-pointer hover:bg-white/80" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[1])}>
                         {days[1][0]}
                     </div>
-                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[2][1] === 'grey' ? "text-gray-500 cursor-default" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[2])}>
+                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[2][1] === 'grey' ? "text-gray-500 cursor-default" : sel && days[2][0] == date.day ? "text-black font-bold glassless rounded-lg cursor-pointer hover:bg-white/80" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[2])}>
                         {days[2][0]}
                     </div>
-                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[3][1] === 'grey' ? "text-gray-500 cursor-default" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[3])}>
+                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[3][1] === 'grey' ? "text-gray-500 cursor-default" : sel && days[3][0] == date.day ? "text-black font-bold glassless rounded-lg cursor-pointer hover:bg-white/80" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[3])}>
                         {days[3][0]}
                     </div>
-                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[4][1] === 'grey' ? "text-gray-500 cursor-default" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[4])}>
+                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[4][1] === 'grey' ? "text-gray-500 cursor-default" : sel && days[4][0] == date.day ? "text-black font-bold glassless rounded-lg cursor-pointer hover:bg-white/80" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[4])}>
                         {days[4][0]}
                     </div>
-                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[5][1] === 'grey' ? "text-gray-500 cursor-default" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[5])}>
+                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[5][1] === 'grey' ? "text-gray-500 cursor-default" : sel && days[5][0] == date.day ? "text-black font-bold glassless rounded-lg cursor-pointer hover:bg-white/80" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[5])}>
                         {days[5][0]}
                     </div>
-                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[6][1] === 'grey' ? "text-gray-500 cursor-default" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[6])}>
+                    <div className={`flex-1 square my-0.5 px-0.5 mx-0.5  ${days[6][1] === 'grey' ? "text-gray-500 cursor-default" : sel && days[6][0] == date.day ? "text-black font-bold glassless rounded-lg cursor-pointer hover:bg-white/80" : "text-black glassless rounded-lg cursor-pointer hover:bg-white/80"} `} onClick={() => dateClicked(days[6])}>
                         {days[6][0]}
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Task } from "./Task"
+import moment from "moment/moment";
 import {DndContext, closestCenter, useDroppable, DragOverlay} from '@dnd-kit/core'
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
@@ -23,10 +24,12 @@ export const Day = (props) => {
         props.setCompleted(taskId, isCompleted, props.date);
     }
 
+    const today = (props.date === moment().format("DD/MM/YYYY"))
+
     return (
         <div className="rounded-xl glassless w-[19.5%] p-3" ref={setNodeRef}>
             <div className="text-xl pb-2 mb-2 font-semibold border-b border-gray-500 flex justify-between cursor-default select-none">
-                <div className="">
+                <div className={`${today ? "text-blue-600": "text-black"}`}>
                     {props.name}
                 </div>
                 <div className="text-gray-400">
