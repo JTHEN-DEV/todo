@@ -135,7 +135,7 @@ export const TaskEdit = (props) => {
                     </form>
                 </div>
 
-                <div className="flex items-center">
+                {props.editedTask.startDate && props.editedTask.startDate !== -1 && <div className="flex items-center">
                     <div>
                         {
                             <div
@@ -255,10 +255,10 @@ export const TaskEdit = (props) => {
                             <IoMdSync />
                         )}
                     </div>
-                </div>
+                </div>}
             </div>
             <div className="left-0 pl-8 relative w-[22%] mb-3">
-                        {<div>
+                        {props.editedTask.startDate && props.editedTask.startDate !== -1 && <div>
                         <div className="glassless rounded-lg text-gray-600 text-[12px] font-semibold cursor-pointer -mt-3 p-0.5" onClick={() => setShowDatePicker(!showDatePicker)}>{props.editedTask.startDate}</div>
                         {showDatePicker && <DatePicker setEditedTask={props.setEditedTask} editedTask={props.editedTask} setShowDatePicker={setShowDatePicker} month={moment(props.editedTask.startDate, "DD/MM/YYYY").month()+1} year={moment(props.editedTask.startDate, "DD/MM/YYYY").year()}/>}
                         </div>}

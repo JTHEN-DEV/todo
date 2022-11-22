@@ -18,6 +18,9 @@ function App() {
     const day = moment().add(dayOffset, "days");
     const [activeId, setActiveId] = useState(null)
     const [isNew, setIsNew] = useState(false); // tells taskedit if current task is a new task (on cancel will delete new task)
+    const {setNodeRef} = useDroppable({
+    id: "someday",
+    });
     const [editedTask, setEditedTask] = useState({
         startDate: ""
     })
@@ -104,7 +107,7 @@ function App() {
                     completed: false,
                 },
             ],
-            startDate: "22/11/2022",
+            startDate: "",
             repeat: {
                 type: "none", // changed this to signify no repeats - easier to implement taskedit!
                 frequency: 1,
@@ -287,6 +290,13 @@ function App() {
             } else {
                 setEditedTask({...t})
             }
+            console.log(date)
+            console.log(id)
+            console.log(currTaskId)
+            isNew ? setIsNew(true) : setIsNew(false)
+            setCurrentEditID(id);
+            setSelectedDate(date);
+            setThisTask(thisTask)
             //console.log("Editing this task? " + thisTask)
             //if (thisTask && task.repeat.type !== 'none') {
                 // Creates new "non-repeating" version (with no exceptions and new date) of instance of repeating task
@@ -296,16 +306,44 @@ function App() {
                 // Sets an exception to the repeating task
                 // editTask(id, {...task, exceptions: [...task.exceptions, date]})
                 // THIS FUNCTION IS CONFIRMED TO WORK :)
-            } //else {
+        } else if (id !== 0) {
+            let t = {}
+            if (newTask) {
+                t = {...newTask}
+            } else {
+                t = {...tasks.filter((task) => task.id === id)[0]} 
+            }
+            console.log(t)
+            console.log(id)
+            
+            if (t.repeat.type !== 'none') {
+                // repeated tasks have their "master complete" set to true to enable proper functionality of checkbox in taskedit
+                editTask(id, {...t, completed: true})
+                setEditedTask({...t, completed: true})
+            } else {
+                setEditedTask({...t})
+            }
+            console.log(date)
+            console.log(id)
+            console.log(currTaskId)
+            isNew ? setIsNew(true) : setIsNew(false)
+            setCurrentEditID(id);
+            setSelectedDate(-1);
+            setThisTask(thisTask)
+        } else {
+            console.log(date)
+            console.log(id)
+            console.log(currTaskId)
+            isNew ? setIsNew(true) : setIsNew(false)
+            setCurrentEditID(id);
+            setSelectedDate(date);
+            setThisTask(thisTask)
+
+        }
+            
+            //else {
                 //editTask(id, {...tasks.filter((task) => task.id === id)[0], startDate: date})
             
-                console.log(date)
-                console.log(id)
-                console.log(currTaskId)
-                isNew ? setIsNew(true) : setIsNew(false)
-                setCurrentEditID(id);
-                setSelectedDate(date);
-                setThisTask(thisTask)
             }
     
     const handleDragEnd = (event) => {
@@ -336,10 +374,17 @@ function App() {
           }))
         }
     } else {
-        if (activeItem.startDate !== over.id) {
+        if (over.id !== "someday" && activeItem.startDate !== over.id) {
             setTasks(tasks.map(item => {
             if (item.id === active.id) {
               return {...activeItem, startDate: over.id}
+            }
+            return item
+          }))
+        } else {
+            setTasks(tasks.map(item => {
+            if (item.id === active.id) {
+              return {...activeItem, startDate: ""}
             }
             return item
           }))
@@ -353,10 +398,10 @@ function App() {
             className="App font-inter w-full flex flex-col items-center mx-auto p-4 h-[100vh] bg-cover bg-center"
             style={{ "background-image": `url(/background.jpg)` }}
         >
+            <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
             <div className="max-w-[1500px] w-full relative">
                 <WeekController day={day} changeDay={changeDay} />
                 <div className="flex justify-between pt-5">
-                    <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
                     {[...Array(5)].map((e, i) => {
                         return (
                             <Day
@@ -393,7 +438,6 @@ function App() {
                      <Task overlay={true} key={activeId} iid={activeId} {...tasks.filter(task => task.id === activeId)[0]}/>
                           ): null}
                     </DragOverlay>  
-                    </DndContext>
                 </div>
                 <div className="absolute w-full flex justify-center top-[50vh] -translate-y-[50%]">
                     {selectedDate && !repeatWarning.show && (
@@ -416,13 +460,32 @@ function App() {
                             onSave={onSave}
                             setThisTask={setThisTask}
                             setRepeatWarning={setRepeatWarning}
-                        />
-                    )}
+                            />
+                            )}
                     <div className="absolute w-full flex justify-center mb-100 -top-20">
                         {repeatWarning.show && <RepeatEditWarning setRepeatWarning={setRepeatWarning} toggleEdit={toggleEdit} repeatWarning={repeatWarning} setThisTask={setThisTask} onSave={onSave} thisTask={thisTask}/>}
                     </div>
                 </div>
             </div>
+            <div className="flex w-full">
+                <div className="rounded-xl glassless w-[19.5%] p-3 my-4" ref={setNodeRef}>
+                <div className="text-xl pb-2 mb-2 font-semibold border-b border-gray-500 flex justify-between cursor-default select-none">
+                    <div className="">
+                        Someday
+                    </div>
+                </div>
+                <div className="min-h-[30vh] flex flex-col">
+                    <SortableContext items={tasks} strategy={verticalListSortingStrategy} id={"someday"}>
+                        {tasks.filter(task => !task.startDate).map((task) => {return <Task activeId={activeId} overlay={false} key={task.id} iid={task.id} setCompleted={setCompleted} setRepeatWarning={setRepeatWarning} toggleEdit={toggleEdit} editTask={editTask} tasks={tasks} {...task}/>})}
+                    </SortableContext>
+                        
+                        <div className={`flex px-2 py-1 transition-opacity ease-in-out duration-300 hover:opacity-100 opacity-0`}>
+                        <div className="cursor-pointer" onClick={() => addTask("")}>New Task</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </DndContext>
         </div>
     );
 }

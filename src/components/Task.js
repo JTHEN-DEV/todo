@@ -48,7 +48,7 @@ export const Task = (props) => {
                 <div className="cursor-pointer select-none" for={props.id} onClick = {onClick}>{props.name}</div>
             </div>
             <div>
-                {props.repeat.type === 'none' && <IoIosReorder className={`justify-end mt-3`} {...attributes} {...listeners}/>}
+                {props.repeat.type === 'none' && <IoIosReorder className={`justify-end mt-3 outline-0`} {...attributes} {...listeners}/>}
                 {props.repeat.type !== 'none' && <div className="relative text-sm mt-5 text-black/50">
                     <IoMdSync/>
                 </div>}
