@@ -390,7 +390,7 @@ function App() {
                     })}
                     <DragOverlay>
                     {activeId ? (
-                     <Task key={activeId} iid={activeId} {...tasks.filter(task => task.id === activeId)[0]}/>
+                     <Task overlay={true} key={activeId} iid={activeId} {...tasks.filter(task => task.id === activeId)[0]}/>
                           ): null}
                     </DragOverlay>  
                     </DndContext>

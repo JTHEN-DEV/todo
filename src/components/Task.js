@@ -35,7 +35,7 @@ export const Task = (props) => {
     }
 
     return (
-        <div className="w-full justify-between flex px-2 glassless my-1 rounded-lg opacity-100" ref={setNodeRef} style={style}>
+        <div className={`w-full justify-between flex px-2 glassless my-1 rounded-lg ${!props.overlay && props.activeId && props.activeId === props.id ? "opacity-0" : "opacity-100"}`} ref={setNodeRef} style={style}>
             <div className="flex py-2">
                 <div>
 
