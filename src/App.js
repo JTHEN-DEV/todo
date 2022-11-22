@@ -5,18 +5,25 @@ import { Day } from "./components/Day";
 import { TaskEdit } from "./components/TaskEdit";
 import { WeekController } from "./components/WeekController";
 import {RepeatEditWarning} from "./components/RepeatEditWarning"
+import {DndContext, closestCenter, useDroppable, DragOverlay} from '@dnd-kit/core'
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { Task } from "./components/Task";
 
 function App() {
-    const [currTaskId, setCurrTaskId] = useState(3); // currently set to 3 because the next task will have an id of 3
+    const [currTaskId, setCurrTaskId] = useState(4); // currently set to 4 because the next task will have an id of 4
     const [selectedDate, setSelectedDate] = useState(false); // logs the date of the task that is being edited by taskedit
     const [currentEditID, setCurrentEditID] = useState(0);
     const [dayOffset, setDayOffset] = useState(0);
     const [thisTask, setThisTask] = useState(true);
     const day = moment().add(dayOffset, "days");
+    const [activeId, setActiveId] = useState(null)
     const [isNew, setIsNew] = useState(false); // tells taskedit if current task is a new task (on cancel will delete new task)
     const [editedTask, setEditedTask] = useState({
         startDate: ""
     })
+    function handleDragStart(event) {
+    
+  }
     const [repeatWarning, setRepeatWarning] = useState({
         show: false,
         id: 0,
@@ -24,7 +31,7 @@ function App() {
     })
     const [tasks, setTasks] = useState([
         {
-            id: 0,
+            id: 1,
             dayIdx: 0,
             subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
             name: "Finish coding project",
@@ -52,7 +59,7 @@ function App() {
             completions: ["18/11/2022"], // Gives the date of repeating tasks that have been completed
         },
         {
-            id: 1,
+            id: 2,
             dayIdx: 1,
             name: "Import boilerplate",
             subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
@@ -80,7 +87,7 @@ function App() {
             completions: [],
         },
         {
-            id: 2,
+            id: 3,
             dayIdx: 1,
             name: "Test non-repeat",
             subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
@@ -97,7 +104,7 @@ function App() {
                     completed: false,
                 },
             ],
-            startDate: "15/11/2022",
+            startDate: "22/11/2022",
             repeat: {
                 type: "none", // changed this to signify no repeats - easier to implement taskedit!
                 frequency: 1,
@@ -301,6 +308,45 @@ function App() {
                 setThisTask(thisTask)
             }
     
+    const handleDragEnd = (event) => {
+    const{active, over} = event;
+    const activeIndex = (tasks.findIndex(item => item.id === active.id))
+    const overIndex = (tasks.findIndex(item => item.id === over.id))
+    if(active.id !== over.id) {
+      setTasks((items)=>{
+        return arrayMove(items, activeIndex, overIndex)
+      })
+    }
+    setActiveId(null);
+  }
+ 
+  const handleDragOver = (event) => {
+    setActiveId(event.active.id)
+    const {active, over} = event;
+    console.log(active.id + " - " + over.id)
+    const activeItem = (tasks.filter(item => item.id === active.id)[0])
+    const overItem = (tasks.filter(item => item.id === over.id)[0])
+    if(overItem) { // checks if item is dragged over another item or a new list!
+        if(activeItem.startDate !== overItem.startDate) {
+          setTasks(tasks.map(item => {
+            if (item.id === active.id) {
+              return {...activeItem, startDate: overItem.startDate}
+            }
+            return item
+          }))
+        }
+    } else {
+        if (activeItem.startDate !== over.id) {
+            setTasks(tasks.map(item => {
+            if (item.id === active.id) {
+              return {...activeItem, startDate: over.id}
+            }
+            return item
+          }))
+        }
+    }
+  }
+
 
     return (
         <div
@@ -310,6 +356,7 @@ function App() {
             <div className="max-w-[1500px] w-full relative">
                 <WeekController day={day} changeDay={changeDay} />
                 <div className="flex justify-between pt-5">
+                    <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
                     {[...Array(5)].map((e, i) => {
                         return (
                             <Day
@@ -329,6 +376,7 @@ function App() {
                                         task
                                     )
                                 )}
+                                activeId={activeId}
                                 date={day
                                     .clone()
                                     .add(-2 + i, "days")
@@ -340,6 +388,12 @@ function App() {
                             />
                         );
                     })}
+                    <DragOverlay>
+                    {activeId ? (
+                     <Task key={activeId} iid={activeId} {...tasks.filter(task => task.id === activeId)[0]}/>
+                          ): null}
+                    </DragOverlay>  
+                    </DndContext>
                 </div>
                 <div className="absolute w-full flex justify-center top-[50vh] -translate-y-[50%]">
                     {selectedDate && !repeatWarning.show && (
