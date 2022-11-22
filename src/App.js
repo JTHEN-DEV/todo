@@ -128,7 +128,23 @@ function App() {
                 completions: [],
             })
         );
-        toggleEdit(currTaskId, date, false, true)
+        toggleEdit(currTaskId, date, false, true, {
+                id: currTaskId,
+                dayIdx: 0,
+                subTaskCurrId: 0,
+                name: "",
+                completed: false,
+                subTasks: [],
+                repeat: {
+                    type: "none",
+                    frequency: 1,
+                },
+                startDate: date,
+                rolledOver: false,
+                notes: "",
+                exceptions: [],
+                completions: [],
+            })
         setCurrTaskId(currTaskId + 1);
     };
 
@@ -241,16 +257,22 @@ function App() {
         toggleEdit(0, false, false) //closes the edit box :)
     }
 
-    const toggleEdit = (id, date, thisTask, isNew) => {
+    const toggleEdit = (id, date, thisTask, isNew, newTask) => {
         // Open -> true if the edit window is meant to open
         //         false is the edit window is meant to close
         // this function will handle the edit of repeating tasks
         // NOTE: need to create a function to handle "asynchronous edits" e.g. ticking the completed box without opening taskedit
         if (date) { // Makes sure that this function isn't run when the toggleEdit function is used to close the taskEdit window
              // this refers to the parent task (if there is one!)
-            const t = {...tasks.filter((task) => task.id === id)[0], startDate: date}
+            let t = {}
+            if (newTask) {
+                t = {...newTask}
+            } else {
+                t = {...tasks.filter((task) => task.id === id)[0], startDate: date} 
+            }
             console.log(t)
-
+            console.log(id)
+            
             if (t.repeat.type !== 'none') {
                 // repeated tasks have their "master complete" set to true to enable proper functionality of checkbox in taskedit
                 editTask(id, {...t, completed: true})
