@@ -115,6 +115,7 @@ function App() {
             rolledOver: false,
             notes: "this is a test non-repeating task",
             exceptions: [],
+            completions: [],
         },
     ]);
 
