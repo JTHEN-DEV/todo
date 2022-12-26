@@ -11,7 +11,7 @@ export const Task = (props) => {
         transition
     }
     const handleChange = () => {
-        if(props.completions) {
+        if(props.completions && props.repeat.type !== 'none') {
             const task= props.tasks.filter((task) => task.id === props.id)[0]
             if(props.completions.includes(props.date)) {
                 const completes = task.completions
@@ -39,7 +39,7 @@ export const Task = (props) => {
             <div className="flex py-2">
                 <div>
 
-                {/**!props.completed ||*/(props.completions ? !props.completions.includes(props.date) : !props.completed) ? 
+                {/**!props.completed ||*/((props.completions&& props.repeat.type !== 'none') ? !props.completions.includes(props.date) : !props.completed) ? 
                             <div type="checkbox" className={`cursor-pointer glassless mr-2 mt-1 h-[14px] w-[14px] rounded`} value={props.completed} checked={props.completed} onClick = {handleChange}/>
                             :
                             <IoMdCheckbox type="checkbox" className="cursor-pointer mr-2 mt-1 scale-125 opacity-70 h-[14px] w-[14px]" value={props.completed} checked={props.completed} onClick = {handleChange}/>

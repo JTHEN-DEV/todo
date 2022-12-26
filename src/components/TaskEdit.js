@@ -74,14 +74,17 @@ export const TaskEdit = (props) => {
     // }, [props.task]);
     
     const onClickSave = () => {
-        if (props.editedTask.repeat.type === 'none') {
-            props.onSave()
-        } else if (props.task.repeat.type === 'none') {
-            props.onSave()
-            console.log("THE NEW ADDITION >>>>>") 
-        } else {
-            props.setThisTask(true)
-            props.setRepeatWarning({show: true, id: props.editedTask.id, date: props.editedTask.startDate})
+        console.log(props.editedTask.name.trim().length !== 0)
+        if (props.editedTask.name.trim().length !== 0) {
+            if (props.editedTask.repeat.type === 'none') {
+                props.onSave()
+            } else if (props.task.repeat.type === 'none') {
+                props.onSave()
+                console.log("THE NEW ADDITION >>>>>") 
+            } else {
+                props.setThisTask(true)
+                props.setRepeatWarning({show: true, id: props.editedTask.id, date: props.editedTask.startDate})
+            }
         }
     }
 
@@ -95,7 +98,8 @@ export const TaskEdit = (props) => {
     const onToggleCheck = () => {
         console.log(!props.task.completed || !props.task.completions.includes(props.selectedDate))
         if (props.editedTask.repeat.type === 'none') {
-            props.setCompleted(props.task.id, !props.task.completed)
+            props.editTask(props.editedTask.id, {...props.task, completed: !props.task.completed})
+            props.setEditedTask({...props.editedTask, completed: !props.editedTask.completed})
         } else {
             // Repeating tasks have their completed set to true for the checkbox functionality to work in the taskedit
             if (props.task.completions.includes(props.selectedDate)) {
@@ -116,7 +120,7 @@ export const TaskEdit = (props) => {
                 <div className="flex items-center">
                     <form>
 
-                        {(!props.task.completed || (props.task.completions && !props.task.completions.includes(props.selectedDate))) ? 
+                        {(!props.task.completed || (props.task.repeat.type !== 'none' && props.task.completions && !props.task.completions.includes(props.selectedDate))) ? 
                         <div type="checkbox" className={`cursor-pointer glassless mr-2 my-4 h-[23px] w-[23px] rounded`} value={props.task.completed} checked={props.task.completed} onClick = {onToggleCheck}/>
                         :
                         <IoMdCheckbox type="checkbox" className="cursor-pointer mr-2 my-4 scale-125 opacity-70 h-[23px] w-[23px]" value={props.task.completed} checked={props.task.completed} onClick = {onToggleCheck}/>
