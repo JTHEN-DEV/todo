@@ -262,12 +262,17 @@ function App() {
             const task = tasks.filter((task) => task.id === currentEditID)[0]
             const start = moment(task.startDate, "DD/MM/YYYY")
             const difference = start.diff(moment(editedTask.startDate, "DD/MM/YYYY"), "days", true)
-            const array = editedTask.completions.map((day) => {
+            let array = editedTask.completions.map((day) => {
                 return moment(day, "DD/MM/YYYY").add(-difference, 'days').format("DD/MM/YYYY");
             })
-            const earray = editedTask.exceptions.map((day) => {
+            let earray = editedTask.exceptions.map((day) => {
                 return moment(day, "DD/MM/YYYY").add(-difference, 'days').format("DD/MM/YYYY");
             })
+            // Clears completions/exceptions if the repeat type/frequency has been modified
+            if(task.repeat.type !== editedTask.repeat.type) {
+                array = []
+                earray = []
+            }
             if(editedTask.repeat.type === 'none') {
                 editTask(currentEditID, {...editedTask, completions: [], exceptions: []})
             } else {

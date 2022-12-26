@@ -74,14 +74,17 @@ export const TaskEdit = (props) => {
     // }, [props.task]);
     
     const onClickSave = () => {
-        if (props.editedTask.repeat.type === 'none') {
-            props.onSave()
-        } else if (props.task.repeat.type === 'none') {
-            props.onSave()
-            console.log("THE NEW ADDITION >>>>>") 
-        } else {
-            props.setThisTask(true)
-            props.setRepeatWarning({show: true, id: props.editedTask.id, date: props.editedTask.startDate})
+        console.log(props.editedTask.name.trim().length !== 0)
+        if (props.editedTask.name.trim().length !== 0) {
+            if (props.editedTask.repeat.type === 'none') {
+                props.onSave()
+            } else if (props.task.repeat.type === 'none') {
+                props.onSave()
+                console.log("THE NEW ADDITION >>>>>") 
+            } else {
+                props.setThisTask(true)
+                props.setRepeatWarning({show: true, id: props.editedTask.id, date: props.editedTask.startDate})
+            }
         }
     }
 
