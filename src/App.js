@@ -472,7 +472,7 @@ function App() {
                     </div>
                 </div>
             </div>
-            <div className="flex w-full">
+            {/* <div className="flex w-full">
                 <div className="rounded-xl glassless w-[19.5%] p-3 my-4" ref={setNodeRef}>
                 <div className="text-xl pb-2 mb-2 font-semibold border-b border-gray-500 flex justify-between cursor-default select-none">
                     <div className="">
@@ -489,7 +489,7 @@ function App() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
         </DndContext>
         </div>
     );
