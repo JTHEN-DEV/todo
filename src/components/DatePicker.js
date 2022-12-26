@@ -28,7 +28,7 @@ export const DatePicker = (props) => {
     const prevYear = selectedMonth === 1 ? selectedYear - 1 : selectedYear;
     const prevMonth = selectedMonth === 1 ? 12 : selectedMonth - 1;
     const daysInPrevMonth = new Date(prevYear, prevMonth, 0).getDate();
-    const numExtraDays = new Date(prevYear, prevMonth).getDay() - 1;
+    const numExtraDays = (new Date(prevYear, prevMonth).getDay() + 6) % 7
     const numExtraAfterDays =
         7 - new Date(prevYear, prevMonth, daysInMonth).getDay();
     const days = [];
