@@ -107,7 +107,7 @@ function App() {
                     completed: false,
                 },
             ],
-            startDate: "",
+            startDate: "25/12/2022",
             repeat: {
                 type: "none", // changed this to signify no repeats - easier to implement taskedit!
                 frequency: 1,
@@ -250,11 +250,13 @@ function App() {
     const onSave = () => { // called when the taskedit saves the edited task to the main task list
         if (thisTask) {
             //Creates singular version of repeating task
-            setTasks(tasks.concat({...editedTask, id: currTaskId, repeat: {type: "none", frequency: 1}, exceptions: []}))
+            setTasks(tasks.concat({...editedTask, id: currTaskId, completed: editedTask.completions.includes(editedTask.startDate), repeat: {type: "none", frequency: 1}, exceptions: [], completions: []}))
             setCurrTaskId(currTaskId+1)
             //Creates exception
             const task = tasks.filter((task) => task.id === currentEditID)[0]
-            editTask(currentEditID, {...task, exceptions: [...task.exceptions, selectedDate]})
+            const comp = editedTask.completions.filter((day) => day !== editedTask.startDate)
+            console.log(comp)
+            editTask(currentEditID, {...task, completions: comp, exceptions: [...task.exceptions, selectedDate]})
         } else {
             //Edit completions to shift if startDate changes
             const task = tasks.filter((task) => task.id === currentEditID)[0]
@@ -263,10 +265,13 @@ function App() {
             const array = editedTask.completions.map((day) => {
                 return moment(day, "DD/MM/YYYY").add(-difference, 'days').format("DD/MM/YYYY");
             })
+            const earray = editedTask.exceptions.map((day) => {
+                return moment(day, "DD/MM/YYYY").add(-difference, 'days').format("DD/MM/YYYY");
+            })
             if(editedTask.repeat.type === 'none') {
-                editTask(currentEditID, {...editedTask, completions: []})
+                editTask(currentEditID, {...editedTask, completions: [], exceptions: []})
             } else {
-                editTask(currentEditID, {...editedTask, completions: array})
+                editTask(currentEditID, {...editedTask, completions: array, exceptions: earray})
             }
         }
         toggleEdit(0, false, false) //closes the edit box :)
