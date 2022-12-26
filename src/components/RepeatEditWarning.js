@@ -25,7 +25,7 @@ export const RepeatEditWarning = (props) => {
                 </div>  
             </div>
             <div className="flex justify-between mt-4">
-                <div className="glassless rounded-xl w-[45%] text-sm cursor-pointer" onClick={() => props.setRepeatWarning({show: false, id: 0, date: ""})}>Cancel</div>
+                <div className="glassless rounded-xl w-[45%] text-sm cursor-pointer" onClick={() => {props.setRepeatWarning({show: false, id: 0, date: ""}); props.setThisTask(false)}}>Cancel</div>
                 <div className="glassless rounded-xl w-[45%] text-sm cursor-pointer" onClick={() => {props.setRepeatWarning({...props.repeatWarning, show: false}); props.onSave(); console.log("toggleEdit called by repeatWarning")}}>Ok</div>
             </div>
         </div>

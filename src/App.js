@@ -263,7 +263,11 @@ function App() {
             const array = editedTask.completions.map((day) => {
                 return moment(day, "DD/MM/YYYY").add(-difference, 'days').format("DD/MM/YYYY");
             })
-            editTask(currentEditID, {...editedTask, completions: array})
+            if(editedTask.repeat.type === 'none') {
+                editTask(currentEditID, {...editedTask, completions: []})
+            } else {
+                editTask(currentEditID, {...editedTask, completions: array})
+            }
         }
         toggleEdit(0, false, false) //closes the edit box :)
     }
