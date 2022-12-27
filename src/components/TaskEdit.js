@@ -41,6 +41,17 @@ export const TaskEdit = (props) => {
             editSubTasks(props.task.id, arrayMove(props.task.subTasks, activeIndex, overIndex));
         }
     }
+
+    const handleRepeat = () => {
+        props.setEditedTask({
+            ...props.editedTask,
+            startDate: props.selectedDate,
+            repeat: editedRepeat,
+        }); 
+        console.log(editedRepeat);
+        setShowRepeatType(false);
+    }
+
     const onAddSubtask = () => {
         editSubTasks(0, props.editedTask.subTasks.concat({id: currSubTaskId, name: newSubTaskName, completed: false}))
         // setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
@@ -249,13 +260,7 @@ export const TaskEdit = (props) => {
                     >
                         {showRepeat ? (
                             <IoMdCheckmark
-                                onClick={() => {
-                                    props.setEditedTask({
-                                        ...props.editedTask,
-                                        startDate: props.selectedDate,
-                                        repeat: editedRepeat,
-                                    });
-                                    setShowRepeatType(false);
+                                onClick={() => {handleRepeat()
                                 }}
                             />
                         ) : (

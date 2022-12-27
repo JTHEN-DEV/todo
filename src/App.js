@@ -124,12 +124,20 @@ function App(props) {
     const [dataRetrieved, setDataRetrieved] = useState(false);
 
     useEffect(() => {
+  const timer = setInterval(() => {
+    rollAllTasks()
+  }, 600000);
+  return () => clearInterval(timer);
+}, []);
+
+    useEffect(() => {
         if (dataRetrieved) {
             writeToFirebase();
         }
     }, [tasks, currTaskId]);
 
     const writeToFirebase = () => {
+        console.log(tasks)
         const query = ref(db, props.user.uid);
         set(query, {tasks, currTaskId});
     }
@@ -228,8 +236,13 @@ function App(props) {
     
 
     const rollAllTasks = () => {
+        if(!dataRetrieved || (selectedDate && !repeatWarning.show)) {
+            console.log("fail")
+            return;
+        }
+        console.log("roll")
         setTasks(
-            tasks.map((task) => {
+            tasks.flatMap((task) => {
                 if (task.repeat.type === 'none') {
                     if(!task.completed && moment(task.startDate, "DD/MM/YYYY").isBefore(moment(), "day")) {
                         return {...task, startDate: moment().format("DD/MM/YYYY")}
@@ -237,7 +250,58 @@ function App(props) {
                         return {...task}
                     }
                 } else { //currently roll-over doesn't apply to repeating tasks
-                    return {...task}
+                    let prevdate = moment(moment().format("DD/MM/YYYY"), "DD/MM/YYYY");
+                    let diff = moment(task.startDate, "DD/MM/YYYY").diff(moment(), 'days')
+                    if (task.repeat.type === "daily") {
+                        diff = -((diff%(task.repeat.frequency)-(task.repeat.frequency))%(task.repeat.frequency))
+                        prevdate.subtract(diff, 'days')
+                    } else if (task.repeat.type === "weekly") {
+                        diff = -((diff%(task.repeat.frequency * 7)-(task.repeat.frequency*7))%(task.repeat.frequency*7))
+                        prevdate.subtract(diff, 'days')
+                    } else if (task.repeat.type === "yearly") {
+                        let datethisyear = moment(moment(task.startDate, "DD/MM/YYYY").format("DD/MM") + "/" + moment().format("YYYY"), "DD/MM/YYYY");
+                        if (datethisyear.isBefore(moment(), 'day')) {
+                            prevdate = datethisyear
+                        } else {
+                            prevdate = datethisyear.subtract(1, 'years')
+                        }
+                    }
+                    console.log(diff)
+                    prevdate = prevdate.format("DD/MM/YYYY")
+                    console.log(prevdate)
+                    if (task.exceptions.includes(prevdate) || task.completions.includes(prevdate)) {
+                        return {...task}
+                    } else {
+                        setCurrTaskId(currTaskId+1)
+                        return [{...task, exceptions: task.exceptions.concat(prevdate)}, {...task, startDate: moment().format("DD/MM/YYYY"), id: currTaskId-1, completed: false, repeat: {type: "none", frequency: 1}, exceptions: [], completions: []}]
+                    }
+                    // const upperbound = moment()
+                    // let lowerbound = 0
+                    // // const taskdate = moment(task.startDate, "DD/MM/YYYY")
+                    // if (task.repeat.type === "daily") {
+                    //     lowerbound = moment().subtract(task.repeat.frequency, 'd')
+                    // } else if (task.repeat.type === "weekly") {
+                    //     lowerbound = moment().subtract(task.repeat.frequency, 'w')
+                    // } else if (task.repeat.type === "yearly") {
+                    //     lowerbound = moment().subtract(task.repeat.frequency, 'y')
+                    // }
+                    // lowerbound.subtract(1,'d')
+                    // let toberolled = true
+                    // task.exceptions.forEach((exc) => {
+                    //     if (exc.isBetween(lowerbound, upperbound)) {
+                    //         toberolled = false
+                    //     }
+                    // })
+                    // task.completions.forEach((exc) => {
+                    //     if (exc.isBetween(lowerbound, upperbound)) {
+                    //         toberolled = false
+                    //     }
+                    // })
+                    // if (toberolled) {
+                    //     return {...task, exceptions: task.exceptions.concat(moment().format("DD/MM/YYYY"))}
+                    // } else {
+                    //     return {...task, }
+                    // }
                 }
             })
         );
@@ -441,6 +505,7 @@ function App(props) {
             className="App font-inter w-full flex flex-col items-center mx-auto p-4 h-[100vh] bg-cover bg-center"
             style={{ "background-image": `url(/background.jpg)` }}
         >
+            {/* <button onClick={rollAllTasks}>ROLLLLLLLLL</button> */}
             <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
             <div className="max-w-[1500px] w-full relative h-full flex flex-col">
                 <WeekController day={day} changeDay={changeDay} />
