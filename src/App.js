@@ -269,7 +269,8 @@ function App() {
                 return moment(day, "DD/MM/YYYY").add(-difference, 'days').format("DD/MM/YYYY");
             })
             // Clears completions/exceptions if the repeat type/frequency has been modified
-            if(task.repeat.type !== editedTask.repeat.type) {
+            if(task.repeat.type !== editedTask.repeat.type || task.repeat.frequency !== editedTask.repeat.frequency) {
+                console.log("change")
                 array = []
                 earray = []
             }
