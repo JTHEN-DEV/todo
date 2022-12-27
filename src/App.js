@@ -415,9 +415,9 @@ function App() {
             style={{ "background-image": `url(/background.jpg)` }}
         >
             <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
-            <div className="max-w-[1500px] w-full relative">
+            <div className="max-w-[1500px] w-full relative h-full flex flex-col">
                 <WeekController day={day} changeDay={changeDay} />
-                <div className="flex justify-between pt-5">
+                <div className="flex justify-between pt-5 flex-1">
                     {[...Array(5)].map((e, i) => {
                         return (
                             <Day
