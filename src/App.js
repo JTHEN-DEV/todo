@@ -229,19 +229,14 @@ function App(props) {
     const rollAllTasks = () => {
         setTasks(
             tasks.map((task) => {
-                if (
-                    !task.completed &&
-                    moment(task.startDate, "DD/MM/YYYY").isBefore(
-                        moment(),
-                        "day"
-                    )
-                ) {
-                    return {
-                        ...task,
-                        startDate: moment().format("DD/MM/YYYY"),
-                    };
-                } else {
-                    return task;
+                if (task.repeat.type === 'none') {
+                    if(!task.completed && moment(task.startDate, "DD/MM/YYYY").isBefore(moment(), "day")) {
+                        return {...task, startDate: moment().format("DD/MM/YYYY")}
+                    } else {
+                        return {...task}
+                    }
+                } else { //currently roll-over doesn't apply to repeating tasks
+                    return {...task}
                 }
             })
         );
