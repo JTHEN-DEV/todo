@@ -255,13 +255,14 @@ export const TaskEdit = (props) => {
                     <div
                         className="text-xl rounded-lg glassless p-1.5 font-black text-gray-500 hover:text-gray-800 cursor-pointer"
                         onClick={() => {
+                            if(showRepeat) {
+                                handleRepeat()
+                            }
                             setShowRepeat(!showRepeat);
                         }}
                     >
                         {showRepeat ? (
                             <IoMdCheckmark
-                                onClick={() => {handleRepeat()
-                                }}
                             />
                         ) : (
                             <IoMdSync />
