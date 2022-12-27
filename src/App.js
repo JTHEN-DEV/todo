@@ -144,7 +144,8 @@ function App(props) {
 
             if (snapshot.exists()) {
                 console.log("DATA >>> ", data);
-                setTasks(data.tasks ? data.tasks : []);
+                const template = { completions: [], exceptions: [], subTasks: []};
+                setTasks(data.tasks ? data.tasks.map((task) => { return { ...template, ...task }}) : []);
                 setCurrTaskId(data.currTaskId ? data.currTaskId : 1);
             }
         });
