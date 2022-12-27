@@ -1,5 +1,5 @@
 import moment from "moment/moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { Day } from "./components/Day";
 import { TaskEdit } from "./components/TaskEdit";
@@ -8,9 +8,11 @@ import {RepeatEditWarning} from "./components/RepeatEditWarning"
 import {DndContext, closestCenter, useDroppable, DragOverlay} from '@dnd-kit/core'
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Task } from "./components/Task";
+import { db } from "./firebase";
+import { onValue, ref, set } from "firebase/database";
 
-function App() {
-    const [currTaskId, setCurrTaskId] = useState(4); // currently set to 4 because the next task will have an id of 4
+function App(props) {
+    const [currTaskId, setCurrTaskId] = useState(2); // currently set to 4 because the next task will have an id of 4
     const [selectedDate, setSelectedDate] = useState(false); // logs the date of the task that is being edited by taskedit
     const [currentEditID, setCurrentEditID] = useState(0);
     const [dayOffset, setDayOffset] = useState(0);
@@ -33,91 +35,120 @@ function App() {
         date: ""
     })
     const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            dayIdx: 0,
-            subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
-            name: "Finish coding project",
-            completed: false,
-            subTasks: [
-                {
-                    id: 1, // id of first element must be 1 for drag and drop to work
-                    name: "test 1",
-                    completed: false,
-                },
-                {
-                    id: 2,
-                    name: "test 2",
-                    completed: false,
-                },
-            ],
-            repeat: {
-                type: "daily",
-                frequency: 2,
-            },
-            startDate: "20/11/2022",
-            rolledOver: false,
-            notes: "",
-            exceptions: [],
-            completions: ["18/11/2022"], // Gives the date of repeating tasks that have been completed
-        },
-        {
-            id: 2,
-            dayIdx: 1,
-            name: "Import boilerplate",
-            subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
-            completed: false,
-            subTasks: [
-                {
-                    id: 1,
-                    name: "test a1",
-                    completed: false,
-                },
-                {
-                    id: 2,
-                    name: "test a2",
-                    completed: false,
-                },
-            ],
-            startDate: "10/11/2022",
-            repeat: {
-                type: "weekly",
-                frequency: 1,
-            },
-            rolledOver: false,
-            notes: "testing :)",
-            exceptions: [],
-            completions: [],
-        },
-        {
-            id: 3,
-            dayIdx: 1,
-            name: "Test non-repeat",
-            subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
-            completed: false,
-            subTasks: [
-                {
-                    id: 1,
-                    name: "test a1",
-                    completed: false,
-                },
-                {
-                    id: 2,
-                    name: "test a2",
-                    completed: false,
-                },
-            ],
-            startDate: "25/12/2022",
-            repeat: {
-                type: "none", // changed this to signify no repeats - easier to implement taskedit!
-                frequency: 1,
-            },
-            rolledOver: false,
-            notes: "this is a test non-repeating task",
-            exceptions: [],
-            completions: [],
-        },
+        // {
+        //     id: 1,
+        //     dayIdx: 0,
+        //     subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
+        //     name: "Finish coding project",
+        //     completed: false,
+        //     subTasks: [
+        //         {
+        //             id: 1, // id of first element must be 1 for drag and drop to work
+        //             name: "test 1",
+        //             completed: false,
+        //         },
+        //         {
+        //             id: 2,
+        //             name: "test 2",
+        //             completed: false,
+        //         },
+        //     ],
+        //     repeat: {
+        //         type: "daily",
+        //         frequency: 2,
+        //     },
+        //     startDate: "20/11/2022",
+        //     rolledOver: false,
+        //     notes: "",
+        //     exceptions: [],
+        //     completions: ["18/11/2022"], // Gives the date of repeating tasks that have been completed
+        // },
+        // {
+        //     id: 2,
+        //     dayIdx: 1,
+        //     name: "Import boilerplate",
+        //     subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
+        //     completed: false,
+        //     subTasks: [
+        //         {
+        //             id: 1,
+        //             name: "test a1",
+        //             completed: false,
+        //         },
+        //         {
+        //             id: 2,
+        //             name: "test a2",
+        //             completed: false,
+        //         },
+        //     ],
+        //     startDate: "10/11/2022",
+        //     repeat: {
+        //         type: "weekly",
+        //         frequency: 1,
+        //     },
+        //     rolledOver: false,
+        //     notes: "testing :)",
+        //     exceptions: [],
+        //     completions: [],
+        // },
+        // {
+        //     id: 3,
+        //     dayIdx: 1,
+        //     name: "Test non-repeat",
+        //     subTaskCurrId: 3, // currently set to 2 because a new task needs an id of 2
+        //     completed: false,
+        //     subTasks: [
+        //         {
+        //             id: 1,
+        //             name: "test a1",
+        //             completed: false,
+        //         },
+        //         {
+        //             id: 2,
+        //             name: "test a2",
+        //             completed: false,
+        //         },
+        //     ],
+        //     startDate: "",
+        //     repeat: {
+        //         type: "none", // changed this to signify no repeats - easier to implement taskedit!
+        //         frequency: 1,
+        //     },
+        //     rolledOver: false,
+        //     notes: "this is a test non-repeating task",
+        //     exceptions: [],
+        //     completions: [],
+        // },
     ]);
+
+    const [dataRetrieved, setDataRetrieved] = useState(false);
+
+    useEffect(() => {
+        if (dataRetrieved) {
+            writeToFirebase();
+        }
+    }, [tasks, currTaskId]);
+
+    const writeToFirebase = () => {
+        const query = ref(db, props.user.uid);
+        set(query, {tasks, currTaskId});
+    }
+
+    useEffect(() => {
+        console.log(props.user.uid);
+        const query = ref(db, props.user.uid);
+        setDataRetrieved(true);
+        return onValue(query, (snapshot) => {
+            const data = snapshot.val();
+
+
+            if (snapshot.exists()) {
+                console.log("DATA >>> ", data);
+                setTasks(data.tasks ? data.tasks : []);
+                setCurrTaskId(data.currTaskId ? data.currTaskId : 1);
+            }
+        });
+    }, []);
 
     const addTask = (date) => {
         setTasks(
