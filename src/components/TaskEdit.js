@@ -35,10 +35,10 @@ export const TaskEdit = (props) => {
 
     const handleDragEnd = (event) => {
         const{active, over} = event;
-        const activeIndex = (props.task.subTasks.findIndex(item => item.id === active.id))
-        const overIndex = (props.task.subTasks.findIndex(item => item.id === over.id))
+        const activeIndex = (props.editedTask.subTasks.findIndex(item => item.id === active.id))
+        const overIndex = (props.editedTask.subTasks.findIndex(item => item.id === over.id))
         if(active.id !== over.id) {
-            editSubTasks(props.task.id, arrayMove(props.task.subTasks, activeIndex, overIndex));
+            editSubTasks(props.task.id, arrayMove(props.editedTask.subTasks, activeIndex, overIndex));
         }
     }
 
