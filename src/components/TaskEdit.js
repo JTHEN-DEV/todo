@@ -18,7 +18,7 @@ import { FaTasks } from "react-icons/fa";
 
 export const TaskEdit = (props) => {
     console.log(props.selectedDate)
-    // const [editedTask, setEditedTask] = useState({...props.task, startDate: props.selectedDate});
+    // const [editedTask, setEditedTask] = useState({...props.editedTask, startDate: props.selectedDate});
     // etc.
 
     const [currSubTaskId, setCurrSubTaskId] = useState(props.editedTask.subTaskCurrId)
@@ -29,7 +29,7 @@ export const TaskEdit = (props) => {
 
     const [showRepeat, setShowRepeat] = useState(false);
 
-    const [editedRepeat, setEditedRepeat] = useState(props.task.repeat);
+    const [editedRepeat, setEditedRepeat] = useState(props.editedTask.repeat);
     
     const [showDatePicker, setShowDatePicker] = useState(false)
 
@@ -38,7 +38,7 @@ export const TaskEdit = (props) => {
         const activeIndex = (props.editedTask.subTasks.findIndex(item => item.id === active.id))
         const overIndex = (props.editedTask.subTasks.findIndex(item => item.id === over.id))
         if(active.id !== over.id) {
-            editSubTasks(props.task.id, arrayMove(props.editedTask.subTasks, activeIndex, overIndex));
+            editSubTasks(props.editedTask.id, arrayMove(props.editedTask.subTasks, activeIndex, overIndex));
         }
     }
 
@@ -54,7 +54,7 @@ export const TaskEdit = (props) => {
 
     const onAddSubtask = () => {
         editSubTasks(0, props.editedTask.subTasks.concat({id: currSubTaskId+1, name: newSubTaskName, completed: false}))
-        // setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
+        // setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.editedTask.subTaskCurrId, name: newSubTaskName, completed: false})})
         setNewSubTaskName('')
         setCurrSubTaskId(currSubTaskId+2)
     }
@@ -73,16 +73,16 @@ export const TaskEdit = (props) => {
 
     const onDeleteTask = () => {
         const tasks = props.tasks
-        const index = tasks.map(task => task.id).indexOf(props.task.id);
+        const index = tasks.map(task => task.id).indexOf(props.editedTask.id);
         tasks.splice(index, 1)
         props.setTasks(tasks)
         props.toggleEdit(0, false, false)
     }
 
     // useEffect(() => {
-    //     props.setEditedTask(props.task);
-    //     setEditedRepeat(props.task.repeat);
-    // }, [props.task]);
+    //     props.setEditedTask(props.editedTask);
+    //     setEditedRepeat(props.editedTask.repeat);
+    // }, [props.editedTask]);
     
     const onClickSave = () => {
         console.log(props.editedTask.name.trim().length !== 0)
@@ -91,7 +91,6 @@ export const TaskEdit = (props) => {
                 props.onSave()
             } else if (props.task.repeat.type === 'none') {
                 props.onSave()
-                console.log("THE NEW ADDITION >>>>>") 
             } else {
                 props.setThisTask(true)
                 props.setRepeatWarning({show: true, id: props.editedTask.id, date: props.editedTask.startDate})
