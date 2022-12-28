@@ -68,3 +68,13 @@ code {
     box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
     background: rgba(255, 255, 255, 0.3);
 }
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
