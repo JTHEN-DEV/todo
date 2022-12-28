@@ -10,6 +10,12 @@ export const Task = (props) => {
         transform: CSS.Transform.toString(transform),
         transition
     }
+    const taskClicked = () => {
+        console.log(props.editedTask.startDate === undefined, props.editedTask.name)
+        if(props.editedTask.startDate === undefined || (props.editedTask && props.editedTask.name)){
+            onClick()
+        }
+    }
     let subTaskLength = props.subTasks.filter((subTask) => subTask.completed).length/props.subTasks.length
     const handleChange = () => {
         if(props.completions && props.repeat.type !== 'none') {
@@ -47,7 +53,7 @@ export const Task = (props) => {
                             <IoMdCheckbox type="checkbox" className="cursor-pointer mr-2 mt-1 scale-125 opacity-70 h-[14px] w-[14px]" value={props.completed} checked={props.completed} onClick = {handleChange}/>
                         }
                 </div>
-                <div className="cursor-pointer select-none font-medium" for={props.id} onClick = {onClick}>{props.name}</div>
+                <div className="cursor-pointer select-none font-medium" for={props.id} onClick = {taskClicked}>{props.name}</div>
             </div>
             <div>
                 {props.repeat.type === 'none' && <IoIosReorder className={`justify-end mt-3 outline-0`} {...attributes} {...listeners}/>}

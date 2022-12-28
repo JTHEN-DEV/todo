@@ -40,7 +40,7 @@ export const Day = (props) => {
             </div>
             <div className="min-h-[30vh] flex flex-col overflow-y-auto h-[70vh] max-h-[70vh] pt-2 px-4 -mx-4 scrollbar-hide" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                 <SortableContext items={props.tasklist} strategy={verticalListSortingStrategy} id={props.date}>
-                    {props.tasks.map((task) => {return <Task activeId={props.activeId} overlay={false} date={props.date} key={task.id + "-" + props.date} iid={task.id + "/" + props.date} setCompleted={setCompleted} setRepeatWarning={props.setRepeatWarning} toggleEdit={props.toggleEdit} editTask={props.editTask} tasks={props.tasklist} {...task}/>})}
+                    {props.tasks.map((task) => {return <Task editedTask={props.editedTask} activeId={props.activeId} overlay={false} date={props.date} key={task.id + "-" + props.date} iid={task.id + "/" + props.date} setCompleted={setCompleted} setRepeatWarning={props.setRepeatWarning} toggleEdit={props.toggleEdit} editTask={props.editTask} tasks={props.tasklist} {...task}/>})}
                 </SortableContext>
                 
                 <div className={`flex px-2 py-1 transition-opacity ease-in-out duration-300 ${hover ? "opacity-100" : "opacity-0"}`}>

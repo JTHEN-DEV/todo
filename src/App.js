@@ -24,9 +24,7 @@ function App(props) {
     const {setNodeRef} = useDroppable({
     id: "someday",
     });
-    const [editedTask, setEditedTask] = useState({
-        startDate: ""
-    })
+    const [editedTask, setEditedTask] = useState({startDate: undefined})
     function handleDragStart(event) {
     
   }
@@ -163,6 +161,7 @@ function App(props) {
     }, []);
 
     const addTask = (date) => {
+
         setTasks(
             tasks.concat({
                 id: currTaskId,
@@ -517,6 +516,7 @@ function App(props) {
                         return (
                             <Day
                                 key={day.clone().add(-2 + i, "days").format("DD/MM/YYYY")}
+                                editedTask={editedTask}
                                 setCompleted={setCompleted}
                                 setRepeatWarning={setRepeatWarning}
                                 addTask={addTask}
