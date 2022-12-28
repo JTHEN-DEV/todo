@@ -443,6 +443,7 @@ function App(props) {
             console.log(date)
             console.log(id)
             console.log(currTaskId)
+            setEditedTask({startDate: undefined})
             isNew ? setIsNew(true) : setIsNew(false)
             setCurrentEditID(id);
             setSelectedDate(date);
