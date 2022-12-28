@@ -53,10 +53,10 @@ export const TaskEdit = (props) => {
     }
 
     const onAddSubtask = () => {
-        editSubTasks(0, props.editedTask.subTasks.concat({id: currSubTaskId, name: newSubTaskName, completed: false}))
+        editSubTasks(0, props.editedTask.subTasks.concat({id: currSubTaskId+1, name: newSubTaskName, completed: false}))
         // setEditedTask({...editedTask, subTasks: editedTask.subTasks.concat({id: props.task.subTaskCurrId, name: newSubTaskName, completed: false})})
         setNewSubTaskName('')
-        setCurrSubTaskId(currSubTaskId+1)
+        setCurrSubTaskId(currSubTaskId+2)
     }
 
     const editSubTasks = (taskId, updatedSubTasks) => {

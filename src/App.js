@@ -502,8 +502,8 @@ function App(props) {
 
     return (
         <div
-            className="App font-inter w-full flex flex-col items-center mx-auto p-4 h-[100vh] bg-cover bg-center"
-            style={{ "background-image": `url(/background.jpg)` }}
+            className="App font-inter w-full flex flex-col items-center mx-auto p-4 h-[100vh] bg-cover bg-[#EFEFEF] bg-center"
+            // style={{ "background-image": `url(/background.jpg)` }}
         >
             {/* <button onClick={rollAllTasks}>ROLLLLLLLLL</button> */}
             <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>

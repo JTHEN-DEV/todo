@@ -10,6 +10,7 @@ export const Task = (props) => {
         transform: CSS.Transform.toString(transform),
         transition
     }
+    let subTaskLength = props.subTasks.filter((subTask) => subTask.completed).length/props.subTasks.length
     const handleChange = () => {
         if(props.completions && props.repeat.type !== 'none') {
             const task= props.tasks.filter((task) => task.id === props.id)[0]
@@ -35,7 +36,8 @@ export const Task = (props) => {
     }
 
     return (
-        <div className={`w-full justify-between flex px-2 glassless my-1 rounded-lg ${!props.overlay && props.activeId && props.activeId === props.id ? "opacity-0" : "opacity-100"}`} ref={setNodeRef} style={style}>
+        <div className={`w-full px-2 flatui my-1 rounded-lg ${!props.overlay && props.activeId && props.activeId === props.id ? "opacity-0" : "opacity-100"}`} ref={setNodeRef} style={style}>
+            <div className=" justify-between flex">
             <div className="flex py-2">
                 <div>
 
@@ -45,14 +47,21 @@ export const Task = (props) => {
                             <IoMdCheckbox type="checkbox" className="cursor-pointer mr-2 mt-1 scale-125 opacity-70 h-[14px] w-[14px]" value={props.completed} checked={props.completed} onClick = {handleChange}/>
                         }
                 </div>
-                <div className="cursor-pointer select-none" for={props.id} onClick = {onClick}>{props.name}</div>
+                <div className="cursor-pointer select-none font-medium" for={props.id} onClick = {onClick}>{props.name}</div>
             </div>
             <div>
                 {props.repeat.type === 'none' && <IoIosReorder className={`justify-end mt-3 outline-0`} {...attributes} {...listeners}/>}
-                {props.repeat.type !== 'none' && <div className="relative text-sm mt-5 text-black/50">
+                {props.repeat.type !== 'none' && <div className="relative text-sm mt-3 text-black/50">
                     <IoMdSync/>
                 </div>}
             </div>
+            </div>
+            {props.subTasks.length !== 0 && 
+            <div className="flex justify-between"><div className={`mb-2 relative -mt-1 rounded-sm bg-gray-300 h-[2px]`} style={{"width": "100%"}}>
+                <div className={`absolute top-0 left-0 mb-2 rounded-sm bg-gray-400 h-[2px]`} style={{"width": `${subTaskLength*100}%`}}/>
+                </div>
+                <div className="ml-2 text-xs -mt-3">{props.subTasks.filter((subTask) => subTask.completed).length}/{props.subTasks.length}</div>
+                </div>}
         </div>
     )
 }
