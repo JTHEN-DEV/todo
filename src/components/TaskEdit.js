@@ -158,6 +158,7 @@ export const TaskEdit = (props) => {
                                 })
                             }
                             onKeyDown={taskNameHandleKeyDown}
+                            autoFocus
                         />
                     </form>
                 </div>
