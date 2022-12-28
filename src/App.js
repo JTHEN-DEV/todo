@@ -507,9 +507,9 @@ function App(props) {
         >
             {/* <button onClick={rollAllTasks}>ROLLLLLLLLL</button> */}
             <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
-            <div className="max-w-[1500px] w-full relative h-full flex flex-col">
+            <div className="max-w-[1500px] w-full relative h-full max-h-full flex flex-col">
                 <WeekController day={day} changeDay={changeDay} />
-                <div className="flex justify-between pt-5 flex-1">
+                <div className="flex justify-between pt-5">
                     {[...Array(5)].map((e, i) => {
                         return (
                             <Day

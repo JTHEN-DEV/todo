@@ -27,8 +27,8 @@ export const Day = (props) => {
     const today = (props.date === moment().format("DD/MM/YYYY"))
 
     return (
-        <div className="rounded-xl glassless w-[19.5%] p-3" ref={setNodeRef}>
-            <div className="text-xl pb-2 mb-2 font-semibold border-b border-gray-500 flex justify-between cursor-default select-none">
+        <div className="rounded-xl glassless w-[19.5%] p-3 min-h-0" ref={setNodeRef}>
+            <div className="text-xl pb-2 mb-0 font-semibold border-b border-gray-500 flex justify-between cursor-default select-none">
                 <div className={`${today ? "text-blue-600": "text-black"}`}>
                     {props.name}
                 </div>
@@ -36,7 +36,7 @@ export const Day = (props) => {
                     {props.dateName}
                 </div>
             </div>
-            <div className="min-h-[30vh] flex flex-col" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+            <div className="min-h-[30vh] flex flex-col overflow-y-auto h-[70vh] max-h-[70vh] pt-2 px-4 -mx-4 scrollbar-hide" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                 <SortableContext items={props.tasklist} strategy={verticalListSortingStrategy} id={props.date}>
                     {props.tasks.map((task) => {return <Task activeId={props.activeId} overlay={false} date={props.date} key={task.id + "-" + props.date} iid={task.id + "/" + props.date} setCompleted={setCompleted} setRepeatWarning={props.setRepeatWarning} toggleEdit={props.toggleEdit} editTask={props.editTask} tasks={props.tasklist} {...task}/>})}
                 </SortableContext>
