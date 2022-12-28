@@ -99,6 +99,14 @@ export const TaskEdit = (props) => {
         }
     }
 
+
+    const taskNameHandleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault()
+            onClickSave();
+        }
+    }
+
     const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
         event.preventDefault()
@@ -149,6 +157,7 @@ export const TaskEdit = (props) => {
                                     name: e.target.value,
                                 })
                             }
+                            onKeyDown={taskNameHandleKeyDown}
                         />
                     </form>
                 </div>
