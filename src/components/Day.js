@@ -14,10 +14,12 @@ export const Day = (props) => {
 
     const handleMouseOver = () => {
         setHover(true);
+        props.enableAnimations(false);
     }
 
     const handleMouseOut = () => {
         setHover(false);
+        props.enableAnimations(true);
     }
 
     const setCompleted = (taskId, isCompleted) => {
@@ -27,7 +29,7 @@ export const Day = (props) => {
     const today = (props.date === moment().format("DD/MM/YYYY"))
 
     return (
-        <div className="w-[19.5%] p-3" ref={setNodeRef}>
+        <div key={props.key} className="w-[19.5%] p-3" ref={setNodeRef}>
             <div className="text-xl pb-2 mb-2 font-semibold border-b border-gray-500 flex justify-between cursor-default select-none">
                 <div className={`${today ? "text-blue-600": "text-black"}`}>
                     {props.name}

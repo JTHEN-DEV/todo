@@ -10,6 +10,7 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import { Task } from "./components/Task";
 import { db } from "./firebase";
 import { onValue, ref, set } from "firebase/database";
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 function App(props) {
     const [currTaskId, setCurrTaskId] = useState(2); // currently set to 4 because the next task will have an id of 4
@@ -120,6 +121,8 @@ function App(props) {
         //     completions: [],
         // },
     ]);
+
+    const [parent, enableAnimations] = useAutoAnimate();
 
     const [dataRetrieved, setDataRetrieved] = useState(false);
 
@@ -509,10 +512,11 @@ function App(props) {
             <DndContext onDragStart={handleDragStart} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
             <div className="max-w-[1500px] w-full relative h-full max-h-full flex flex-col">
                 <WeekController day={day} changeDay={changeDay} />
-                <div className="flex justify-between pt-5">
+                <div className="flex justify-between pt-5" ref={parent}>
                     {[...Array(5)].map((e, i) => {
                         return (
                             <Day
+                                key={day.clone().add(-2 + i, "days").format("DD/MM/YYYY")}
                                 setCompleted={setCompleted}
                                 setRepeatWarning={setRepeatWarning}
                                 addTask={addTask}
@@ -538,6 +542,7 @@ function App(props) {
                                     .clone()
                                     .add(-2 + i, "days")
                                     .format("DD.MM")}
+                                enableAnimations={enableAnimations}
                             />
                         );
                     })}
