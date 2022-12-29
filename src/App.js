@@ -121,6 +121,7 @@ function App(props) {
     ]);
 
     const [parent, enableAnimations] = useAutoAnimate();
+    const [tedit, tenableAnimations] = useAutoAnimate();
 
     const [dataRetrieved, setDataRetrieved] = useState(false);
 
@@ -505,7 +506,7 @@ function App(props) {
 
     return (
         <div
-            className="App font-inter w-full flex flex-col items-center mx-auto p-4 h-[100vh] bg-cover bg-[#EFEFEF] bg-center"
+            className="App scrollbar-hide whitespace-nowrap overflow-auto font-inter w-full flex flex-col items-center mx-auto p-4 h-[100vh] bg-cover bg-[#EFEFEF] bg-center"
             // style={{ "background-image": `url(/background.jpg)` }}
         >
             {/* <button onClick={rollAllTasks}>ROLLLLLLLLL</button> */}
@@ -553,7 +554,7 @@ function App(props) {
                           ): null}
                     </DragOverlay>  
                 </div>
-                <div className="absolute w-full flex justify-center top-[50vh] -translate-y-[50%]">
+                <div ref={tedit} className="absolute w-full flex justify-center top-[50vh] -translate-y-[50%]">
                     {selectedDate && !repeatWarning.show && (
                         <TaskEdit
                             incrementSubTaskCurrId={incrementSubTaskCurrId}

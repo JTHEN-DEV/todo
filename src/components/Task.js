@@ -14,6 +14,7 @@ export const Task = (props) => {
         console.log(props.editedTask.startDate === undefined, props.editedTask.name)
         if(props.editedTask.startDate === undefined || (props.editedTask && props.editedTask.name)){
             onClick()
+            props.enableAnimations(true)
         }
     }
     let subTaskLength = props.subTasks.filter((subTask) => subTask.completed).length/props.subTasks.length
