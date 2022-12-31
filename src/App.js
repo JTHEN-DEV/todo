@@ -125,6 +125,16 @@ function App(props) {
 
     const [dataRetrieved, setDataRetrieved] = useState(false);
 
+    const [weekTaskList, setWeekTaskList] = useState([[], [], [], [], []]);
+
+    useEffect(() => {
+        setWeekTaskList([...Array(5)].map((e, i) => {
+            return generateDayTaskList(day.clone().add(-2 + i, "days"));
+        }));
+    }, [tasks])
+
+   
+
     useEffect(() => {
   const timer = setInterval(() => {
     rollAllTasks()
@@ -139,7 +149,7 @@ function App(props) {
     }, [tasks, currTaskId]);
 
     const writeToFirebase = () => {
-        console.log(tasks)
+        // console.log(tasks)
         const query = ref(db, props.user.uid);
         set(query, {tasks, currTaskId});
     }
@@ -162,7 +172,9 @@ function App(props) {
     }, []);
 
     const addTask = (date) => {
-
+        const results = generateDayTaskList(moment(date, "DD/MM/YYYY"));
+        console.log(results);
+        const newPos = results.length ? results.at(-1).pos + 1 : 0;
         setTasks(
             tasks.concat({
                 id: currTaskId,
@@ -180,6 +192,7 @@ function App(props) {
                 notes: "",
                 exceptions: [],
                 completions: [],
+                pos: newPos
             })
         );
         toggleEdit(currTaskId, date, false, true, {
@@ -198,15 +211,16 @@ function App(props) {
                 notes: "",
                 exceptions: [],
                 completions: [],
+                pos: newPos
             })
         setCurrTaskId(currTaskId + 1);
     };
 
     const incrementSubTaskCurrId = (taskId) => {
-        setTasks(tasks => {
+        setTasks((tasks) => {
             return tasks.map((task) => {
-                if ((task.id) === taskId){
-                    return {...task, subTaskCurrId: task.subTaskCurrId+1};
+                if (task.id === taskId) {
+                    return { ...task, subTaskCurrId: task.subTaskCurrId + 1 };
                 } else {
                     return task;
                 }
@@ -377,6 +391,35 @@ function App(props) {
         toggleEdit(0, false, false) //closes the edit box :)
     }
 
+    const generateDayTaskList = (date) => {
+        const repeated = [];
+        const nonRepeated = [];
+        tasks.forEach((task) => {
+            if (dayMatch(date,task)) {
+                if (task.repeat.type !== "none") {
+                    repeated.push(task);
+                } else {
+                    nonRepeated.push(task);
+                }
+            }
+        });
+        nonRepeated.sort((a, b) => a.pos - b.pos);
+        return repeated.concat(nonRepeated);
+    }
+
+    const generateNonRepeatingDayTaskList = (date) => {
+        const nonRepeated = [];
+        tasks.forEach((task) => {
+            if (dayMatch(date,task)) {
+                if (task.repeat.type === "none") {
+                    nonRepeated.push(task);
+                }
+            }
+        });
+        nonRepeated.sort((a, b) => a.pos - b.pos);
+        return nonRepeated;
+    }
+
     const toggleEdit = (id, date, thisTask, isNew, newTask) => {
         // Open -> true if the edit window is meant to open
         //         false is the edit window is meant to close
@@ -458,18 +501,51 @@ function App(props) {
             }
     
     const handleDragEnd = (event) => {
+    enableAnimations(false);
     const{active, over} = event;
-    const activeIndex = (tasks.findIndex(item => item.id === active.id))
-    const overIndex = (tasks.findIndex(item => item.id === over.id))
+    const draggedTaskDate = tasks.filter(item => item.id === active.id)[0].startDate;
+    const currentDayTaskList = weekTaskList[moment(draggedTaskDate, 'DD/MM/YYYY').diff(day, 'day') + 2];
+    const activeIndex = (currentDayTaskList.findIndex(item => item.id === active.id))
+    const overItemRepeat = (currentDayTaskList.filter(item => item.id === over.id))[0].repeat.type !== 'none';
+    let overIndex = 0;
+    if (!overItemRepeat) {
+        overIndex = (currentDayTaskList.findIndex(item => item.id === over.id))
+    }
     if(active.id !== over.id) {
-      setTasks((items)=>{
-        return arrayMove(items, activeIndex, overIndex)
-      })
+        const orderedList = arrayMove(currentDayTaskList, activeIndex, overIndex);
+        setWeekTaskList((old) => 
+            old.map((item, idx) => {
+                if (idx === moment(draggedTaskDate, 'DD/MM/YYYY').diff(day, 'day') + 2) {
+                    return orderedList;
+                }
+                return item;
+            })
+        )
+        console.log(weekTaskList);
+        console.log(">>>", orderedList);
+        let currentTasks = JSON.parse(JSON.stringify(tasks));
+        orderedList.forEach((task, index) => {
+            const idx = currentTasks.findIndex(item => item.id === task.id);
+            if (idx != -1) {
+                currentTasks[idx] = {...task, pos: index}
+            }
+        })
+        setTasks(currentTasks);
+        // orderedList.forEach((task, idx) => {
+        //     editTask(task.id, {...task, pos: idx});
+        // })
+        // TODO: get new array from orderedList and then update the tasks
+        //1. Get date of current id task 2. Get task list from date 3. Use editTask to update those tasks
+    //   setTasks((items)=>{
+    //     return arrayMove(items, activeIndex, overIndex)
+    //   })
     }
     setActiveId(null);
+    // enableAnimations(true);
   }
  
   const handleDragOver = (event) => {
+    enableAnimations(false);
     setActiveId(event.active.id)
     const {active, over} = event;
     console.log(active.id + " - " + over.id)
@@ -515,6 +591,7 @@ function App(props) {
                 <WeekController day={day} changeDay={changeDay} />
                 <div className="flex justify-between pt-5" ref={parent}>
                     {[...Array(5)].map((e, i) => {
+                        const taskList = generateDayTaskList(day.clone().add(-2 + i, "days"));
                         return (
                             <Day
                                 key={day.clone().add(-2 + i, "days").format("DD/MM/YYYY")}
@@ -529,12 +606,7 @@ function App(props) {
                                     .clone()
                                     .add(-2 + i, "days")
                                     .format("dddd")}
-                                tasks={tasks.filter((task) =>
-                                    dayMatch(
-                                        day.clone().add(-2 + i, "days"),
-                                        task
-                                    )
-                                )}
+                                tasks={weekTaskList[i]}
                                 activeId={activeId}
                                 date={day
                                     .clone()
